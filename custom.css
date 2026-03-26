@@ -652,7 +652,8 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] {
 }
 
 /* Above footer */
-#footer {
+#footer-sections,
+footer {
   border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
@@ -674,15 +675,11 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] {
    9. FOOTER
    ========================================================== */
 
-#footer {
-  border-top: 1px solid var(--sba-rule);
-}
-
-#footer a {
+#footer-sections a {
   transition: color 0.3s ease;
 }
 
-#footer a:hover {
+#footer-sections a:hover {
   color: var(--sba-accent);
 }
 
