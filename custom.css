@@ -62,6 +62,16 @@ h2 {
   font-weight: 200;
 }
 
+/* H4 — universal accent label style (Columbus Ohio, About the Firm, Selected Work, etc.) */
+h4 {
+  font-size: 0.6875rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  color: var(--sba-accent) !important;
+  line-height: 1.4 !important;
+}
+
 
 /* ==========================================================
    3. HEADER & NAVIGATION
@@ -321,16 +331,6 @@ section[data-section-id="69c561a06d6e4b21c6d06df9"] .section-border {
    Section ID: 69c58420aea2363fae6ea228
    ========================================================== */
 
-/* "About the Firm" H4 label — match Columbus Ohio style */
-section[data-section-id="69c58420aea2363fae6ea228"] h4 {
-  font-size: 0.6875rem !important;
-  font-weight: 400 !important;
-  letter-spacing: 0.15em !important;
-  text-transform: uppercase !important;
-  color: var(--sba-accent) !important;
-  line-height: 1.4 !important;
-}
-
 /* H2 heading — thin weight, white */
 section[data-section-id="69c58420aea2363fae6ea228"] h2 {
   font-weight: 200 !important;
@@ -363,6 +363,154 @@ section[data-section-id="69c58420aea2363fae6ea228"] h3 {
 #team .summary-item {
   position: relative;
   overflow: hidden;
+}
+
+
+/* ==========================================================
+   6b. FEATURED PROJECTS SLIDESHOW
+   Section ID: 69c5859f3b7752712f05e4b0
+   ========================================================== */
+
+/* Slideshow section — constrained height, full bleed */
+section[data-section-id="69c5859f3b7752712f05e4b0"] {
+  position: relative;
+}
+
+/* Slide images cover the area */
+section[data-section-id="69c5859f3b7752712f05e4b0"] .slide-media-container {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+section[data-section-id="69c5859f3b7752712f05e4b0"] .list-slideshow-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Gradient overlay — bottom-left vignette for text readability */
+section[data-section-id="69c5859f3b7752712f05e4b0"] .slide-media-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 0% 100%,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.4) 40%,
+      transparent 70%
+    ),
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.3) 25%,
+      transparent 50%
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Slide text — bottom-left positioned */
+section[data-section-id="69c5859f3b7752712f05e4b0"] .slide-content {
+  position: absolute !important;
+  bottom: 4rem !important;
+  left: 4rem !important;
+  right: auto !important;
+  top: auto !important;
+  z-index: 2;
+  padding: 0 !important;
+  background: none !important;
+  max-width: 500px;
+}
+
+/* Project title */
+section[data-section-id="69c5859f3b7752712f05e4b0"] .list-item-content__title {
+  color: var(--sba-text) !important;
+  font-size: clamp(1.5rem, 3vw, 2.5rem) !important;
+  font-weight: 200 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 4px !important;
+}
+
+/* Project location */
+section[data-section-id="69c5859f3b7752712f05e4b0"] .list-item-content__description,
+section[data-section-id="69c5859f3b7752712f05e4b0"] .list-item-content__description p {
+  color: var(--sba-accent) !important;
+  font-size: 0.6875rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  font-weight: 400 !important;
+}
+
+/* Arrow containers — position bottom-right */
+section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows {
+  display: flex !important;
+  z-index: 10;
+}
+
+section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows.arrow-container--left {
+  left: auto !important;
+  right: 160px !important;
+  bottom: 4rem !important;
+  top: auto !important;
+}
+
+section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows.arrow-container--right {
+  right: 4rem !important;
+  bottom: 4rem !important;
+  top: auto !important;
+}
+
+/* Arrow button styling — match wireframe */
+section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows button,
+section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows a {
+  width: 52px !important;
+  height: 52px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+}
+
+section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows button:hover,
+section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows a:hover {
+  border-color: #fff !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows svg {
+  fill: #fff !important;
+  color: #fff !important;
+}
+
+/* Slide counter — "1 / 4" between arrows */
+section[data-section-id="69c5859f3b7752712f05e4b0"] .sba-slide-counter {
+  position: absolute;
+  bottom: 4rem;
+  right: calc(4rem + 60px);
+  z-index: 10;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.85);
+  min-width: 48px;
+  text-align: center;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Hide section border */
+section[data-section-id="69c5859f3b7752712f05e4b0"] .section-border {
+  display: none !important;
 }
 
 
