@@ -79,12 +79,28 @@ body:not(.sqs-is-page-editing) #header {
   ) !important;
 }
 
-/* Nav link styling */
+/* Nav link styling — match wireframe exactly */
 .header-nav-item a {
-  font-weight: 300;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 0.8rem;
+  font-weight: 400 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  font-size: 0.6875rem !important;
+  color: var(--sba-text) !important;
+  transition: color 0.3s ease;
+}
+
+.header-nav-item a:hover {
+  color: var(--sba-accent) !important;
+}
+
+/* Active nav underline color */
+.header-nav-item--active a {
+  color: var(--sba-text) !important;
+}
+
+/* Logo text color */
+#header .header-title-text a {
+  color: var(--sba-text) !important;
 }
 
 
@@ -187,53 +203,61 @@ section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__descript
   line-height: 1.5 !important;
 }
 
-/* Desktop navigation arrows — visible, styled to match wireframe */
-section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows {
-  display: flex !important;
+/* Hide slideshow arrows — landing page only, no navigation needed */
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows,
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .mobile-arrows {
+  display: none !important;
+}
+
+/* "COLUMBUS, OHIO" label — injected before the title via ::before */
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__title::before {
+  content: 'COLUMBUS, OHIO';
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sba-accent);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+/* Scroll indicator — bottom right of hero */
+section[data-section-id="69c561a06d6e4b21c6d06df9"]::after {
+  content: 'SCROLL';
+  position: absolute;
+  bottom: 6rem;
+  right: 4rem;
   z-index: 10;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sba-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
 }
 
-section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows.arrow-container--left {
-  left: auto !important;
-  right: 140px !important;
-  bottom: 6rem !important;
-  top: auto !important;
+/* Scroll indicator animated line */
+section[data-section-id="69c561a06d6e4b21c6d06df9"]::before {
+  content: '';
+  position: absolute;
+  bottom: 2rem;
+  right: calc(4rem + 4px);
+  z-index: 10;
+  width: 1px;
+  height: 3rem;
+  background: linear-gradient(to bottom, var(--sba-text-muted), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
 }
 
-section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows.arrow-container--right {
-  right: 4rem !important;
-  bottom: 6rem !important;
-  top: auto !important;
-}
-
-/* Arrow button styling */
-section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows button,
-section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows a {
-  width: 52px !important;
-  height: 52px !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
-  background: rgba(0, 0, 0, 0.4) !important;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #fff !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: all 0.3s ease !important;
-  border-radius: 0 !important;
-  cursor: pointer;
-}
-
-section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows button:hover,
-section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows a:hover {
-  border-color: #fff !important;
-  background: rgba(0, 0, 0, 0.6) !important;
-}
-
-/* Arrow SVG/icon color */
-section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows svg {
-  fill: #fff !important;
-  color: #fff !important;
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
 }
 
 /* Hide section border on hero */
@@ -390,6 +414,12 @@ body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .sl
 
   section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__title {
     font-size: clamp(2rem, 8vw, 3.25rem) !important;
+  }
+
+  /* Hide scroll indicator on mobile */
+  section[data-section-id="69c561a06d6e4b21c6d06df9"]::after,
+  section[data-section-id="69c561a06d6e4b21c6d06df9"]::before {
+    display: none !important;
   }
 
   /* Portfolio hover info always visible on mobile */
