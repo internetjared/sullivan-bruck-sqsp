@@ -541,20 +541,103 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .section-border {
 
 /* ==========================================================
    7. CONTACT FORM
+   Section ID: 69c5863d2526b8252328c50c
    ========================================================== */
 
-#contact [data-sqsp-block="form"] input,
-#contact [data-sqsp-block="form"] textarea {
-  background: transparent;
-  border: 1px solid var(--sba-rule);
-  color: var(--sba-text);
-  transition: border-color 0.3s ease;
+/* Form labels — small uppercase, muted, matching wireframe */
+section[data-section-id="69c5863d2526b8252328c50c"] label {
+  font-size: 0.6875rem !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  color: var(--sba-text-muted) !important;
+  font-weight: 400 !important;
 }
 
-#contact [data-sqsp-block="form"] input:focus,
-#contact [data-sqsp-block="form"] textarea:focus {
-  border-color: var(--sba-accent);
-  outline: none;
+/* Form fields — transparent bg, bottom-border only, dark grey line */
+section[data-section-id="69c5863d2526b8252328c50c"] input[type="text"],
+section[data-section-id="69c5863d2526b8252328c50c"] input[type="email"],
+section[data-section-id="69c5863d2526b8252328c50c"] textarea {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 0 !important;
+  padding: 1rem 0 !important;
+  font-size: 1rem !important;
+  font-weight: 300 !important;
+  color: var(--sba-text) !important;
+  outline: none !important;
+  transition: border-color 0.3s ease !important;
+}
+
+section[data-section-id="69c5863d2526b8252328c50c"] input[type="text"]:focus,
+section[data-section-id="69c5863d2526b8252328c50c"] input[type="email"]:focus,
+section[data-section-id="69c5863d2526b8252328c50c"] textarea:focus {
+  border-color: var(--sba-accent) !important;
+}
+
+section[data-section-id="69c5863d2526b8252328c50c"] textarea {
+  resize: vertical !important;
+  min-height: 100px !important;
+}
+
+/* Submit button — outlined, white border, transparent bg */
+section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"],
+section[data-section-id="69c5863d2526b8252328c50c"] .form-submit-button {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  color: var(--sba-text) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  padding: 1rem 3rem !important;
+  cursor: pointer;
+  transition: all 0.3s ease !important;
+  border-radius: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+}
+
+section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"]:hover,
+section[data-section-id="69c5863d2526b8252328c50c"] .form-submit-button:hover {
+  border-color: var(--sba-accent) !important;
+  color: var(--sba-accent) !important;
+}
+
+/* Send arrow icon inside submit button */
+section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"] .sba-send-icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"]:hover .sba-send-icon {
+  transform: translateX(4px);
+}
+
+/* Phone and email icons */
+.sba-contact-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sba-contact-icon svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.sba-contact-icon svg path {
+  fill: none;
+  stroke: var(--sba-text-muted);
+  stroke-width: 1.5;
+}
+
+/* Hide the duplicate submit button label if Squarespace renders two */
+section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"] .LiqISyL3YVgi1SgG {
+  display: none !important;
 }
 
 
