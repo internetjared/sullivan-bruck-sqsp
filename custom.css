@@ -453,15 +453,17 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows {
 
 section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows.arrow-container--left {
   left: auto !important;
-  right: 160px !important;
+  right: 180px !important;
   bottom: 4rem !important;
   top: auto !important;
+  transform: none !important;
 }
 
 section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows.arrow-container--right {
   right: 4rem !important;
   bottom: 4rem !important;
   top: auto !important;
+  transform: none !important;
 }
 
 /* Arrow button styling — match wireframe */
