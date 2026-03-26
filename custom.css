@@ -96,11 +96,12 @@ body:not(.sqs-is-page-editing) #header {
    Risk: medium — these are observed Squarespace wrappers
    ========================================================== */
 
-/* Full viewport height hero */
+/* Full viewport height hero — zero out header-offset padding */
 section[data-section-id="69c561a06d6e4b21c6d06df9"] {
   min-height: 100vh !important;
   height: 100vh !important;
   position: relative;
+  padding-top: 0 !important;
 }
 
 /* Force slideshow container to fill section */
