@@ -439,7 +439,7 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .slide-media-container::afte
 section[data-section-id="69c5859f3b7752712f05e4b0"] .slide-content {
   position: absolute !important;
   bottom: 2.5rem !important;
-  left: 4rem !important;
+  left: 2.5rem !important;
   right: auto !important;
   top: auto !important;
   z-index: 2;
@@ -476,8 +476,8 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows {
 /* Custom slideshow controls bar — [← ] [ 1/4 ] [ → ] */
 .sba-slideshow-controls {
   position: absolute;
-  bottom: 4rem;
-  right: 4rem;
+  bottom: 2.5rem;
+  right: 2.5rem;
   z-index: 10;
   display: flex;
   align-items: center;
@@ -526,6 +526,15 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows {
 .sba-arrow svg path {
   fill: #fff !important;
   stroke: #fff !important;
+}
+
+/* Kill the gold inner background div that Squarespace clones into the button */
+.sba-arrow .user-items-list-banner-slideshow__arrow-icon-background,
+.sba-arrow .user-items-list-banner-slideshow__arrow-icon-background-area,
+.sba-arrow div {
+  background: transparent !important;
+  background-color: transparent !important;
+  display: none !important;
 }
 
 /* Counter between arrows */
