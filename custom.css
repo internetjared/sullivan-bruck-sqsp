@@ -1,7 +1,7 @@
 /* ============================================================
    SULLIVAN BRUCK ARCHITECTS — Squarespace 7.1 Custom Styles
    Site: sba-2.squarespace.com
-   CDN:  TBD (Cloudflare Pages)
+   CDN:  https://sullivan-bruck-sqsp.pages.dev
 
    Follows CLAUDE.md selector hierarchy:
    1. Manual section anchor IDs
@@ -10,10 +10,26 @@
    4. Body context classes
    ============================================================ */
 
-/* --- CSS Custom Properties ---
-   These override Squarespace's default palette.
-   Set primary colors in Site Styles first,
-   then use these for fine-tuning only. */
+/* ============================================================
+   TABLE OF CONTENTS
+   1. Custom Properties
+   2. Global Typography
+   3. Header & Navigation
+   4. Hero Section (Homepage Slideshow)
+   5. Portfolio Grid
+   6. About Page
+   7. Contact Form
+   8. Buttons
+   9. Footer
+   10. Reduced Motion
+   11. Edit Mode Safety
+   12. Mobile
+   ============================================================ */
+
+
+/* ==========================================================
+   1. CUSTOM PROPERTIES
+   ========================================================== */
 
 :root {
   --sba-bg: #141414;
@@ -27,15 +43,17 @@
   --sba-overlay: rgba(0, 0, 0, 0.55);
 }
 
-/* --- Global Typography Refinements ---
+
+/* ==========================================================
+   2. GLOBAL TYPOGRAPHY
    Use Site Styles for base font family and sizes.
-   These are surgical overrides only. */
+   These are surgical overrides only.
+   ========================================================== */
 
 h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
-/* Thin weight for display headings */
 h1 {
   font-weight: 200;
 }
@@ -44,10 +62,14 @@ h2 {
   font-weight: 200;
 }
 
-/* --- Header Gradient Overlay ---
-   Makes nav readable over full-bleed hero imagery.
-   Scoped to avoid edit-mode interference. */
 
+/* ==========================================================
+   3. HEADER & NAVIGATION
+   Transparent header with gradient for readability over
+   full-bleed hero imagery.
+   ========================================================== */
+
+/* Gradient overlay on header */
 body:not(.sqs-is-page-editing) #header {
   background: linear-gradient(
     to bottom,
@@ -57,9 +79,7 @@ body:not(.sqs-is-page-editing) #header {
   ) !important;
 }
 
-/* --- Navigation ---
-   Keep nav minimal and light. */
-
+/* Nav link styling */
 .header-nav-item a {
   font-weight: 300;
   letter-spacing: 0.08em;
@@ -67,10 +87,164 @@ body:not(.sqs-is-page-editing) #header {
   font-size: 0.8rem;
 }
 
-/* --- Portfolio Grid ---
-   Hover-reveal project name/location on thumbnails. */
 
-/* Summary block cards in portfolio section */
+/* ==========================================================
+   4. HERO SECTION — Homepage Slideshow
+   Section ID: 69c561a06d6e4b21c6d06df9
+   Observed selectors: .user-items-list-section,
+   .slideshow-holder, .slide, .slide-content, etc.
+   Risk: medium — these are observed Squarespace wrappers
+   ========================================================== */
+
+/* Full viewport height hero */
+section[data-section-id="69c561a06d6e4b21c6d06df9"] {
+  min-height: 100vh !important;
+  height: 100vh !important;
+  position: relative;
+}
+
+/* Force slideshow container to fill section */
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .content-wrapper,
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .content,
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .user-items-list,
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .user-items-list-item-container,
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .slideshow-wrapper,
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .slideshow-gutter,
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .slideshow-holder,
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .slides {
+  height: 100% !important;
+  min-height: 100vh !important;
+}
+
+/* Individual slides fill the viewport */
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide.list-item {
+  height: 100vh !important;
+  position: relative;
+}
+
+/* Slide images cover the full area */
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide-media-container {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-slideshow-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Gradient overlay on slides (dark at top for nav, dark at bottom for text) */
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide-media-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.0) 25%,
+    rgba(0, 0, 0, 0.0) 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Slide text content — positioned bottom-left over image */
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide-content {
+  position: absolute !important;
+  bottom: 6rem !important;
+  left: 4rem !important;
+  right: auto !important;
+  top: auto !important;
+  z-index: 2;
+  padding: 0 !important;
+  background: none !important;
+  max-width: 600px;
+}
+
+/* Title — white, large, thin weight */
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__title {
+  color: var(--sba-text) !important;
+  font-size: clamp(2.5rem, 5vw, 4.5rem) !important;
+  font-weight: 200 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Description — muted, uppercase, small tracking */
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__description,
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__description p {
+  color: var(--sba-text-muted) !important;
+  font-size: 0.8125rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  font-weight: 300 !important;
+  line-height: 1.5 !important;
+}
+
+/* Desktop navigation arrows — visible, styled to match wireframe */
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows {
+  display: flex !important;
+  z-index: 10;
+}
+
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows.arrow-container--left {
+  left: auto !important;
+  right: 140px !important;
+  bottom: 6rem !important;
+  top: auto !important;
+}
+
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows.arrow-container--right {
+  right: 4rem !important;
+  bottom: 6rem !important;
+  top: auto !important;
+}
+
+/* Arrow button styling */
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows button,
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows a {
+  width: 52px !important;
+  height: 52px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+}
+
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows button:hover,
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows a:hover {
+  border-color: #fff !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Arrow SVG/icon color */
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .desktop-arrows svg {
+  fill: #fff !important;
+  color: #fff !important;
+}
+
+/* Hide section border on hero */
+section[data-section-id="69c561a06d6e4b21c6d06df9"] .section-border {
+  display: none !important;
+}
+
+
+/* ==========================================================
+   5. PORTFOLIO GRID
+   ========================================================== */
+
 #portfolio .summary-item {
   position: relative;
   overflow: hidden;
@@ -84,7 +258,6 @@ body:not(.sqs-is-page-editing) #header {
   transform: scale(1.03);
 }
 
-/* Overlay with project info on hover */
 #portfolio .summary-item .summary-title,
 #portfolio .summary-item .summary-excerpt {
   opacity: 0;
@@ -96,7 +269,6 @@ body:not(.sqs-is-page-editing) #header {
   opacity: 1;
 }
 
-/* Touch device fallback */
 @media (hover: none) {
   #portfolio .summary-item .summary-title,
   #portfolio .summary-item .summary-excerpt {
@@ -104,46 +276,20 @@ body:not(.sqs-is-page-editing) #header {
   }
 }
 
-/* --- Project Page Slideshow ---
-   Style the gallery section on project pages. */
 
-body.collection-type-portfolio.view-item .gallery-slideshow {
-  width: 100%;
-  height: 75vh;
-}
-
-/* --- About Page ---
-   Team grid and philosophy section. */
+/* ==========================================================
+   6. ABOUT PAGE
+   ========================================================== */
 
 #team .summary-item {
   position: relative;
   overflow: hidden;
 }
 
-/* --- Section Spacing ---
-   Tighter rhythm between sections on dark backgrounds. */
 
-.page-section {
-  border-top: 1px solid var(--sba-rule);
-}
-
-.page-section:first-child {
-  border-top: none;
-}
-
-/* --- Button Overrides ---
-   Minimal, architectural button style. */
-
-[data-sqsp-button] {
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  font-weight: 400;
-  transition: all 0.3s ease;
-}
-
-/* --- Form Styling ---
-   Contact form refinements. */
+/* ==========================================================
+   7. CONTACT FORM
+   ========================================================== */
 
 #contact [data-sqsp-block="form"] input,
 #contact [data-sqsp-block="form"] textarea {
@@ -159,15 +305,23 @@ body.collection-type-portfolio.view-item .gallery-slideshow {
   outline: none;
 }
 
-/* --- Image Treatment ---
-   Consistent radius and transition on image blocks. */
 
-[data-sqsp-block="image"] [data-sqsp-image-block-image] {
-  transition: transform 0.6s ease;
+/* ==========================================================
+   8. BUTTONS
+   ========================================================== */
+
+[data-sqsp-button] {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 400;
+  transition: all 0.3s ease;
 }
 
-/* --- Footer ---
-   Minimal footer with muted text. */
+
+/* ==========================================================
+   9. FOOTER
+   ========================================================== */
 
 #footer {
   border-top: 1px solid var(--sba-rule);
@@ -181,8 +335,10 @@ body.collection-type-portfolio.view-item .gallery-slideshow {
   color: var(--sba-accent);
 }
 
-/* --- Reduced Motion ---
-   Respect user preference. */
+
+/* ==========================================================
+   10. REDUCED MOTION
+   ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -195,14 +351,28 @@ body.collection-type-portfolio.view-item .gallery-slideshow {
   }
 }
 
-/* --- Edit Mode Safety ---
-   Guard aggressive layout changes from breaking editor. */
+
+/* ==========================================================
+   11. EDIT MODE SAFETY
+   ========================================================== */
 
 body.sqs-is-page-editing [data-sqsp-block="image"] [data-sqsp-image-block-image] {
   transform: none !important;
 }
 
-/* --- Mobile Adjustments --- */
+/* Don't force hero layout in edit mode */
+body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"],
+body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .content-wrapper,
+body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .content,
+body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide.list-item {
+  height: auto !important;
+  min-height: auto !important;
+}
+
+
+/* ==========================================================
+   12. MOBILE
+   ========================================================== */
 
 @media (max-width: 767px) {
   h1 {
@@ -210,7 +380,18 @@ body.sqs-is-page-editing [data-sqsp-block="image"] [data-sqsp-image-block-image]
     line-height: 1.05;
   }
 
-  /* Ensure portfolio hover info is always visible on mobile */
+  /* Hero text repositioned for mobile */
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide-content {
+    bottom: 4rem !important;
+    left: 2rem !important;
+    right: 2rem !important;
+  }
+
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__title {
+    font-size: clamp(2rem, 8vw, 3.25rem) !important;
+  }
+
+  /* Portfolio hover info always visible on mobile */
   #portfolio .summary-item .summary-title,
   #portfolio .summary-item .summary-excerpt {
     opacity: 1;
