@@ -1,7 +1,7 @@
 # Sullivan Bruck Architects — Squarespace Custom Code
 
 **Site:** https://sba-2.squarespace.com/
-**CDN:** TBD (Cloudflare Pages)
+**CDN:** https://sullivan-bruck-sqsp.pages.dev
 
 ## Deployment
 
@@ -12,12 +12,12 @@ Claude branches (`claude/**`) auto-merge to `main` via GitHub Actions.
 
 ### Header (Custom CSS)
 ```html
-<link rel="stylesheet" href="https://TBD.pages.dev/custom.css">
+<link rel="stylesheet" href="https://sullivan-bruck-sqsp.pages.dev/custom.css">
 ```
 
 ### Footer (Custom JS)
 ```html
-<script src="https://TBD.pages.dev/custom.js"></script>
+<script src="https://sullivan-bruck-sqsp.pages.dev/custom.js"></script>
 ```
 
 ## File Structure
