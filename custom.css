@@ -739,12 +739,35 @@ body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .sl
     min-height: 60vh !important;
   }
 
-  /* Hero text — contained within frame */
+  /* Hero text — close to bottom, contained */
   section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide-content {
-    bottom: 2rem !important;
+    bottom: 1.25rem !important;
     left: 1.5rem !important;
     right: 1.5rem !important;
     max-width: calc(100% - 3rem) !important;
+  }
+
+  /* Mobile hamburger menu — white */
+  .header-burger-btn,
+  .header-menu-btn,
+  [data-controller="MobileOverlayToggle"],
+  button[aria-label="Open Menu"] {
+    color: #fff !important;
+  }
+
+  .header-burger-btn svg,
+  .header-menu-btn svg,
+  .header-burger svg {
+    fill: #fff !important;
+    color: #fff !important;
+    stroke: #fff !important;
+  }
+
+  /* Hamburger lines */
+  .header-burger .top-bun,
+  .header-burger .patty,
+  .header-burger .bottom-bun {
+    background-color: #fff !important;
   }
 
   /* Hero title — smaller on mobile, prevent overflow */
