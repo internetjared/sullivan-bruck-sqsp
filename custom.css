@@ -544,49 +544,6 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .section-border {
    Section ID: 69c5863d2526b8252328c50c
    ========================================================== */
 
-/* Form labels — ALL same size, uppercase, muted grey */
-section[data-section-id="69c5863d2526b8252328c50c"] label,
-section[data-section-id="69c5863d2526b8252328c50c"] label.title,
-section[data-section-id="69c5863d2526b8252328c50c"] label.caption {
-  font-size: 0.75rem !important;
-  letter-spacing: 0.15em !important;
-  text-transform: uppercase !important;
-  color: var(--sba-text-muted) !important;
-  font-weight: 400 !important;
-}
-
-/* Hide the "Name" parent label if Squarespace renders it above first/last */
-section[data-section-id="69c5863d2526b8252328c50c"] .field-list .field .caption:empty {
-  display: none !important;
-}
-
-/* Form fields — transparent bg, bottom-border only, dark grey line */
-section[data-section-id="69c5863d2526b8252328c50c"] input[type="text"],
-section[data-section-id="69c5863d2526b8252328c50c"] input[type="email"],
-section[data-section-id="69c5863d2526b8252328c50c"] textarea {
-  background: transparent !important;
-  border: none !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
-  border-radius: 0 !important;
-  padding: 1rem 0 !important;
-  font-size: 1rem !important;
-  font-weight: 300 !important;
-  color: var(--sba-text) !important;
-  outline: none !important;
-  transition: border-color 0.3s ease !important;
-}
-
-section[data-section-id="69c5863d2526b8252328c50c"] input[type="text"]:focus,
-section[data-section-id="69c5863d2526b8252328c50c"] input[type="email"]:focus,
-section[data-section-id="69c5863d2526b8252328c50c"] textarea:focus {
-  border-color: var(--sba-accent) !important;
-}
-
-section[data-section-id="69c5863d2526b8252328c50c"] textarea {
-  resize: vertical !important;
-  min-height: 100px !important;
-}
-
 /* Submit button — outlined, white border, transparent bg */
 section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"].button.sqs-system-button,
 section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"] {
@@ -627,10 +584,15 @@ section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"] .form-
 
 /* Send arrow icon inside submit button */
 section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"] .sba-send-icon {
-  display: inline-block;
+  display: inline-block !important;
   transition: transform 0.3s ease;
   vertical-align: middle;
   margin-left: 0.5rem;
+}
+
+section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"] .sba-send-icon svg {
+  display: inline-block !important;
+  vertical-align: middle;
 }
 
 section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"]:hover .sba-send-icon {
