@@ -452,38 +452,33 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .list-item-content__descript
   font-weight: 400 !important;
 }
 
-/* Arrow containers — position bottom-right */
+/* Arrow containers — force buttons to bottom-right */
 section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows {
   display: flex !important;
   z-index: 10;
+  align-items: flex-end !important;
+  padding-bottom: 2.5rem !important;
 }
 
 section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows.arrow-container--left {
   left: auto !important;
   right: 180px !important;
-  bottom: 2.5rem !important;
-  top: unset !important;
-  transform: none !important;
-  height: auto !important;
 }
 
 section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows.arrow-container--right {
   right: 4rem !important;
-  bottom: 2.5rem !important;
-  top: unset !important;
-  transform: none !important;
-  height: auto !important;
 }
 
-/* Arrow button styling — match wireframe */
+/* Arrow button styling — match wireframe: dark glass, white border, white icons */
+section[data-section-id="69c5859f3b7752712f05e4b0"] .user-items-list-banner-slideshow__arrow-button,
 section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows button,
 section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows a {
-  width: 52px !important;
-  height: 52px !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
-  background: rgba(0, 0, 0, 0.4) !important;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  width: 56px !important;
+  height: 56px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
+  background: rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
   color: #fff !important;
   display: flex !important;
   align-items: center !important;
@@ -491,17 +486,24 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows a {
   transition: all 0.3s ease !important;
   border-radius: 0 !important;
   cursor: pointer;
+  padding: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
+section[data-section-id="69c5859f3b7752712f05e4b0"] .user-items-list-banner-slideshow__arrow-button:hover,
 section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows button:hover,
 section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows a:hover {
-  border-color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.9) !important;
   background: rgba(0, 0, 0, 0.6) !important;
 }
 
-section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows svg {
+section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows svg,
+section[data-section-id="69c5859f3b7752712f05e4b0"] .user-items-list-banner-slideshow__arrow-button svg {
   fill: #fff !important;
   color: #fff !important;
+  width: 20px !important;
+  height: 20px !important;
 }
 
 /* Slide counter — "1 / 4" between arrows */
