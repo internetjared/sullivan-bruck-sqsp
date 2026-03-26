@@ -641,6 +641,10 @@ section[data-section-id="69c5863d2526b8252328c50c"] a[href^="mailto"]:hover {
   border-bottom: none !important;
 }
 
+#about {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
 footer#footer-sections.sections {
   border-top: none !important;
 }
