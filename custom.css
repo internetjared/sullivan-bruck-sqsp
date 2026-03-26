@@ -240,20 +240,18 @@ section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__title::b
 section[data-section-id="69c561a06d6e4b21c6d06df9"]::after {
   content: 'SCROLL';
   position: absolute;
-  bottom: 6rem;
+  bottom: 8rem;
   right: 4rem;
   z-index: 10;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 400;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--sba-text-muted);
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  color: rgba(255, 255, 255, 0.9);
   writing-mode: vertical-rl;
   text-orientation: mixed;
   transform: rotate(180deg);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
 }
 
 /* Scroll indicator animated line */
@@ -264,14 +262,17 @@ section[data-section-id="69c561a06d6e4b21c6d06df9"]::before {
   right: calc(4rem + 4px);
   z-index: 10;
   width: 1px;
-  height: 3rem;
-  background: linear-gradient(to bottom, var(--sba-text-muted), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
+  height: 4.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  animation: scrollBounce 2s ease-in-out infinite;
+  transform-origin: bottom;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
 }
 
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.4; transform: scaleY(1); }
-  50% { opacity: 1; transform: scaleY(1.2); }
+@keyframes scrollBounce {
+  0% { opacity: 0.3; transform: scaleY(0.4); }
+  50% { opacity: 1; transform: scaleY(1); }
+  100% { opacity: 0.3; transform: scaleY(0.4); }
 }
 
 /* Hide section border on hero */
