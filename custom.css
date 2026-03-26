@@ -544,13 +544,20 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .section-border {
    Section ID: 69c5863d2526b8252328c50c
    ========================================================== */
 
-/* Form labels — small uppercase, muted, matching wireframe */
-section[data-section-id="69c5863d2526b8252328c50c"] label {
-  font-size: 0.6875rem !important;
+/* Form labels — ALL same size, uppercase, muted grey */
+section[data-section-id="69c5863d2526b8252328c50c"] label,
+section[data-section-id="69c5863d2526b8252328c50c"] label.title,
+section[data-section-id="69c5863d2526b8252328c50c"] label.caption {
+  font-size: 0.75rem !important;
   letter-spacing: 0.15em !important;
   text-transform: uppercase !important;
   color: var(--sba-text-muted) !important;
   font-weight: 400 !important;
+}
+
+/* Hide the "Name" parent label if Squarespace renders it above first/last */
+section[data-section-id="69c5863d2526b8252328c50c"] .field-list .field .caption:empty {
+  display: none !important;
 }
 
 /* Form fields — transparent bg, bottom-border only, dark grey line */
@@ -581,8 +588,8 @@ section[data-section-id="69c5863d2526b8252328c50c"] textarea {
 }
 
 /* Submit button — outlined, white border, transparent bg */
-section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"],
-section[data-section-id="69c5863d2526b8252328c50c"] .form-submit-button {
+section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"].button.sqs-system-button,
+section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"] {
   background: transparent !important;
   background-color: transparent !important;
   border: 1px solid rgba(255, 255, 255, 0.5) !important;
@@ -595,28 +602,42 @@ section[data-section-id="69c5863d2526b8252328c50c"] .form-submit-button {
   cursor: pointer;
   transition: all 0.3s ease !important;
   border-radius: 0 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 0.75rem !important;
 }
 
-section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"]:hover,
-section[data-section-id="69c5863d2526b8252328c50c"] .form-submit-button:hover {
+section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"]:hover {
   border-color: var(--sba-accent) !important;
   color: var(--sba-accent) !important;
+}
+
+/* Make sure ALL text inside submit button is visible and white */
+section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"] span,
+section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"] .form-submit-button-label,
+section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"] .form-submit-button-state,
+section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"] .form-submit-button-state span {
+  color: inherit !important;
+  display: inline !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Only show ONE label — the state span which Squarespace keeps visible */
+section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"] .form-submit-button-label {
+  display: none !important;
 }
 
 /* Send arrow icon inside submit button */
 section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"] .sba-send-icon {
   display: inline-block;
   transition: transform 0.3s ease;
+  vertical-align: middle;
+  margin-left: 0.5rem;
 }
 
 section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"]:hover .sba-send-icon {
   transform: translateX(4px);
 }
 
-/* Phone and email icons */
+/* Phone and email link icons */
 .sba-contact-icon {
   display: inline-flex;
   align-items: center;
@@ -629,15 +650,23 @@ section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"]:hover 
   flex-shrink: 0;
 }
 
-.sba-contact-icon svg path {
+.sba-contact-icon svg path,
+.sba-contact-icon svg polyline {
   fill: none;
   stroke: var(--sba-text-muted);
   stroke-width: 1.5;
 }
 
-/* Hide the duplicate submit button label if Squarespace renders two */
-section[data-section-id="69c5863d2526b8252328c50c"] button[type="submit"] .LiqISyL3YVgi1SgG {
-  display: none !important;
+/* Phone and email link text — white, not gold */
+section[data-section-id="69c5863d2526b8252328c50c"] a[href^="tel"],
+section[data-section-id="69c5863d2526b8252328c50c"] a[href^="mailto"] {
+  color: var(--sba-text) !important;
+  transition: color 0.3s ease;
+}
+
+section[data-section-id="69c5863d2526b8252328c50c"] a[href^="tel"]:hover,
+section[data-section-id="69c5863d2526b8252328c50c"] a[href^="mailto"]:hover {
+  color: var(--sba-accent) !important;
 }
 
 

@@ -99,15 +99,18 @@
     if (section.dataset.contactInit === 'true') return;
     section.dataset.contactInit = 'true';
 
-    // Add send arrow icon to submit button
+    // Add send arrow icon to submit button (into the visible state span)
     var submitBtn = section.querySelector('button[type="submit"]');
     if (submitBtn) {
-      var label = submitBtn.querySelector('.form-submit-button-label');
-      if (label && !label.querySelector('.sba-send-icon')) {
+      // Squarespace uses .form-submit-button-state as the visible label
+      var stateSpan = submitBtn.querySelector('.form-submit-button-state');
+      var visibleText = stateSpan ? stateSpan.querySelector('span[aria-hidden="true"]') : null;
+      var target = visibleText || stateSpan || submitBtn;
+      if (target && !target.querySelector('.sba-send-icon')) {
         var arrow = document.createElement('span');
         arrow.className = 'sba-send-icon';
-        arrow.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>';
-        label.appendChild(arrow);
+        arrow.innerHTML = ' <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>';
+        target.appendChild(arrow);
       }
     }
 
