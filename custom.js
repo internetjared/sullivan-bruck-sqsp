@@ -59,6 +59,12 @@
     newLeft.className = 'sba-arrow';
     newRight.className = 'sba-arrow';
 
+    // Remove the gold background divs that Squarespace nests inside
+    [newLeft, newRight].forEach(function (btn) {
+      var bgDivs = btn.querySelectorAll('div');
+      bgDivs.forEach(function (d) { d.remove(); });
+    });
+
     // Counter
     var counter = document.createElement('span');
     counter.className = 'sba-counter';
