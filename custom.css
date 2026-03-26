@@ -317,9 +317,49 @@ section[data-section-id="69c561a06d6e4b21c6d06df9"] .section-border {
 
 
 /* ==========================================================
-   6. ABOUT PAGE
+   6. ABOUT SECTION
+   Section ID: 69c58420aea2363fae6ea228
    ========================================================== */
 
+/* "About the Firm" H4 label — match Columbus Ohio style */
+section[data-section-id="69c58420aea2363fae6ea228"] h4 {
+  font-size: 0.6875rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  color: var(--sba-accent) !important;
+  line-height: 1.4 !important;
+}
+
+/* H2 heading — thin weight, white */
+section[data-section-id="69c58420aea2363fae6ea228"] h2 {
+  font-weight: 200 !important;
+  color: var(--sba-text) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Body text — muted color */
+section[data-section-id="69c58420aea2363fae6ea228"] p {
+  color: var(--sba-text-muted) !important;
+  font-size: 1.0625rem !important;
+  line-height: 1.75 !important;
+  font-weight: 300 !important;
+}
+
+/* Principle titles H3 — light weight with gold left border */
+section[data-section-id="69c58420aea2363fae6ea228"] h3 {
+  font-size: 1.0625rem !important;
+  font-weight: 300 !important;
+  color: var(--sba-text) !important;
+  letter-spacing: 0 !important;
+  line-height: 1.5 !important;
+  padding-left: 1.5rem !important;
+  border-left: 2px solid var(--sba-accent) !important;
+  margin-bottom: 0 !important;
+}
+
+/* About page team grid */
 #team .summary-item {
   position: relative;
   overflow: hidden;
