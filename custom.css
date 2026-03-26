@@ -643,22 +643,22 @@ section[data-section-id="69c5863d2526b8252328c50c"] a[href^="mailto"]:hover {
 
 /* Bottom of About section */
 section[data-section-id="69c58420aea2363fae6ea228"] {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Bottom of Featured Projects slideshow */
 section[data-section-id="69c5859f3b7752712f05e4b0"] {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Above footer — use contact section bottom border instead */
 section[data-section-id="69c5863d2526b8252328c50c"] {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Also target footer directly with max specificity */
 footer#footer-sections.sections {
-  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 
