@@ -633,32 +633,16 @@ section[data-section-id="69c5863d2526b8252328c50c"] a[href^="mailto"]:hover {
 
 
 /* ==========================================================
-   7b. SECTION DIVIDERS — only specific sections
+   7b. SECTION DIVIDERS — all removed
    ========================================================== */
 
-/* Remove all default section borders */
 .page-section {
   border-top: none !important;
+  border-bottom: none !important;
 }
 
-/* Bottom of About section */
-section[data-section-id="69c58420aea2363fae6ea228"] {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-/* Bottom of Featured Projects slideshow */
-section[data-section-id="69c5859f3b7752712f05e4b0"] {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-/* Above footer — use contact section bottom border instead */
-section[data-section-id="69c5863d2526b8252328c50c"] {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-/* Footer divider */
 footer#footer-sections.sections {
-  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-top: none !important;
 }
 
 
