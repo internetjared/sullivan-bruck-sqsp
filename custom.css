@@ -720,19 +720,51 @@ body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .sl
 
 @media (max-width: 767px) {
   h1 {
-    font-size: clamp(2rem, 8vw, 3.25rem);
+    font-size: clamp(1.75rem, 7vw, 2.75rem);
     line-height: 1.05;
   }
 
-  /* Hero text repositioned for mobile */
-  section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide-content {
-    bottom: 4rem !important;
-    left: 2rem !important;
-    right: 2rem !important;
+  /* Hero section — 60vh on mobile */
+  section[data-section-id="69c561a06d6e4b21c6d06df9"],
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .content-wrapper,
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .content,
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .user-items-list,
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .user-items-list-item-container,
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .slideshow-wrapper,
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .slideshow-gutter,
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .slideshow-holder,
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .slides,
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide.list-item {
+    height: 60vh !important;
+    min-height: 60vh !important;
   }
 
+  /* Hero text — contained within frame */
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide-content {
+    bottom: 2rem !important;
+    left: 1.5rem !important;
+    right: 1.5rem !important;
+    max-width: calc(100% - 3rem) !important;
+  }
+
+  /* Hero title — smaller on mobile, prevent overflow */
   section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__title {
-    font-size: clamp(2rem, 8vw, 3.25rem) !important;
+    font-size: clamp(1.75rem, 7vw, 2.75rem) !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Columbus Ohio label — smaller on mobile */
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__title::before {
+    font-size: 0.5625rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Description text — prevent overflow */
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__description,
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__description p {
+    font-size: 0.6875rem !important;
+    word-wrap: break-word !important;
   }
 
   /* Hide scroll indicator on mobile */
