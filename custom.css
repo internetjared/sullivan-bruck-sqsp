@@ -383,6 +383,22 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .slideshow-gutter {
   padding-right: 0 !important;
 }
 
+/* Force slides to fill section height */
+section[data-section-id="69c5859f3b7752712f05e4b0"] .content-wrapper,
+section[data-section-id="69c5859f3b7752712f05e4b0"] .content,
+section[data-section-id="69c5859f3b7752712f05e4b0"] .user-items-list,
+section[data-section-id="69c5859f3b7752712f05e4b0"] .user-items-list-item-container,
+section[data-section-id="69c5859f3b7752712f05e4b0"] .slideshow-wrapper,
+section[data-section-id="69c5859f3b7752712f05e4b0"] .slideshow-gutter,
+section[data-section-id="69c5859f3b7752712f05e4b0"] .slideshow-holder,
+section[data-section-id="69c5859f3b7752712f05e4b0"] .slides {
+  height: 100% !important;
+}
+
+section[data-section-id="69c5859f3b7752712f05e4b0"] .slide.list-item {
+  position: relative !important;
+}
+
 /* Slide images cover the area */
 section[data-section-id="69c5859f3b7752712f05e4b0"] .slide-media-container {
   position: absolute !important;
@@ -468,36 +484,48 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows {
   gap: 1rem;
 }
 
-/* Arrow buttons — exact wireframe match */
-.sba-arrow {
-  width: 52px;
-  height: 52px;
-  border: 1.5px solid rgba(255, 255, 255, 0.6);
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #fff;
+/* Arrow buttons — exact wireframe match, force override theme colors */
+.sba-arrow,
+.sba-arrow:link,
+.sba-arrow:visited,
+.sba-arrow:active {
+  width: 52px !important;
+  height: 52px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  color: #fff !important;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  border-radius: 0;
-  padding: 0;
-  outline: none;
-  box-shadow: none;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
 }
 
 .sba-arrow:hover {
-  border-color: #fff;
-  background: rgba(0, 0, 0, 0.6);
+  border-color: #fff !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+  background-color: rgba(0, 0, 0, 0.6) !important;
 }
 
 .sba-arrow svg {
-  fill: #fff;
-  color: #fff;
-  width: 18px;
-  height: 18px;
+  fill: #fff !important;
+  color: #fff !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.sba-arrow svg path {
+  fill: #fff !important;
+  stroke: #fff !important;
 }
 
 /* Counter between arrows */
