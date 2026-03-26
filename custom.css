@@ -153,18 +153,32 @@ section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-slideshow-image {
   object-fit: cover !important;
 }
 
-/* Gradient overlay on slides (dark at top for nav, dark at bottom for text) */
+/* Gradient overlay on slides — dark at top for nav, dark at bottom-left for text */
 section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide-media-container::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0.0) 25%,
-    rgba(0, 0, 0, 0.0) 55%,
-    rgba(0, 0, 0, 0.55) 100%
-  );
+  background:
+    /* Bottom-left corner vignette for text readability */
+    radial-gradient(
+      ellipse 80% 60% at 0% 100%,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.4) 40%,
+      transparent 70%
+    ),
+    /* Bottom edge gradient */
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.35) 20%,
+      transparent 45%
+    ),
+    /* Top edge gradient for nav */
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5) 0%,
+      transparent 20%
+    );
   pointer-events: none;
   z-index: 1;
 }
