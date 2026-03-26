@@ -749,6 +749,7 @@ body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .sl
     top: auto !important;
     max-width: calc(100% - 3rem) !important;
     padding-bottom: 0.5rem !important;
+    margin: 24px 0px !important;
   }
 
   /* Stronger gradient on mobile for legibility */
