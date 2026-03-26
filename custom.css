@@ -484,57 +484,42 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows {
   gap: 1rem;
 }
 
-/* Arrow buttons — exact wireframe match, force override theme colors */
-.sba-arrow,
-.sba-arrow:link,
-.sba-arrow:visited,
-.sba-arrow:active {
-  width: 52px !important;
-  height: 52px !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
-  background: rgba(0, 0, 0, 0.4) !important;
-  background-color: rgba(0, 0, 0, 0.4) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  color: #fff !important;
+/* Arrow buttons — built from scratch, no Squarespace markup inside */
+.sba-arrow {
+  width: 52px;
+  height: 52px;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
   cursor: pointer;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: all 0.3s ease !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  outline: none !important;
-  box-shadow: none !important;
-  -webkit-appearance: none !important;
-  appearance: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border-radius: 0;
+  padding: 0;
+  outline: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .sba-arrow:hover {
-  border-color: #fff !important;
-  background: rgba(0, 0, 0, 0.6) !important;
-  background-color: rgba(0, 0, 0, 0.6) !important;
+  border-color: #fff;
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .sba-arrow svg {
-  fill: #fff !important;
-  color: #fff !important;
-  width: 18px !important;
-  height: 18px !important;
+  width: 18px;
+  height: 18px;
 }
 
 .sba-arrow svg path {
-  fill: #fff !important;
-  stroke: #fff !important;
-}
-
-/* Kill the gold inner background div that Squarespace clones into the button */
-.sba-arrow .user-items-list-banner-slideshow__arrow-icon-background,
-.sba-arrow .user-items-list-banner-slideshow__arrow-icon-background-area,
-.sba-arrow div {
-  background: transparent !important;
-  background-color: transparent !important;
-  display: none !important;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.5;
 }
 
 /* Counter between arrows */

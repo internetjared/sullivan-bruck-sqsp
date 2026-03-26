@@ -2,13 +2,6 @@
    SULLIVAN BRUCK ARCHITECTS — Squarespace 7.1 Custom JavaScript
    Site: sba-2.squarespace.com
    CDN:  https://sullivan-bruck-sqsp.pages.dev
-
-   Rules:
-   - Idempotent initialization (safe to run multiple times)
-   - DOMContentLoaded entry point
-   - Event delegation preferred
-   - MutationObserver only when necessary, scoped narrowly
-   - Edit-mode aware
    ============================================================ */
 
 (function () {
@@ -22,11 +15,6 @@
     );
   }
 
-  /* --- Featured Projects slideshow controls ---
-     Rebuilds the arrow containers into a single flex row:
-     [← ] [ 1 / 4 ] [ → ]
-     Positioned bottom-right, matching the wireframe exactly.
-  */
   function initSlideshowControls() {
     var section = document.querySelector('section[data-section-id="69c5859f3b7752712f05e4b0"]');
     if (!section) return;
@@ -37,7 +25,7 @@
     var totalSlides = slides.length;
     if (totalSlides === 0) return;
 
-    // Find the original arrow buttons
+    // Find the original arrow buttons (keep them functional but hidden)
     var leftContainer = section.querySelector('.arrow-container--left');
     var rightContainer = section.querySelector('.arrow-container--right');
     var leftBtn = leftContainer ? leftContainer.querySelector('button') : null;
@@ -45,27 +33,25 @@
 
     if (!leftBtn || !rightBtn) return;
 
-    // Hide the original arrow containers
+    // Hide original arrow containers
     leftContainer.style.display = 'none';
     rightContainer.style.display = 'none';
 
-    // Create new unified controls bar
+    // Build custom controls: [← ] [ 1 / 4 ] [ → ]
     var controls = document.createElement('div');
     controls.className = 'sba-slideshow-controls';
 
-    // Clone the arrow buttons into our new bar
-    var newLeft = leftBtn.cloneNode(true);
-    var newRight = rightBtn.cloneNode(true);
+    // Build clean arrow buttons from scratch (no cloning Squarespace's markup)
+    var newLeft = document.createElement('button');
     newLeft.className = 'sba-arrow';
+    newLeft.setAttribute('aria-label', 'Previous slide');
+    newLeft.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M19 12H5M5 12L12 19M5 12L12 5"/></svg>';
+
+    var newRight = document.createElement('button');
     newRight.className = 'sba-arrow';
+    newRight.setAttribute('aria-label', 'Next slide');
+    newRight.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>';
 
-    // Remove the gold background divs that Squarespace nests inside
-    [newLeft, newRight].forEach(function (btn) {
-      var bgDivs = btn.querySelectorAll('div');
-      bgDivs.forEach(function (d) { d.remove(); });
-    });
-
-    // Counter
     var counter = document.createElement('span');
     counter.className = 'sba-counter';
     counter.textContent = '1 / ' + totalSlides;
@@ -74,29 +60,33 @@
     controls.appendChild(counter);
     controls.appendChild(newRight);
 
-    // Insert into the slideshow gutter
-    var gutter = section.querySelector('.slideshow-gutter');
-    if (gutter) {
-      gutter.appendChild(controls);
+    // Append to slideshow-holder (not gutter) so it's inside the image bounds
+    var holder = section.querySelector('.slideshow-holder');
+    if (holder) {
+      holder.style.position = 'relative';
+      holder.appendChild(controls);
     }
 
-    // Wire up click events — trigger the original hidden buttons
+    // Click handlers — trigger the original Squarespace buttons
     newLeft.addEventListener('click', function (e) {
       e.preventDefault();
+      e.stopPropagation();
       leftBtn.click();
-      setTimeout(updateCounter, 200);
+      setTimeout(updateCounter, 300);
     });
 
     newRight.addEventListener('click', function (e) {
       e.preventDefault();
+      e.stopPropagation();
       rightBtn.click();
-      setTimeout(updateCounter, 200);
+      setTimeout(updateCounter, 300);
     });
 
     function updateCounter() {
       var currentSlides = section.querySelectorAll('.slide.list-item');
       for (var i = 0; i < currentSlides.length; i++) {
         var transform = getComputedStyle(currentSlides[i]).transform;
+        // Active slide has no -9999 translate
         if (transform === 'none' || (transform.indexOf('-9999') === -1 && transform.indexOf('9999') === -1)) {
           counter.textContent = (i + 1) + ' / ' + totalSlides;
           break;
@@ -104,16 +94,16 @@
       }
     }
 
-    // Observe slide changes
+    // Observe slide style changes to keep counter in sync
     var slidesContainer = section.querySelector('.slides');
     if (slidesContainer) {
       var observer = new MutationObserver(function () {
-        updateCounter();
+        setTimeout(updateCounter, 100);
       });
-      observer.observe(slidesContainer, { attributes: true, subtree: true, attributeFilter: ['style', 'class'] });
+      observer.observe(slidesContainer, { attributes: true, subtree: true, attributeFilter: ['style'] });
     }
 
-    // Remove any old counter element
+    // Clean up any old counter
     var oldCounter = section.querySelector('.sba-slide-counter');
     if (oldCounter) oldCounter.remove();
   }
