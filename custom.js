@@ -67,41 +67,25 @@
       holder.appendChild(controls);
     }
 
-    // Click handlers — trigger the original Squarespace buttons
+    // Track current slide index manually
+    var currentIndex = 0;
+
+    // Click handlers — trigger original buttons and update index directly
     newLeft.addEventListener('click', function (e) {
       e.preventDefault();
       e.stopPropagation();
       leftBtn.click();
-      setTimeout(updateCounter, 300);
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      counter.textContent = (currentIndex + 1) + ' / ' + totalSlides;
     });
 
     newRight.addEventListener('click', function (e) {
       e.preventDefault();
       e.stopPropagation();
       rightBtn.click();
-      setTimeout(updateCounter, 300);
+      currentIndex = (currentIndex + 1) % totalSlides;
+      counter.textContent = (currentIndex + 1) + ' / ' + totalSlides;
     });
-
-    function updateCounter() {
-      var currentSlides = section.querySelectorAll('.slide.list-item');
-      for (var i = 0; i < currentSlides.length; i++) {
-        var transform = getComputedStyle(currentSlides[i]).transform;
-        // Active slide has no -9999 translate
-        if (transform === 'none' || (transform.indexOf('-9999') === -1 && transform.indexOf('9999') === -1)) {
-          counter.textContent = (i + 1) + ' / ' + totalSlides;
-          break;
-        }
-      }
-    }
-
-    // Observe slide style changes to keep counter in sync
-    var slidesContainer = section.querySelector('.slides');
-    if (slidesContainer) {
-      var observer = new MutationObserver(function () {
-        setTimeout(updateCounter, 100);
-      });
-      observer.observe(slidesContainer, { attributes: true, subtree: true, attributeFilter: ['style'] });
-    }
 
     // Clean up any old counter
     var oldCounter = section.querySelector('.sba-slide-counter');
