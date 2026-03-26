@@ -236,13 +236,15 @@ section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__title::b
   line-height: 1.4;
 }
 
-/* Scroll indicator — small chevron, bottom right */
+/* Scroll indicator — label + chevron, bottom center-right */
 section[data-section-id="69c561a06d6e4b21c6d06df9"]::after {
   content: '⌄';
   position: absolute;
   bottom: 2.5rem;
   right: 4rem;
   z-index: 10;
+  width: 40px;
+  text-align: center;
   font-size: 1.5rem;
   color: rgba(255, 255, 255, 0.7);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
@@ -254,13 +256,15 @@ section[data-section-id="69c561a06d6e4b21c6d06df9"]::after {
   50% { transform: translateY(6px); opacity: 0.9; }
 }
 
-/* "SCROLL" label above chevron */
+/* "SCROLL" label above chevron — centered to same 40px box */
 section[data-section-id="69c561a06d6e4b21c6d06df9"]::before {
   content: 'SCROLL';
   position: absolute;
   bottom: calc(2.5rem + 2rem);
-  right: calc(4rem - 10px);
+  right: 4rem;
   z-index: 10;
+  width: 40px;
+  text-align: center;
   font-size: 0.5625rem;
   font-weight: 400;
   letter-spacing: 0.18em;
