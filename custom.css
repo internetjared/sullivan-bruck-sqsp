@@ -1,0 +1,218 @@
+/* ============================================================
+   SULLIVAN BRUCK ARCHITECTS — Squarespace 7.1 Custom Styles
+   Site: sba-2.squarespace.com
+   CDN:  TBD (Cloudflare Pages)
+
+   Follows CLAUDE.md selector hierarchy:
+   1. Manual section anchor IDs
+   2. Official data-sqsp-* hooks
+   3. Section-level data-section-id
+   4. Body context classes
+   ============================================================ */
+
+/* --- CSS Custom Properties ---
+   These override Squarespace's default palette.
+   Set primary colors in Site Styles first,
+   then use these for fine-tuning only. */
+
+:root {
+  --sba-bg: #141414;
+  --sba-bg-elevated: #1c1c1c;
+  --sba-bg-card: #1a1a1a;
+  --sba-text: #f0ede8;
+  --sba-text-muted: #9a9590;
+  --sba-accent: #c8b89a;
+  --sba-accent-hover: #ddd0b8;
+  --sba-rule: rgba(255, 255, 255, 0.08);
+  --sba-overlay: rgba(0, 0, 0, 0.55);
+}
+
+/* --- Global Typography Refinements ---
+   Use Site Styles for base font family and sizes.
+   These are surgical overrides only. */
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
+}
+
+/* Thin weight for display headings */
+h1 {
+  font-weight: 200;
+}
+
+h2 {
+  font-weight: 200;
+}
+
+/* --- Header Gradient Overlay ---
+   Makes nav readable over full-bleed hero imagery.
+   Scoped to avoid edit-mode interference. */
+
+body:not(.sqs-is-page-editing) #header {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.3) 60%,
+    transparent 100%
+  ) !important;
+}
+
+/* --- Navigation ---
+   Keep nav minimal and light. */
+
+.header-nav-item a {
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+/* --- Portfolio Grid ---
+   Hover-reveal project name/location on thumbnails. */
+
+/* Summary block cards in portfolio section */
+#portfolio .summary-item {
+  position: relative;
+  overflow: hidden;
+}
+
+#portfolio .summary-item .summary-thumbnail {
+  transition: transform 0.6s ease;
+}
+
+#portfolio .summary-item:hover .summary-thumbnail {
+  transform: scale(1.03);
+}
+
+/* Overlay with project info on hover */
+#portfolio .summary-item .summary-title,
+#portfolio .summary-item .summary-excerpt {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#portfolio .summary-item:hover .summary-title,
+#portfolio .summary-item:hover .summary-excerpt {
+  opacity: 1;
+}
+
+/* Touch device fallback */
+@media (hover: none) {
+  #portfolio .summary-item .summary-title,
+  #portfolio .summary-item .summary-excerpt {
+    opacity: 1;
+  }
+}
+
+/* --- Project Page Slideshow ---
+   Style the gallery section on project pages. */
+
+body.collection-type-portfolio.view-item .gallery-slideshow {
+  width: 100%;
+  height: 75vh;
+}
+
+/* --- About Page ---
+   Team grid and philosophy section. */
+
+#team .summary-item {
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- Section Spacing ---
+   Tighter rhythm between sections on dark backgrounds. */
+
+.page-section {
+  border-top: 1px solid var(--sba-rule);
+}
+
+.page-section:first-child {
+  border-top: none;
+}
+
+/* --- Button Overrides ---
+   Minimal, architectural button style. */
+
+[data-sqsp-button] {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 400;
+  transition: all 0.3s ease;
+}
+
+/* --- Form Styling ---
+   Contact form refinements. */
+
+#contact [data-sqsp-block="form"] input,
+#contact [data-sqsp-block="form"] textarea {
+  background: transparent;
+  border: 1px solid var(--sba-rule);
+  color: var(--sba-text);
+  transition: border-color 0.3s ease;
+}
+
+#contact [data-sqsp-block="form"] input:focus,
+#contact [data-sqsp-block="form"] textarea:focus {
+  border-color: var(--sba-accent);
+  outline: none;
+}
+
+/* --- Image Treatment ---
+   Consistent radius and transition on image blocks. */
+
+[data-sqsp-block="image"] [data-sqsp-image-block-image] {
+  transition: transform 0.6s ease;
+}
+
+/* --- Footer ---
+   Minimal footer with muted text. */
+
+#footer {
+  border-top: 1px solid var(--sba-rule);
+}
+
+#footer a {
+  transition: color 0.3s ease;
+}
+
+#footer a:hover {
+  color: var(--sba-accent);
+}
+
+/* --- Reduced Motion ---
+   Respect user preference. */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- Edit Mode Safety ---
+   Guard aggressive layout changes from breaking editor. */
+
+body.sqs-is-page-editing [data-sqsp-block="image"] [data-sqsp-image-block-image] {
+  transform: none !important;
+}
+
+/* --- Mobile Adjustments --- */
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: clamp(2rem, 8vw, 3.25rem);
+    line-height: 1.05;
+  }
+
+  /* Ensure portfolio hover info is always visible on mobile */
+  #portfolio .summary-item .summary-title,
+  #portfolio .summary-item .summary-excerpt {
+    opacity: 1;
+  }
+}
