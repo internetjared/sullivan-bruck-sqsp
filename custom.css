@@ -371,9 +371,16 @@ section[data-section-id="69c58420aea2363fae6ea228"] h3 {
    Section ID: 69c5859f3b7752712f05e4b0
    ========================================================== */
 
-/* Slideshow section — constrained height, full bleed */
+/* Slideshow section — constrained height, full bleed, no side gaps */
 section[data-section-id="69c5859f3b7752712f05e4b0"] {
   position: relative;
+  background: var(--sba-bg) !important;
+}
+
+/* Kill the side padding creating white borders */
+section[data-section-id="69c5859f3b7752712f05e4b0"] .slideshow-gutter {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 /* Slide images cover the area */
@@ -415,7 +422,7 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .slide-media-container::afte
 /* Slide text — bottom-left positioned */
 section[data-section-id="69c5859f3b7752712f05e4b0"] .slide-content {
   position: absolute !important;
-  bottom: 4rem !important;
+  bottom: 2.5rem !important;
   left: 4rem !important;
   right: auto !important;
   top: auto !important;
@@ -454,16 +461,18 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows {
 section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows.arrow-container--left {
   left: auto !important;
   right: 180px !important;
-  bottom: 4rem !important;
-  top: auto !important;
+  bottom: 2.5rem !important;
+  top: unset !important;
   transform: none !important;
+  height: auto !important;
 }
 
 section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows.arrow-container--right {
   right: 4rem !important;
-  bottom: 4rem !important;
-  top: auto !important;
+  bottom: 2.5rem !important;
+  top: unset !important;
   transform: none !important;
+  height: auto !important;
 }
 
 /* Arrow button styling — match wireframe */
@@ -498,8 +507,8 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows svg {
 /* Slide counter — "1 / 4" between arrows */
 section[data-section-id="69c5859f3b7752712f05e4b0"] .sba-slide-counter {
   position: absolute;
-  bottom: 4rem;
-  right: calc(4rem + 60px);
+  bottom: calc(2.5rem + 14px);
+  right: calc(4rem + 66px);
   z-index: 10;
   font-size: 0.8125rem;
   font-weight: 400;
