@@ -656,7 +656,7 @@ section[data-section-id="69c5863d2526b8252328c50c"] {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Also target footer directly with max specificity */
+/* Footer divider */
 footer#footer-sections.sections {
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
