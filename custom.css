@@ -833,4 +833,53 @@ body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .sl
   #portfolio .summary-item .summary-excerpt {
     opacity: 1;
   }
+
+  /* Featured Projects section — 60vh on mobile */
+  section[data-section-id="69c5859f3b7752712f05e4b0"],
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .content-wrapper,
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .content,
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .user-items-list,
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .user-items-list-item-container,
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .slideshow-wrapper,
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .slideshow-gutter,
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .slideshow-holder,
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .slides,
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .slide.list-item {
+    height: 60vh !important;
+    min-height: 60vh !important;
+  }
+
+  /* Hide Squarespace default mobile arrows */
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .mobile-arrows {
+    display: none !important;
+  }
+
+  /* Custom controls — left-aligned below text */
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .sba-slideshow-controls {
+    bottom: 1.5rem !important;
+    right: auto !important;
+    left: 1.5rem !important;
+  }
+
+  /* Featured Projects slide text — mobile positioning */
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .slide-content,
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .user-items-list-banner-slideshow .slide-content {
+    position: absolute !important;
+    bottom: 5rem !important;
+    left: 1.5rem !important;
+    right: 1.5rem !important;
+    top: auto !important;
+    margin: 0 !important;
+  }
+
+  /* Stronger gradient on featured projects mobile */
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .slide-media-container::after {
+    background:
+      linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.5) 35%,
+        transparent 65%
+      ) !important;
+  }
 }
