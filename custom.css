@@ -452,66 +452,56 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .list-item-content__descript
   font-weight: 400 !important;
 }
 
-/* Arrow containers — force buttons to bottom-right */
+/* Hide original Squarespace arrow containers — replaced by JS control bar */
 section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows {
-  display: flex !important;
-  z-index: 10;
-  align-items: flex-end !important;
-  padding-bottom: 2.5rem !important;
+  display: none !important;
 }
 
-section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows.arrow-container--left {
-  left: auto !important;
-  right: 180px !important;
-}
-
-section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows.arrow-container--right {
-  right: 4rem !important;
-}
-
-/* Arrow button styling — match wireframe: dark glass, white border, white icons */
-section[data-section-id="69c5859f3b7752712f05e4b0"] .user-items-list-banner-slideshow__arrow-button,
-section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows button,
-section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows a {
-  width: 56px !important;
-  height: 56px !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
-  background: rgba(0, 0, 0, 0.45) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  color: #fff !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: all 0.3s ease !important;
-  border-radius: 0 !important;
-  cursor: pointer;
-  padding: 0 !important;
-  box-shadow: none !important;
-  outline: none !important;
-}
-
-section[data-section-id="69c5859f3b7752712f05e4b0"] .user-items-list-banner-slideshow__arrow-button:hover,
-section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows button:hover,
-section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows a:hover {
-  border-color: rgba(255, 255, 255, 0.9) !important;
-  background: rgba(0, 0, 0, 0.6) !important;
-}
-
-section[data-section-id="69c5859f3b7752712f05e4b0"] .desktop-arrows svg,
-section[data-section-id="69c5859f3b7752712f05e4b0"] .user-items-list-banner-slideshow__arrow-button svg {
-  fill: #fff !important;
-  color: #fff !important;
-  width: 20px !important;
-  height: 20px !important;
-}
-
-/* Slide counter — "1 / 4" between arrows */
-section[data-section-id="69c5859f3b7752712f05e4b0"] .sba-slide-counter {
+/* Custom slideshow controls bar — [← ] [ 1/4 ] [ → ] */
+.sba-slideshow-controls {
   position: absolute;
-  bottom: calc(2.5rem + 14px);
-  right: calc(4rem + 66px);
+  bottom: 4rem;
+  right: 4rem;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Arrow buttons — exact wireframe match */
+.sba-arrow {
+  width: 52px;
+  height: 52px;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border-radius: 0;
+  padding: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+.sba-arrow:hover {
+  border-color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.sba-arrow svg {
+  fill: #fff;
+  color: #fff;
+  width: 18px;
+  height: 18px;
+}
+
+/* Counter between arrows */
+.sba-counter {
   font-size: 0.8125rem;
   font-weight: 400;
   letter-spacing: 0.1em;
