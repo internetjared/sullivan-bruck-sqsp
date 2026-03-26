@@ -739,13 +739,16 @@ body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .sl
     min-height: 60vh !important;
   }
 
-  /* Hero text — tight to bottom */
-  section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide-content {
+  /* Hero text — tight to bottom, override Squarespace relative positioning */
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide-content,
+  section[data-section-id="69c561a06d6e4b21c6d06df9"] .user-items-list-banner-slideshow .slide-content {
+    position: absolute !important;
     bottom: 0 !important;
     left: 1.5rem !important;
     right: 1.5rem !important;
+    top: auto !important;
     max-width: calc(100% - 3rem) !important;
-    padding-bottom: 1.5rem !important;
+    padding-bottom: 0.5rem !important;
   }
 
   /* Stronger gradient on mobile for legibility */
