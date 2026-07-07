@@ -291,37 +291,186 @@ section[data-section-id="69c561a06d6e4b21c6d06df9"] .section-border {
 
 
 /* ==========================================================
-   5. PORTFOLIO GRID
+   5. PORTFOLIO PAGE
+   Section IDs:
+   - Page header: 6a4d1d0d85dd204cec53eb72
+   - Collection grid: 6a4d1d0d85dd204cec53eb74
    ========================================================== */
 
-#portfolio .summary-item {
-  position: relative;
-  overflow: hidden;
+/* --- 5a. Page Header --- */
+
+section[data-section-id="6a4d1d0d85dd204cec53eb72"] {
+  min-height: 45vh !important;
 }
 
-#portfolio .summary-item .summary-thumbnail {
+section[data-section-id="6a4d1d0d85dd204cec53eb72"] .section-background-overlay {
+  background: linear-gradient(to top, rgba(20,20,20,0.85), rgba(20,20,20,0.2)) !important;
+  opacity: 1 !important;
+}
+
+/* --- 5b. Filter Bar (injected by JS) --- */
+
+.sba-filter-bar {
+  display: flex;
+  gap: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--sba-rule);
+  flex-wrap: wrap;
+  max-width: 1280px;
+  margin: 0 auto 2.5rem;
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+
+.sba-filter-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sba-text-muted);
+  cursor: pointer;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.sba-filter-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--sba-accent);
+  transition: width 0.3s ease;
+}
+
+.sba-filter-btn:hover,
+.sba-filter-btn.active {
+  color: var(--sba-text);
+}
+
+.sba-filter-btn.active::after {
+  width: 100%;
+}
+
+/* --- 5c. Portfolio Grid --- */
+
+section[data-section-id="6a4d1d0d85dd204cec53eb74"] {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+section[data-section-id="6a4d1d0d85dd204cec53eb74"] .content-wrapper {
+  padding: 3rem 0 !important;
+  max-width: none !important;
+}
+
+.portfolio-grid-overlay.grid-wrapper {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 4px !important;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 4vw;
+}
+
+/* Grid items — 4:3 aspect ratio cards */
+.portfolio-grid-overlay .grid-item {
+  position: relative !important;
+  aspect-ratio: 4/3 !important;
+  overflow: hidden !important;
+  display: block !important;
+  width: 100% !important;
+  float: none !important;
+  background: var(--sba-bg-card);
+}
+
+.portfolio-grid-overlay .grid-item .grid-image,
+.portfolio-grid-overlay .grid-item .grid-image-inner-wrapper {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.portfolio-grid-overlay .grid-item .grid-image-inner-wrapper img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
   transition: transform 0.6s ease;
 }
 
-#portfolio .summary-item:hover .summary-thumbnail {
+.portfolio-grid-overlay .grid-item:hover .grid-image-inner-wrapper img {
   transform: scale(1.03);
 }
 
-#portfolio .summary-item .summary-title,
-#portfolio .summary-item .summary-excerpt {
-  opacity: 0;
-  transition: opacity 0.4s ease;
+/* Overlay — transparent by default, dark on hover */
+.portfolio-grid-overlay .grid-item .portfolio-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(0,0,0,0) !important;
+  transition: background 0.4s ease !important;
+  z-index: 1 !important;
 }
 
-#portfolio .summary-item:hover .summary-title,
-#portfolio .summary-item:hover .summary-excerpt {
+.portfolio-grid-overlay .grid-item:hover .portfolio-overlay {
+  background: rgba(0,0,0,0.5) !important;
+}
+
+/* Text — bottom-left, hidden until hover */
+.portfolio-grid-overlay .grid-item .portfolio-text {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  padding: 2rem !important;
+  z-index: 2 !important;
+  transform: translateY(12px);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.portfolio-grid-overlay .grid-item:hover .portfolio-text {
+  transform: translateY(0);
   opacity: 1;
 }
 
+.portfolio-grid-overlay .portfolio-title {
+  font-size: 1.125rem !important;
+  font-weight: 300 !important;
+  color: var(--sba-text) !important;
+  margin-bottom: 4px !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* Location text (injected by JS) */
+.portfolio-grid-overlay .sba-project-location {
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sba-accent);
+  display: block;
+  margin-top: 2px;
+}
+
+/* Filtered-out items */
+.portfolio-grid-overlay .grid-item.sba-hidden {
+  display: none !important;
+}
+
+/* Touch devices — always show text */
 @media (hover: none) {
-  #portfolio .summary-item .summary-title,
-  #portfolio .summary-item .summary-excerpt {
+  .portfolio-grid-overlay .grid-item .portfolio-text {
     opacity: 1;
+    transform: translateY(0);
+  }
+  .portfolio-grid-overlay .grid-item .portfolio-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%) !important;
   }
 }
 
@@ -704,6 +853,11 @@ body.sqs-is-page-editing [data-sqsp-block="image"] [data-sqsp-image-block-image]
   transform: none !important;
 }
 
+/* Don't force portfolio grid in edit mode */
+body.sqs-is-page-editing .portfolio-grid-overlay .grid-item {
+  aspect-ratio: unset !important;
+}
+
 /* Don't force hero layout in edit mode */
 body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"],
 body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .content-wrapper,
@@ -828,10 +982,19 @@ body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .sl
     display: none !important;
   }
 
-  /* Portfolio hover info always visible on mobile */
-  #portfolio .summary-item .summary-title,
-  #portfolio .summary-item .summary-excerpt {
-    opacity: 1;
+  /* Portfolio grid — 2 columns on tablet, 1 on small mobile */
+  .portfolio-grid-overlay.grid-wrapper {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2px !important;
+    padding: 0 !important;
+  }
+
+  /* Filter bar — tighter spacing */
+  .sba-filter-bar {
+    gap: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 
   /* Featured Projects section — 60vh on mobile */
