@@ -171,28 +171,41 @@
         // Collect unique categories
         var categorySet = {};
 
-        // Tag each grid item with category data and inject location
+        // Tag each grid item with category and location
+        // Excerpt format: "Category | Location" e.g. "Multi-Family | The Highlands, NW Columbus"
         gridItems.forEach(function (el) {
           var href = el.getAttribute('href');
           var item = lookup[href];
           if (!item) return;
 
-          // Categories
-          var cats = item.categories || [];
-          if (cats.length > 0) {
-            var slug = cats[0].toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-            el.dataset.category = slug;
-            categorySet[slug] = cats[0];
+          var raw = (item.excerpt || '').replace(/<[^>]*>/g, '').trim();
+          if (!raw) return;
+
+          var parts = raw.split('|');
+          var category = '';
+          var location = '';
+
+          if (parts.length >= 2) {
+            category = parts[0].trim();
+            location = parts.slice(1).join('|').trim();
+          } else {
+            location = raw;
           }
 
-          // Location from excerpt (plain text)
-          var excerpt = (item.excerpt || '').replace(/<[^>]*>/g, '').trim();
-          if (excerpt) {
+          // Apply category
+          if (category) {
+            var slug = category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            el.dataset.category = slug;
+            categorySet[slug] = category;
+          }
+
+          // Inject location text
+          if (location) {
             var textContainer = el.querySelector('.portfolio-text');
             if (textContainer && !textContainer.querySelector('.sba-project-location')) {
               var loc = document.createElement('span');
               loc.className = 'sba-project-location';
-              loc.textContent = excerpt;
+              loc.textContent = location;
               textContainer.appendChild(loc);
             }
           }
