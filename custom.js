@@ -295,15 +295,68 @@
       .catch(function () {});
   }
 
-  /* --- Project page gallery → slideshow ---
-     Converts the masonry gallery section on portfolio item pages into
-     a single-image fading slideshow with prev/next arrows and counter,
-     matching the reference .project-slideshow. Works on every project
-     page automatically — no per-page setup, no editor layout change. */
+  /* --- Project page gallery slideshow controls ---
+     The gallery section uses Squarespace's native Slideshow: Full
+     layout. This moves the native prev/next buttons (handlers intact)
+     into a custom controls bar with a counter, bottom-right, matching
+     the reference .project-slideshow. Counter stays in sync with the
+     native bullet nav (hidden via CSS) through a MutationObserver.
+     Falls back to converting a masonry gallery if one is used. */
   function initProjectGallerySlideshow() {
     if (!document.body.classList.contains('view-item')) return;
     if (!document.body.classList.contains('collection-6a4d1d0d85dd204cec53eb22')) return;
 
+    var ss = document.querySelector('.gallery-fullscreen-slideshow');
+    if (ss) {
+      if (ss.dataset.sbaControls === 'true') return;
+      ss.dataset.sbaControls = 'true';
+
+      var natControls = ss.querySelectorAll('.gallery-fullscreen-slideshow-control');
+      var bullets = ss.querySelectorAll('.gallery-fullscreen-slideshow-bullet');
+      var total = bullets.length ||
+        ss.querySelectorAll('.gallery-fullscreen-slideshow-item').length;
+      if (natControls.length < 2 || total < 2) return;
+
+      var bar = document.createElement('div');
+      bar.className = 'sba-slideshow-controls';
+
+      var counter = document.createElement('span');
+      counter.className = 'sba-counter';
+      counter.textContent = '1 / ' + total;
+
+      // Moving the nodes preserves Squarespace's click handlers
+      bar.appendChild(natControls[0]);
+      bar.appendChild(counter);
+      bar.appendChild(natControls[1]);
+      ss.appendChild(bar);
+
+      // Sync counter with the active bullet (its inner spans toggle
+      // the hidden attribute when the slide changes)
+      function activeIndex() {
+        for (var i = 0; i < bullets.length; i++) {
+          var span = bullets[i].querySelector('.js-slideshow-active-slide');
+          if (span && !span.hasAttribute('hidden')) return i;
+        }
+        return -1;
+      }
+
+      var bulletNav = ss.querySelector('.gallery-fullscreen-slideshow-bullet-nav');
+      if (bulletNav) {
+        var sync = function () {
+          var idx = activeIndex();
+          if (idx > -1) counter.textContent = (idx + 1) + ' / ' + total;
+        };
+        sync();
+        new MutationObserver(sync).observe(bulletNav, {
+          attributes: true,
+          subtree: true,
+          attributeFilter: ['hidden', 'class', 'aria-current']
+        });
+      }
+      return;
+    }
+
+    // Fallback: masonry gallery → fading slideshow
     var gallery = document.querySelector('.gallery-masonry');
     if (!gallery) return;
     if (gallery.dataset.sbaSlideshow === 'true') return;
@@ -327,9 +380,9 @@
     prevBtn.setAttribute('aria-label', 'Previous image');
     prevBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M19 12H5M5 12L12 19M5 12L12 5"/></svg>';
 
-    var counter = document.createElement('span');
-    counter.className = 'sba-counter';
-    counter.textContent = '1 / ' + slides.length;
+    var mCounter = document.createElement('span');
+    mCounter.className = 'sba-counter';
+    mCounter.textContent = '1 / ' + slides.length;
 
     var nextBtn = document.createElement('button');
     nextBtn.className = 'sba-arrow';
@@ -337,7 +390,7 @@
     nextBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>';
 
     controls.appendChild(prevBtn);
-    controls.appendChild(counter);
+    controls.appendChild(mCounter);
     controls.appendChild(nextBtn);
     gallery.appendChild(controls);
 
@@ -345,7 +398,7 @@
       slides[current].classList.remove('sba-active');
       current = (idx + slides.length) % slides.length;
       slides[current].classList.add('sba-active');
-      counter.textContent = (current + 1) + ' / ' + slides.length;
+      mCounter.textContent = (current + 1) + ' / ' + slides.length;
     }
 
     prevBtn.addEventListener('click', function (e) {
