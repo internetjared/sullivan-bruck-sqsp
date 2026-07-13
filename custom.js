@@ -142,12 +142,20 @@
   }
 
   /* --- Portfolio filter bar and category tagging ---
-     Reads from window.SBA_PROJECTS config defined in footer code injection.
-     Each key is the project URL slug (last segment of the href).
+     Reads from window.SBA_PROJECTS config defined in a Code Block
+     on the portfolio page. Each key is the project URL slug.
      Value: { cat: "Multi-Family", loc: "The Highlands, NW Columbus" }
+
+     Client workflow for new projects:
+     1. Add portfolio item normally (title + images)
+     2. Copy the URL slug from the project settings
+     3. Add one line to the Code Block config on the portfolio page
   */
   function initPortfolioFilters() {
-    var gridSection = document.querySelector('section[data-section-id="6a4d1d0d85dd204cec53eb74"]');
+    var gridSection = document.querySelector('[data-sqsp-section="portfolio-list"]');
+    if (!gridSection) {
+      gridSection = document.querySelector('section[data-section-id="6a4d1d0d85dd204cec53eb74"]');
+    }
     if (!gridSection) return;
     if (gridSection.dataset.filtersInit === 'true') return;
     gridSection.dataset.filtersInit = 'true';
@@ -155,7 +163,8 @@
     var config = window.SBA_PROJECTS;
     if (!config) return;
 
-    var grid = gridSection.querySelector('.portfolio-grid-overlay');
+    var grid = gridSection.querySelector('.portfolio-grid-overlay') ||
+               gridSection.querySelector('.grid-wrapper');
     if (!grid) return;
 
     var gridItems = grid.querySelectorAll('.grid-item');
@@ -165,14 +174,14 @@
 
     gridItems.forEach(function (el) {
       var href = el.getAttribute('href') || '';
-      var slug = href.split('/').filter(Boolean).pop() || '';
-      var data = config[slug];
+      var itemSlug = href.split('/').filter(Boolean).pop() || '';
+      var data = config[itemSlug];
       if (!data) return;
 
       if (data.cat) {
-        var slug = data.cat.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-        el.dataset.category = slug;
-        categorySet[slug] = data.cat;
+        var catSlug = data.cat.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        el.dataset.category = catSlug;
+        categorySet[catSlug] = data.cat;
       }
 
       if (data.loc) {
