@@ -711,7 +711,8 @@ body.view-item.collection-6a4d1d0d85dd204cec53eb22 .gallery-fullscreen-slideshow
   display: none !important;
 }
 
-/* Controls bar (native buttons moved here by custom.js) */
+/* Controls bar — custom .sba-arrow buttons proxy the (hidden) native
+   prev/next buttons; shared styles come from the homepage slideshow */
 .gallery-fullscreen-slideshow .sba-slideshow-controls {
   position: absolute;
   bottom: 2rem;
@@ -720,56 +721,6 @@ body.view-item.collection-6a4d1d0d85dd204cec53eb22 .gallery-fullscreen-slideshow
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.sba-slideshow-controls .gallery-fullscreen-slideshow-control {
-  position: static !important;
-  width: auto !important;
-  height: auto !important;
-  transform: none !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-}
-
-/* Native prev/next buttons restyled to ref .slide-arrow: 52px box,
-   1.5px border, dark translucent bg, blur */
-.sba-slideshow-controls .gallery-fullscreen-slideshow-control-btn {
-  width: 52px !important;
-  height: 52px !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
-  background: rgba(0, 0, 0, 0.4) !important;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  cursor: pointer;
-  transition: all 0.3s ease !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  opacity: 1 !important;
-}
-
-.sba-slideshow-controls .gallery-fullscreen-slideshow-control-btn:hover {
-  border-color: #fff !important;
-  background: rgba(0, 0, 0, 0.6) !important;
-}
-
-.sba-slideshow-controls .gallery-fullscreen-slideshow-control-btn-icon {
-  width: 12px !important;
-  height: 18px !important;
-}
-
-.sba-slideshow-controls .gallery-fullscreen-slideshow-control-btn svg {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.sba-slideshow-controls .gallery-fullscreen-slideshow-control-btn svg polyline {
-  stroke: #fff !important;
 }
 
 

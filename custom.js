@@ -317,21 +317,61 @@
         ss.querySelectorAll('.gallery-fullscreen-slideshow-item').length;
       if (natControls.length < 2 || total < 2) return;
 
+      // IMPORTANT: do NOT move the native buttons — Squarespace's
+      // controller binds to them after our script runs, and moving
+      // them breaks the binding. Hide them and proxy clicks instead
+      // (same pattern as the homepage featured-projects slideshow).
+      var prevNative = natControls[0].querySelector('button');
+      var nextNative = natControls[1].querySelector('button');
+      if (!prevNative || !nextNative) return;
+      natControls[0].style.display = 'none';
+      natControls[1].style.display = 'none';
+
       var bar = document.createElement('div');
       bar.className = 'sba-slideshow-controls';
+
+      var prevBtn = document.createElement('button');
+      prevBtn.className = 'sba-arrow';
+      prevBtn.setAttribute('aria-label', 'Previous image');
+      prevBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M19 12H5M5 12L12 19M5 12L12 5"/></svg>';
 
       var counter = document.createElement('span');
       counter.className = 'sba-counter';
       counter.textContent = '1 / ' + total;
 
-      // Moving the nodes preserves Squarespace's click handlers
-      bar.appendChild(natControls[0]);
+      var nextBtn = document.createElement('button');
+      nextBtn.className = 'sba-arrow';
+      nextBtn.setAttribute('aria-label', 'Next image');
+      nextBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>';
+
+      bar.appendChild(prevBtn);
       bar.appendChild(counter);
-      bar.appendChild(natControls[1]);
+      bar.appendChild(nextBtn);
       ss.appendChild(bar);
 
-      // Sync counter with the active bullet (its inner spans toggle
-      // the hidden attribute when the slide changes)
+      // Manual index tracking, with bullet-nav observer as the
+      // authoritative sync when available
+      var idx = 0;
+      function setCounter(i) {
+        counter.textContent = (i + 1) + ' / ' + total;
+      }
+
+      prevBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        prevNative.click();
+        idx = (idx - 1 + total) % total;
+        setCounter(idx);
+      });
+
+      nextBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        nextNative.click();
+        idx = (idx + 1) % total;
+        setCounter(idx);
+      });
+
       function activeIndex() {
         for (var i = 0; i < bullets.length; i++) {
           var span = bullets[i].querySelector('.js-slideshow-active-slide');
@@ -341,13 +381,11 @@
       }
 
       var bulletNav = ss.querySelector('.gallery-fullscreen-slideshow-bullet-nav');
-      if (bulletNav) {
-        var sync = function () {
-          var idx = activeIndex();
-          if (idx > -1) counter.textContent = (idx + 1) + ' / ' + total;
-        };
-        sync();
-        new MutationObserver(sync).observe(bulletNav, {
+      if (bulletNav && bullets.length) {
+        new MutationObserver(function () {
+          var i = activeIndex();
+          if (i > -1) { idx = i; setCounter(i); }
+        }).observe(bulletNav, {
           attributes: true,
           subtree: true,
           attributeFilter: ['hidden', 'class', 'aria-current']
