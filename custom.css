@@ -476,6 +476,98 @@ section[data-section-id="6a4d1d0d85dd204cec53eb74"] .content-wrapper {
 
 
 /* ==========================================================
+   5d. PROJECT DETAIL PAGE (portfolio item view)
+   Scoped to body.view-item so it only applies on project pages.
+   Section IDs:
+   - Hero: 6a55622171c625789128a204
+   - Info/description: 6a55623271c625789128a96d
+   - Gallery: 6a5562428a7dae448ad012a0
+   ========================================================== */
+
+/* Hero section — full-bleed background image, 80vh */
+body.view-item section[data-section-id="6a55622171c625789128a204"] {
+  min-height: 80vh !important;
+}
+
+body.view-item section[data-section-id="6a55622171c625789128a204"] .section-background-overlay {
+  background: linear-gradient(to top, rgba(20,20,20,0.7) 0%, transparent 40%) !important;
+  opacity: 1 !important;
+}
+
+/* Hero text — project title, category label, location */
+body.view-item section[data-section-id="6a55622171c625789128a204"] h1 {
+  font-size: clamp(2rem, 4vw, 3.5rem) !important;
+  font-weight: 200 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+body.view-item section[data-section-id="6a55622171c625789128a204"] [data-sqsp-text-block-content] p {
+  font-size: 0.75rem !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: var(--sba-accent) !important;
+  font-weight: 400 !important;
+}
+
+/* Info strip section — horizontal metadata layout */
+body.view-item section[data-section-id="6a55623271c625789128a96d"] {
+  border-bottom: 1px solid var(--sba-rule) !important;
+}
+
+body.view-item section[data-section-id="6a55623271c625789128a96d"] h4 {
+  margin-bottom: 0.5rem !important;
+}
+
+body.view-item section[data-section-id="6a55623271c625789128a96d"] p {
+  font-size: 1rem !important;
+  color: var(--sba-text) !important;
+  font-weight: 300 !important;
+  line-height: 1.5 !important;
+}
+
+/* Description text — muted, readable width */
+body.view-item section[data-section-id="6a55623271c625789128a96d"] .fe-block:last-child p {
+  font-size: 1.0625rem !important;
+  line-height: 1.75 !important;
+  color: var(--sba-text-muted) !important;
+  font-weight: 300 !important;
+  max-width: 720px;
+}
+
+/* Gallery section — tight grid, no section padding */
+body.view-item section[data-section-id="6a5562428a7dae448ad012a0"] {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+body.view-item section[data-section-id="6a5562428a7dae448ad012a0"] .content-wrapper {
+  padding: 0 !important;
+  max-width: none !important;
+}
+
+body.view-item .gallery-masonry {
+  gap: 4px !important;
+  padding: 0 4px !important;
+}
+
+body.view-item .gallery-masonry-item {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.view-item .gallery-masonry-item img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Hide section borders on project pages */
+body.view-item .page-section .section-border {
+  display: none !important;
+}
+
+
+/* ==========================================================
    6. ABOUT SECTION
    Section ID: 69c58420aea2363fae6ea228
    ========================================================== */
