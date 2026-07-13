@@ -477,31 +477,38 @@ section[data-section-id="6a4d1d0d85dd204cec53eb74"] .content-wrapper {
 
 /* ==========================================================
    5d. PROJECT DETAIL PAGE (portfolio item view)
-   Scoped to body.view-item so it only applies on project pages.
-   Section IDs:
-   - Hero: 6a55622171c625789128a204
-   - Info/description: 6a55623271c625789128a96d
-   - Gallery: 6a5562428a7dae448ad012a0
+   Scoped to body.view-item + the portfolio collection ID, so it
+   applies to EVERY project page — including ones added later.
+
+   Sections are targeted STRUCTURALLY (not by section ID, which
+   changes per project):
+   - Section 1 = hero (background image + title text)
+   - Section 2 = info strip + description
+   - Gallery section = matched via :has(.gallery-masonry)
+
+   Template contract: every project page is a duplicate of the
+   sample project, so it always has these sections in this order.
    ========================================================== */
 
 /* Hero section — full-bleed background image, 80vh */
-body.view-item section[data-section-id="6a55622171c625789128a204"] {
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child {
   min-height: 80vh !important;
 }
 
-body.view-item section[data-section-id="6a55622171c625789128a204"] .section-background-overlay {
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child .section-background-overlay {
   background: linear-gradient(to top, rgba(20,20,20,0.7) 0%, transparent 40%) !important;
   opacity: 1 !important;
 }
 
-/* Hero text — project title, category label, location */
-body.view-item section[data-section-id="6a55622171c625789128a204"] h1 {
+/* Hero title */
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child h1 {
   font-size: clamp(2rem, 4vw, 3.5rem) !important;
   font-weight: 200 !important;
   margin-bottom: 0.5rem !important;
 }
 
-body.view-item section[data-section-id="6a55622171c625789128a204"] [data-sqsp-text-block-content] p {
+/* Hero category + location labels (p or h4 — global h4 rule also applies) */
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child [data-sqsp-text-block-content] p {
   font-size: 0.75rem !important;
   letter-spacing: 0.2em !important;
   text-transform: uppercase !important;
@@ -510,15 +517,15 @@ body.view-item section[data-section-id="6a55622171c625789128a204"] [data-sqsp-te
 }
 
 /* Info strip section — horizontal metadata layout */
-body.view-item section[data-section-id="6a55623271c625789128a96d"] {
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) {
   border-bottom: 1px solid var(--sba-rule) !important;
 }
 
-body.view-item section[data-section-id="6a55623271c625789128a96d"] h4 {
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) h4 {
   margin-bottom: 0.5rem !important;
 }
 
-body.view-item section[data-section-id="6a55623271c625789128a96d"] p {
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) p {
   font-size: 1rem !important;
   color: var(--sba-text) !important;
   font-weight: 300 !important;
@@ -526,12 +533,18 @@ body.view-item section[data-section-id="6a55623271c625789128a96d"] p {
 }
 
 /* Description text — muted, readable width */
-body.view-item section[data-section-id="6a55623271c625789128a96d"] .fe-block:last-child p {
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:last-child p {
   font-size: 1.0625rem !important;
   line-height: 1.75 !important;
   color: var(--sba-text-muted) !important;
   font-weight: 300 !important;
   max-width: 720px;
+}
+
+/* Gallery section — flush against neighbors */
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 .page-section:has(.gallery-masonry) .content-wrapper {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 /* Gallery section — the masonry layout is JS-controlled (GalleryMasonry
