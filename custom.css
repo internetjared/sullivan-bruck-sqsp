@@ -490,7 +490,9 @@ section[data-section-id="6a4d1d0d85dd204cec53eb74"] .content-wrapper {
    sample project, so it always has these sections in this order.
    ========================================================== */
 
-/* Hero section — full-bleed background image, 80vh */
+/* Hero section — full-bleed background image, 80vh
+   Reference: .project-hero (80vh, gradient to top 0.7→transparent 40%,
+   content absolute bottom-left 4rem) */
 body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child {
   min-height: 80vh !important;
 }
@@ -500,6 +502,17 @@ body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:fir
   opacity: 1 !important;
 }
 
+/* Pixel-match the reference 4rem text inset: collapse the FE grid
+   (gutter = 4vw ≈ 51px, ref wants 64px) and pad the wrapper instead.
+   Edit-mode guarded so the FE editor still works. */
+body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child .fluid-engine {
+  display: block !important;
+}
+
+body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child .content-wrapper {
+  padding: 4rem !important;
+}
+
 /* Hero title */
 body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child h1 {
   font-size: clamp(2rem, 4vw, 3.5rem) !important;
@@ -507,13 +520,25 @@ body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:fir
   margin-bottom: 0.5rem !important;
 }
 
-/* Hero category + location labels (p or h4 — global h4 rule also applies) */
+/* Hero labels: strip stray leading <br>, tighten label→title gap */
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child [data-sqsp-text-block-content] h4 br:first-child {
+  display: none;
+}
+
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child [data-sqsp-text-block-content] h4:first-child {
+  margin: 0 0 0.75rem !important;
+}
+
+/* Location line (h4 after the title, or p) — ref .project-location-hero:
+   0.75rem / 0.2em / accent */
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child [data-sqsp-text-block-content] h1 ~ h4,
 body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child [data-sqsp-text-block-content] p {
   font-size: 0.75rem !important;
   letter-spacing: 0.2em !important;
   text-transform: uppercase !important;
   color: var(--sba-accent) !important;
   font-weight: 400 !important;
+  margin: 0 !important;
 }
 
 /* Info section — force the mockup layout regardless of Fluid Engine
@@ -611,13 +636,68 @@ body.view-item.collection-6a4d1d0d85dd204cec53eb22 .page-section:has(.gallery-ma
   padding-bottom: 0 !important;
 }
 
-/* Gallery section — the masonry layout is JS-controlled (GalleryMasonry
-   controller sets item positions/heights). Do NOT override item height,
-   width, or object-fit — that collapses the images.
+/* Gallery → slideshow conversion (.sba-gallery-slideshow class is
+   added by custom.js). Reference: .project-slideshow — 16/9,
+   max-height 80vh, bg #0a0a0a, slides fade 0.8s, controls
+   bottom-right 2rem. The !important flags are required to beat the
+   GalleryMasonry controller's inline position/transform/width styles.
+   Edit-mode guarded so the editor shows the normal masonry grid.
 
    NOTE: never hide .section-border — it CONTAINS .section-background,
    which renders each section's theme background and hero image.
    (See git history: this exact mistake blanked the homepage once too.) */
+
+body:not(.sqs-is-page-editing) .sba-gallery-slideshow {
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 16 / 9;
+  max-height: 80vh;
+  overflow: hidden !important;
+  background: #0a0a0a;
+}
+
+body:not(.sqs-is-page-editing) .sba-gallery-slideshow .gallery-masonry-wrapper {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+body:not(.sqs-is-page-editing) .sba-gallery-slideshow .gallery-masonry-item {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform: none !important;
+  margin: 0 !important;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+
+body:not(.sqs-is-page-editing) .sba-gallery-slideshow .gallery-masonry-item.sba-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body:not(.sqs-is-page-editing) .sba-gallery-slideshow .gallery-masonry-item-wrapper {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+body:not(.sqs-is-page-editing) .sba-gallery-slideshow .gallery-masonry-item img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Controls inside the project slideshow — ref: bottom/right 2rem */
+.sba-gallery-slideshow .sba-slideshow-controls {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10;
+}
 
 
 /* ==========================================================
