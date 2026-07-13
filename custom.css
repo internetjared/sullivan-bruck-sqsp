@@ -534,32 +534,10 @@ body.view-item section[data-section-id="6a55623271c625789128a96d"] .fe-block:las
   max-width: 720px;
 }
 
-/* Gallery section — tight grid, no section padding */
-body.view-item section[data-section-id="6a5562428a7dae448ad012a0"] {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-body.view-item section[data-section-id="6a5562428a7dae448ad012a0"] .content-wrapper {
-  padding: 0 !important;
-  max-width: none !important;
-}
-
-body.view-item .gallery-masonry {
-  gap: 4px !important;
-  padding: 0 4px !important;
-}
-
-body.view-item .gallery-masonry-item {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-body.view-item .gallery-masonry-item img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-}
+/* Gallery section — the masonry layout is JS-controlled (GalleryMasonry
+   controller sets item positions/heights). Do NOT override item height,
+   width, or object-fit — that collapses the images. Only touch the
+   section-level spacing, which is safe. */
 
 /* Hide section borders on project pages */
 body.view-item .page-section .section-border {
