@@ -141,12 +141,19 @@
     }
   }
 
-  /* --- Portfolio filter bar and category tagging --- */
+  /* --- Portfolio filter bar and category tagging ---
+     Reads from window.SBA_PROJECTS config defined in footer code injection.
+     Each key is the project title (must match exactly).
+     Value: { cat: "Multi-Family", loc: "The Highlands, NW Columbus" }
+  */
   function initPortfolioFilters() {
     var gridSection = document.querySelector('section[data-section-id="6a4d1d0d85dd204cec53eb74"]');
     if (!gridSection) return;
     if (gridSection.dataset.filtersInit === 'true') return;
     gridSection.dataset.filtersInit = 'true';
+
+    var config = window.SBA_PROJECTS;
+    if (!config) return;
 
     var grid = gridSection.querySelector('.portfolio-grid-overlay');
     if (!grid) return;
@@ -154,114 +161,76 @@
     var gridItems = grid.querySelectorAll('.grid-item');
     if (gridItems.length === 0) return;
 
-    // Fetch portfolio JSON to get categories and excerpts
-    var collectionPath = window.location.pathname.replace(/\/$/, '') || '/portfolio-1';
-    fetch(collectionPath + '?format=json')
-      .then(function (res) { return res.json(); })
-      .then(function (data) {
-        var items = (data.collection && data.collection.items) || data.items || [];
-        if (items.length === 0) return;
+    var categorySet = {};
 
-        // Build a lookup by fullUrl
-        var lookup = {};
-        items.forEach(function (item) {
-          lookup[item.fullUrl] = item;
-        });
+    gridItems.forEach(function (el) {
+      var titleEl = el.querySelector('.portfolio-title');
+      if (!titleEl) return;
+      var title = titleEl.textContent.trim();
+      var data = config[title];
+      if (!data) return;
 
-        // Collect unique categories
-        var categorySet = {};
+      if (data.cat) {
+        var slug = data.cat.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        el.dataset.category = slug;
+        categorySet[slug] = data.cat;
+      }
 
-        // Tag each grid item with category and location
-        // Excerpt format: "Category | Location" e.g. "Multi-Family | The Highlands, NW Columbus"
-        gridItems.forEach(function (el) {
-          var href = el.getAttribute('href');
-          var item = lookup[href];
-          if (!item) return;
-
-          var raw = (item.excerpt || '').replace(/<[^>]*>/g, '').trim();
-          if (!raw) return;
-
-          var parts = raw.split('|');
-          var category = '';
-          var location = '';
-
-          if (parts.length >= 2) {
-            category = parts[0].trim();
-            location = parts.slice(1).join('|').trim();
-          } else {
-            location = raw;
-          }
-
-          // Apply category
-          if (category) {
-            var slug = category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-            el.dataset.category = slug;
-            categorySet[slug] = category;
-          }
-
-          // Inject location text
-          if (location) {
-            var textContainer = el.querySelector('.portfolio-text');
-            if (textContainer && !textContainer.querySelector('.sba-project-location')) {
-              var loc = document.createElement('span');
-              loc.className = 'sba-project-location';
-              loc.textContent = location;
-              textContainer.appendChild(loc);
-            }
-          }
-        });
-
-        // Build filter bar
-        var categoryKeys = Object.keys(categorySet);
-        if (categoryKeys.length === 0) return;
-
-        var filterBar = document.createElement('div');
-        filterBar.className = 'sba-filter-bar';
-
-        var allBtn = document.createElement('button');
-        allBtn.className = 'sba-filter-btn active';
-        allBtn.dataset.filter = 'all';
-        allBtn.textContent = 'All Projects';
-        filterBar.appendChild(allBtn);
-
-        categoryKeys.sort().forEach(function (slug) {
-          var btn = document.createElement('button');
-          btn.className = 'sba-filter-btn';
-          btn.dataset.filter = slug;
-          btn.textContent = categorySet[slug];
-          filterBar.appendChild(btn);
-        });
-
-        // Insert filter bar before the grid
-        var contentWrapper = gridSection.querySelector('.content-wrapper');
-        if (contentWrapper) {
-          contentWrapper.insertBefore(filterBar, contentWrapper.firstChild);
+      if (data.loc) {
+        var textContainer = el.querySelector('.portfolio-text');
+        if (textContainer && !textContainer.querySelector('.sba-project-location')) {
+          var loc = document.createElement('span');
+          loc.className = 'sba-project-location';
+          loc.textContent = data.loc;
+          textContainer.appendChild(loc);
         }
+      }
+    });
 
-        // Filter click handler
-        filterBar.addEventListener('click', function (e) {
-          var btn = e.target.closest('.sba-filter-btn');
-          if (!btn) return;
+    var categoryKeys = Object.keys(categorySet);
+    if (categoryKeys.length === 0) return;
 
-          filterBar.querySelectorAll('.sba-filter-btn').forEach(function (b) {
-            b.classList.remove('active');
-          });
-          btn.classList.add('active');
+    var filterBar = document.createElement('div');
+    filterBar.className = 'sba-filter-bar';
 
-          var filter = btn.dataset.filter;
+    var allBtn = document.createElement('button');
+    allBtn.className = 'sba-filter-btn active';
+    allBtn.dataset.filter = 'all';
+    allBtn.textContent = 'All Projects';
+    filterBar.appendChild(allBtn);
 
-          gridItems.forEach(function (card) {
-            if (filter === 'all' || card.dataset.category === filter) {
-              card.classList.remove('sba-hidden');
-            } else {
-              card.classList.add('sba-hidden');
-            }
-          });
-        });
-      })
-      .catch(function () {
-        // JSON fetch failed — grid still works, just no filters
+    categoryKeys.sort().forEach(function (slug) {
+      var btn = document.createElement('button');
+      btn.className = 'sba-filter-btn';
+      btn.dataset.filter = slug;
+      btn.textContent = categorySet[slug];
+      filterBar.appendChild(btn);
+    });
+
+    var contentWrapper = gridSection.querySelector('.content-wrapper');
+    if (contentWrapper) {
+      contentWrapper.insertBefore(filterBar, contentWrapper.firstChild);
+    }
+
+    filterBar.addEventListener('click', function (e) {
+      var btn = e.target.closest('.sba-filter-btn');
+      if (!btn) return;
+
+      filterBar.querySelectorAll('.sba-filter-btn').forEach(function (b) {
+        b.classList.remove('active');
       });
+      btn.classList.add('active');
+
+      var filter = btn.dataset.filter;
+
+      gridItems.forEach(function (card) {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.classList.remove('sba-hidden');
+        } else {
+          card.classList.add('sba-hidden');
+        }
+      });
+    });
   }
 
   function init() {
