@@ -536,13 +536,11 @@ body.view-item section[data-section-id="6a55623271c625789128a96d"] .fe-block:las
 
 /* Gallery section — the masonry layout is JS-controlled (GalleryMasonry
    controller sets item positions/heights). Do NOT override item height,
-   width, or object-fit — that collapses the images. Only touch the
-   section-level spacing, which is safe. */
+   width, or object-fit — that collapses the images.
 
-/* Hide section borders on project pages */
-body.view-item .page-section .section-border {
-  display: none !important;
-}
+   NOTE: never hide .section-border — it CONTAINS .section-background,
+   which renders each section's theme background and hero image.
+   (See git history: this exact mistake blanked the homepage once too.) */
 
 
 /* ==========================================================
