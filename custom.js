@@ -143,7 +143,7 @@
 
   /* --- Portfolio filter bar and category tagging ---
      Reads from window.SBA_PROJECTS config defined in footer code injection.
-     Each key is the project title (must match exactly).
+     Each key is the project URL slug (last segment of the href).
      Value: { cat: "Multi-Family", loc: "The Highlands, NW Columbus" }
   */
   function initPortfolioFilters() {
@@ -164,10 +164,9 @@
     var categorySet = {};
 
     gridItems.forEach(function (el) {
-      var titleEl = el.querySelector('.portfolio-title');
-      if (!titleEl) return;
-      var title = titleEl.textContent.trim();
-      var data = config[title];
+      var href = el.getAttribute('href') || '';
+      var slug = href.split('/').filter(Boolean).pop() || '';
+      var data = config[slug];
       if (!data) return;
 
       if (data.cat) {
