@@ -516,29 +516,91 @@ body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:fir
   font-weight: 400 !important;
 }
 
-/* Info strip section — horizontal metadata layout */
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) {
-  border-bottom: 1px solid var(--sba-rule) !important;
+/* Info section — force the mockup layout regardless of Fluid Engine
+   block placement: metadata strip (block 1) full-width on top,
+   description (block 2) centered below. Guarded from edit mode so
+   FE editing still works normally. */
+body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fluid-engine {
+  display: flex !important;
+  flex-direction: column;
+  gap: 4rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 4vw;
+}
+
+body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:first-child {
+  width: 100%;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--sba-rule);
+}
+
+/* Metadata pairs (h4 label + p value) laid out as horizontal columns:
+   grid rows = [labels, values], auto-flow column builds L→R pairs */
+body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:first-child [data-sqsp-text-block-content] {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-auto-flow: column;
+  justify-content: start;
+  column-gap: clamp(2.5rem, 6vw, 6rem);
+  row-gap: 0.5rem;
+  align-items: start;
+}
+
+/* Description — centered, readable width, muted */
+body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:last-child {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) h4 {
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 0 !important;
 }
 
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) p {
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:first-child p {
   font-size: 1rem !important;
   color: var(--sba-text) !important;
   font-weight: 300 !important;
   line-height: 1.5 !important;
 }
 
-/* Description text — muted, readable width */
 body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:last-child p {
   font-size: 1.0625rem !important;
   line-height: 1.75 !important;
   color: var(--sba-text-muted) !important;
   font-weight: 300 !important;
-  max-width: 720px;
+}
+
+/* Prev / All / Next project navigation (injected by custom.js) */
+.sba-project-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rem 4vw;
+  border-top: 1px solid var(--sba-rule);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.sba-project-nav a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sba-text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sba-project-nav a:hover {
+  color: var(--sba-text);
+}
+
+.sba-project-nav .sba-all-projects {
+  color: var(--sba-accent);
 }
 
 /* Gallery section — flush against neighbors */
@@ -1076,6 +1138,28 @@ body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .sl
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     margin-bottom: 1.5rem;
+  }
+
+  /* Project page info strip — stack vertically on mobile */
+  body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:first-child [data-sqsp-text-block-content] {
+    display: block;
+  }
+
+  body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:first-child [data-sqsp-text-block-content] p {
+    margin-bottom: 1.25rem;
+  }
+
+  /* Project prev/next nav — tighter on mobile */
+  .sba-project-nav {
+    padding: 2rem 1.5rem;
+  }
+
+  .sba-project-nav a span {
+    display: none;
+  }
+
+  .sba-project-nav a.sba-all-projects span {
+    display: inline;
   }
 
   /* Featured Projects section — 60vh on mobile */

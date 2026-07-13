@@ -241,11 +241,66 @@
     });
   }
 
+  /* --- Project page prev / all / next navigation ---
+     Injected automatically on every portfolio item page, built from
+     the collection JSON. No per-project setup needed. */
+  function initProjectNav() {
+    if (!document.body.classList.contains('view-item')) return;
+    if (!document.body.classList.contains('collection-6a4d1d0d85dd204cec53eb22')) return;
+    if (document.querySelector('.sba-project-nav')) return;
+
+    var sections = document.getElementById('sections');
+    if (!sections) return;
+
+    var path = window.location.pathname.replace(/\/$/, '');
+    var collectionPath = path.substring(0, path.lastIndexOf('/'));
+    if (!collectionPath) return;
+
+    fetch(collectionPath + '?format=json')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var items = data.items || (data.collection && data.collection.items) || [];
+        if (items.length < 2) return;
+
+        var index = -1;
+        items.forEach(function (item, i) {
+          if (item.fullUrl === path) index = i;
+        });
+        if (index === -1) return;
+
+        var prev = items[(index - 1 + items.length) % items.length];
+        var next = items[(index + 1) % items.length];
+
+        var nav = document.createElement('div');
+        nav.className = 'sba-project-nav';
+
+        var prevLink = document.createElement('a');
+        prevLink.href = prev.fullUrl;
+        prevLink.innerHTML = '&larr; <span>Previous Project</span>';
+
+        var allLink = document.createElement('a');
+        allLink.href = collectionPath;
+        allLink.className = 'sba-all-projects';
+        allLink.innerHTML = '<span>All Projects</span>';
+
+        var nextLink = document.createElement('a');
+        nextLink.href = next.fullUrl;
+        nextLink.innerHTML = '<span>Next Project</span> &rarr;';
+
+        nav.appendChild(prevLink);
+        nav.appendChild(allLink);
+        nav.appendChild(nextLink);
+        sections.appendChild(nav);
+      })
+      .catch(function () {});
+  }
+
   function init() {
     if (isEditing()) return;
     initSlideshowControls();
     initContactEnhancements();
     initPortfolioFilters();
+    initProjectNav();
   }
 
   document.addEventListener('DOMContentLoaded', init);
