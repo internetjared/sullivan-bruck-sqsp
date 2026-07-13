@@ -554,8 +554,10 @@ body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #se
   margin: 0 auto;
 }
 
+/* Zero ALL h4 margins in the strip — Squarespace only zeroes the first
+   h4's top margin, which misaligns the grid row of labels */
 body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) h4 {
-  margin-bottom: 0 !important;
+  margin: 0 !important;
 }
 
 body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:first-child p {
