@@ -404,23 +404,27 @@
         return -1;
       }
 
-      var tries = 0;
-      var poll = setInterval(function () {
-        tries++;
-        var bound = (ss.getAttribute('data-controllers-bound') || '')
-          .indexOf('GalleryFullscreenSlideshow') > -1;
-        if (!bound && tries < 40) return;
-        clearInterval(poll);
-        if (bound && visibleIndex() === slideItems.length - 1) {
-          ss.style.opacity = '0';
-          nextNative.click();
-          setTimeout(function () {
-            ss.style.opacity = '';
-            idx = 0;
-            setCounter(0);
-          }, 1300);
+      // The bound attribute can appear before handlers actually work,
+      // so retry clicking until the first slide is verifiably visible,
+      // masking the process behind opacity on the container.
+      var attempts = 0;
+      function normalize() {
+        attempts++;
+        if (visibleIndex() === 0) {
+          ss.style.opacity = '';
+          idx = 0;
+          setCounter(0);
+          return;
         }
-      }, 150);
+        if (attempts > 6) {
+          ss.style.opacity = '';
+          return;
+        }
+        nextNative.click();
+        setTimeout(normalize, 1400);
+      }
+      ss.style.opacity = '0';
+      setTimeout(normalize, 600);
       return;
     }
 
