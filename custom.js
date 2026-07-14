@@ -404,27 +404,35 @@
         return -1;
       }
 
-      // The bound attribute can appear before handlers actually work,
-      // so retry clicking until the first slide is verifiably visible,
-      // masking the process behind opacity on the container.
-      var attempts = 0;
-      function normalize() {
-        attempts++;
-        if (visibleIndex() === 0) {
-          ss.style.opacity = '';
-          idx = 0;
-          setCounter(0);
-          return;
+      // Wait for the controller's init signature (it shows the LAST
+      // slide once initialized), then advance to the true first slide
+      // behind an opacity mask, verifying each click landed.
+      var waited = 0;
+      var waitInit = setInterval(function () {
+        waited += 200;
+        if (visibleIndex() === slideItems.length - 1) {
+          clearInterval(waitInit);
+          ss.style.opacity = '0';
+          var attempts = 0;
+          (function step() {
+            attempts++;
+            if (visibleIndex() === 0) {
+              ss.style.opacity = '';
+              idx = 0;
+              setCounter(0);
+              return;
+            }
+            if (attempts > 5) {
+              ss.style.opacity = '';
+              return;
+            }
+            nextNative.click();
+            setTimeout(step, 1500);
+          })();
+        } else if (waited > 10000) {
+          clearInterval(waitInit);
         }
-        if (attempts > 6) {
-          ss.style.opacity = '';
-          return;
-        }
-        nextNative.click();
-        setTimeout(normalize, 1400);
-      }
-      ss.style.opacity = '0';
-      setTimeout(normalize, 600);
+      }, 200);
       return;
     }
 
