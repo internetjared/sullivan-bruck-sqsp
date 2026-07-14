@@ -422,6 +422,38 @@
     });
   }
 
+  /* --- Footer social links → text labels ---
+     The reference footer uses text links (Facebook, LinkedIn, ...),
+     not icons. Squarespace's social-links block renders SVG icons,
+     so we add a text label from each link's accessible name and
+     hide the icon via CSS (.sba-textified). Site-wide (global footer). */
+  function initFooterSocialLabels() {
+    var footer = document.getElementById('footer-sections');
+    if (!footer) return;
+
+    var links = footer.querySelectorAll('.sqs-svg-icon--wrapper');
+    links.forEach(function (a) {
+      if (a.dataset.sbaText === 'true') return;
+      a.dataset.sbaText = 'true';
+
+      var label = a.getAttribute('aria-label') || a.getAttribute('title') || '';
+      if (!label) {
+        // Derive from the domain as a fallback
+        var href = a.getAttribute('href') || '';
+        var m = href.match(/([a-z]+)\.(com|net|org|io)/i);
+        if (m) label = m[1];
+      }
+      label = label.replace(/-unauth$/i, '').trim();
+      if (!label) return;
+
+      a.classList.add('sba-textified');
+      var span = document.createElement('span');
+      span.className = 'sba-social-label';
+      span.textContent = label.charAt(0).toUpperCase() + label.slice(1);
+      a.appendChild(span);
+    });
+  }
+
   function init() {
     if (isEditing()) return;
     initSlideshowControls();
@@ -429,6 +461,7 @@
     initPortfolioFilters();
     initProjectNav();
     initProjectGallerySlideshow();
+    initFooterSocialLabels();
   }
 
   document.addEventListener('DOMContentLoaded', init);

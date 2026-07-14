@@ -1119,6 +1119,8 @@ footer#footer-sections.sections {
 
 /* ==========================================================
    9. FOOTER
+   Match reference .site-footer: copyright left, social right,
+   both 0.6875rem / 0.1em / muted, gold on hover, subtle top rule.
    ========================================================== */
 
 #footer-sections a {
@@ -1127,6 +1129,50 @@ footer#footer-sections.sections {
 
 #footer-sections a:hover {
   color: var(--sba-accent);
+}
+
+/* Vertical breathing room to match the reference 4rem padding */
+#footer-sections .content-wrapper {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
+/* Copyright text — small, tracked, muted (override the darkAccent
+   color span Squarespace applies) */
+#footer-sections .fe-block:first-child p,
+#footer-sections .fe-block:first-child p span,
+#footer-sections .fe-block:first-child .sqsrte-text-color--darkAccent {
+  font-size: 0.6875rem !important;
+  letter-spacing: 0.1em !important;
+  color: var(--sba-text-muted) !important;
+  line-height: 1.5 !important;
+}
+
+/* Social links → text labels (custom.js adds .sba-social-label and
+   flags each wrapper .sba-textified). Hide the SVG icon, show text. */
+#footer-sections .sqs-svg-icon--wrapper.sba-textified .sqs-svg-icon,
+#footer-sections .sqs-svg-icon--wrapper.sba-textified svg {
+  display: none !important;
+}
+
+#footer-sections .sba-social-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sba-text-muted);
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+#footer-sections .sqs-svg-icon--wrapper:hover .sba-social-label {
+  color: var(--sba-accent);
+}
+
+/* Keep the social block's icons row from imposing icon dimensions on
+   the text labels */
+#footer-sections .sba-textified .sqs-svg-icon--outer {
+  width: auto !important;
+  height: auto !important;
 }
 
 
