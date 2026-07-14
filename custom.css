@@ -477,28 +477,27 @@ section[data-section-id="6a4d1d0d85dd204cec53eb74"] .content-wrapper {
 
 /* ==========================================================
    5d. PROJECT DETAIL PAGE (portfolio item view)
-   Scoped to body.view-item + the portfolio collection ID, so it
-   applies to EVERY project page — including ones added later.
 
-   Sections are targeted STRUCTURALLY (not by section ID, which
-   changes per project):
-   - Section 1 = hero (background image + title text)
-   - Section 2 = info strip + description
-   - Gallery section = matched via :has(.gallery-masonry)
+   Targeted by MANUAL SECTION ANCHOR IDs set on the sample project:
+   - #hero    = hero (background image + title text)
+   - #info    = metadata strip + description
+   - #gallery = Slideshow: Full gallery
 
-   Template contract: every project page is a duplicate of the
-   sample project, so it always has these sections in this order.
+   These anchors are duplicated along with the page, so every project
+   built by duplicating the sample inherits all of this automatically.
+   Keeping the three anchor IDs is the only template contract.
+   (Anchors are Tier-A selectors per CLAUDE.md — the most durable hook.)
    ========================================================== */
 
 /* Hero section — full-bleed background image, 80vh
    Reference: .project-hero, content absolute bottom-left 4rem.
    Gradient is stronger than the reference for legibility over bright
    backgrounds (e.g. the fire pit in the Luxe photo). */
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child {
+#hero {
   min-height: 80vh !important;
 }
 
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child .section-background-overlay {
+#hero .section-background-overlay {
   background: linear-gradient(
     to top,
     rgba(0, 0, 0, 0.85) 0%,
@@ -512,18 +511,18 @@ body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:fir
 /* Pixel-match the reference 4rem text inset: collapse the FE grid
    (gutter = 4vw ≈ 51px, ref wants 64px) and pad the wrapper instead.
    Edit-mode guarded so the FE editor still works. */
-body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child .fluid-engine {
+body:not(.sqs-is-page-editing) #hero .fluid-engine {
   display: block !important;
 }
 
-body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child .content-wrapper {
+body:not(.sqs-is-page-editing) #hero .content-wrapper {
   padding: 4rem !important;
 }
 
 /* Hero title — match reference gaps: label→title 4px, title→loc 15px,
    line-height 1.1. Squarespace's default h1 margin (32px top / 8px
    bottom) is what threw the spacing off. */
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child h1 {
+#hero h1 {
   font-size: clamp(2rem, 4vw, 3.5rem) !important;
   font-weight: 200 !important;
   line-height: 1.1 !important;
@@ -531,18 +530,18 @@ body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:fir
 }
 
 /* Hero labels: strip stray leading <br>, tighten label→title gap */
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child [data-sqsp-text-block-content] h4 br:first-child {
+#hero [data-sqsp-text-block-content] h4 br:first-child {
   display: none;
 }
 
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child [data-sqsp-text-block-content] h4:first-child {
+#hero [data-sqsp-text-block-content] h4:first-child {
   margin: 0 !important;
 }
 
 /* Location line (h4 after the title, or p) — ref .project-location-hero:
    0.75rem / 0.2em / accent */
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child [data-sqsp-text-block-content] h1 ~ h4,
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child [data-sqsp-text-block-content] p {
+#hero [data-sqsp-text-block-content] h1 ~ h4,
+#hero [data-sqsp-text-block-content] p {
   font-size: 0.75rem !important;
   letter-spacing: 0.2em !important;
   text-transform: uppercase !important;
@@ -555,7 +554,7 @@ body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:fir
    block placement: metadata strip (block 1) full-width on top,
    description (block 2) centered below. Guarded from edit mode so
    FE editing still works normally. */
-body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fluid-engine {
+body:not(.sqs-is-page-editing) #info .fluid-engine {
   display: flex !important;
   flex-direction: column;
   gap: 4rem;
@@ -564,7 +563,7 @@ body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #se
   padding: 2rem 4vw;
 }
 
-body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:first-child {
+body:not(.sqs-is-page-editing) #info .fe-block:first-child {
   width: 100%;
   padding-bottom: 3rem;
   border-bottom: 1px solid var(--sba-rule);
@@ -572,7 +571,7 @@ body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #se
 
 /* Metadata pairs (h4 label + p value) laid out as horizontal columns:
    grid rows = [labels, values], auto-flow column builds L→R pairs */
-body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:first-child [data-sqsp-text-block-content] {
+body:not(.sqs-is-page-editing) #info .fe-block:first-child [data-sqsp-text-block-content] {
   display: grid;
   grid-template-rows: auto auto;
   grid-auto-flow: column;
@@ -583,7 +582,7 @@ body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #se
 }
 
 /* Description — centered, readable width, muted */
-body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:last-child {
+body:not(.sqs-is-page-editing) #info .fe-block:last-child {
   width: 100%;
   max-width: 720px;
   margin: 0 auto;
@@ -591,18 +590,18 @@ body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #se
 
 /* Zero ALL h4 margins in the strip — Squarespace only zeroes the first
    h4's top margin, which misaligns the grid row of labels */
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) h4 {
+#info h4 {
   margin: 0 !important;
 }
 
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:first-child p {
+#info .fe-block:first-child p {
   font-size: 1rem !important;
   color: var(--sba-text) !important;
   font-weight: 300 !important;
   line-height: 1.5 !important;
 }
 
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:last-child p {
+#info .fe-block:last-child p {
   font-size: 1.0625rem !important;
   line-height: 1.75 !important;
   color: var(--sba-text-muted) !important;
@@ -641,7 +640,7 @@ body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth
 }
 
 /* Gallery section — flush against neighbors */
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 .page-section:has(.gallery-masonry) .content-wrapper {
+#gallery .content-wrapper {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
@@ -711,14 +710,14 @@ body:not(.sqs-is-page-editing) .sba-gallery-slideshow .gallery-masonry-item img 
 
 /* --- Native Squarespace "Slideshow: Full" gallery on project pages ---
    Pixel-match ref .project-slideshow: 16/9 capped at 80vh */
-body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 .gallery-fullscreen-slideshow {
+body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow {
   height: min(56.25vw, 80vh) !important;
   background: #0a0a0a;
 }
 
 /* Hide the bullet nav and native arrow controls — replaced by our bar */
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 .gallery-fullscreen-slideshow-bullet-nav,
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 .sba-takeover .gallery-fullscreen-slideshow-control {
+#gallery .gallery-fullscreen-slideshow-bullet-nav,
+#gallery .sba-takeover .gallery-fullscreen-slideshow-control {
   display: none !important;
 }
 
@@ -1345,11 +1344,11 @@ body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .sl
   }
 
   /* Project page info strip — stack vertically on mobile */
-  body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:first-child [data-sqsp-text-block-content] {
+  body:not(.sqs-is-page-editing) #info .fe-block:first-child [data-sqsp-text-block-content] {
     display: block;
   }
 
-  body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:nth-child(2) .fe-block:first-child [data-sqsp-text-block-content] p {
+  body:not(.sqs-is-page-editing) #info .fe-block:first-child [data-sqsp-text-block-content] p {
     margin-bottom: 1.25rem;
   }
 

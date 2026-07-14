@@ -308,7 +308,10 @@
     if (!document.body.classList.contains('view-item')) return;
     if (!document.body.classList.contains('collection-6a4d1d0d85dd204cec53eb22')) return;
 
-    var ss = document.querySelector('.gallery-fullscreen-slideshow');
+    // Prefer the #gallery anchor section; fall back to any fullscreen
+    // slideshow on the page.
+    var galleryScope = document.getElementById('gallery') || document;
+    var ss = galleryScope.querySelector('.gallery-fullscreen-slideshow');
     if (ss) {
       if (ss.dataset.sbaControls === 'true') return;
       ss.dataset.sbaControls = 'true';
