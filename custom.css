@@ -706,9 +706,51 @@ body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 .ga
   background: #0a0a0a;
 }
 
-/* Hide the bullet nav — replaced by the arrows + counter bar */
-body.view-item.collection-6a4d1d0d85dd204cec53eb22 .gallery-fullscreen-slideshow-bullet-nav {
+/* Hide the bullet nav and native arrow controls — replaced by our bar */
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 .gallery-fullscreen-slideshow-bullet-nav,
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 .sba-takeover .gallery-fullscreen-slideshow-control {
   display: none !important;
+}
+
+/* Takeover mode: OUR .sba-active class decides which slide shows.
+   These rules out-rank whatever inline/visibility state the native
+   controller applies, making the slideshow fully deterministic. */
+.sba-takeover .gallery-fullscreen-slideshow-wrapper,
+.sba-takeover .gallery-fullscreen-slideshow-list {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform: none !important;
+}
+
+.sba-takeover .gallery-fullscreen-slideshow-item {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform: none !important;
+  margin: 0 !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  transition: opacity 0.8s ease, visibility 0s linear 0.8s !important;
+  pointer-events: none !important;
+}
+
+.sba-takeover .gallery-fullscreen-slideshow-item.sba-active {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transition: opacity 0.8s ease, visibility 0s !important;
+  pointer-events: auto !important;
+  z-index: 2;
+}
+
+.sba-takeover .gallery-fullscreen-slideshow-item img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Controls bar — custom .sba-arrow buttons proxy the (hidden) native

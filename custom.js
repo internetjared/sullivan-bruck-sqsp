@@ -295,12 +295,14 @@
       .catch(function () {});
   }
 
-  /* --- Project page gallery slideshow controls ---
+  /* --- Project page gallery slideshow ---
      The gallery section uses Squarespace's native Slideshow: Full
-     layout. This moves the native prev/next buttons (handlers intact)
-     into a custom controls bar with a counter, bottom-right, matching
-     the reference .project-slideshow. Counter stays in sync with the
-     native bullet nav (hidden via CSS) through a MutationObserver.
+     layout, but its controller initializes asynchronously on the
+     WRONG slide and binds handlers late — racing it proved
+     unreliable. So we take over rendering entirely: CSS scoped to
+     .sba-takeover forces item visibility from our .sba-active class,
+     overriding whatever the native controller does, and our own
+     arrows + counter drive it deterministically.
      Falls back to converting a masonry gallery if one is used. */
   function initProjectGallerySlideshow() {
     if (!document.body.classList.contains('view-item')) return;
@@ -311,21 +313,15 @@
       if (ss.dataset.sbaControls === 'true') return;
       ss.dataset.sbaControls = 'true';
 
-      var natControls = ss.querySelectorAll('.gallery-fullscreen-slideshow-control');
-      var bullets = ss.querySelectorAll('.gallery-fullscreen-slideshow-bullet');
-      var total = bullets.length ||
-        ss.querySelectorAll('.gallery-fullscreen-slideshow-item').length;
-      if (natControls.length < 2 || total < 2) return;
+      var slides = ss.querySelectorAll('.gallery-fullscreen-slideshow-item');
+      if (slides.length === 0) return;
 
-      // IMPORTANT: do NOT move the native buttons — Squarespace's
-      // controller binds to them after our script runs, and moving
-      // them breaks the binding. Hide them and proxy clicks instead
-      // (same pattern as the homepage featured-projects slideshow).
-      var prevNative = natControls[0].querySelector('button');
-      var nextNative = natControls[1].querySelector('button');
-      if (!prevNative || !nextNative) return;
-      natControls[0].style.display = 'none';
-      natControls[1].style.display = 'none';
+      ss.classList.add('sba-takeover');
+
+      var idx = 0;
+      slides[0].classList.add('sba-active');
+
+      if (slides.length < 2) return;
 
       var bar = document.createElement('div');
       bar.className = 'sba-slideshow-controls';
@@ -337,7 +333,7 @@
 
       var counter = document.createElement('span');
       counter.className = 'sba-counter';
-      counter.textContent = '1 / ' + total;
+      counter.textContent = '1 / ' + slides.length;
 
       var nextBtn = document.createElement('button');
       nextBtn.className = 'sba-arrow';
@@ -349,90 +345,24 @@
       bar.appendChild(nextBtn);
       ss.appendChild(bar);
 
-      // Manual index tracking, with bullet-nav observer as the
-      // authoritative sync when available
-      var idx = 0;
-      function setCounter(i) {
-        counter.textContent = (i + 1) + ' / ' + total;
+      function goTo(i) {
+        slides[idx].classList.remove('sba-active');
+        idx = (i + slides.length) % slides.length;
+        slides[idx].classList.add('sba-active');
+        counter.textContent = (idx + 1) + ' / ' + slides.length;
       }
 
       prevBtn.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
-        prevNative.click();
-        idx = (idx - 1 + total) % total;
-        setCounter(idx);
+        goTo(idx - 1);
       });
 
       nextBtn.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
-        nextNative.click();
-        idx = (idx + 1) % total;
-        setCounter(idx);
+        goTo(idx + 1);
       });
-
-      function activeIndex() {
-        for (var i = 0; i < bullets.length; i++) {
-          var span = bullets[i].querySelector('.js-slideshow-active-slide');
-          if (span && !span.hasAttribute('hidden')) return i;
-        }
-        return -1;
-      }
-
-      var bulletNav = ss.querySelector('.gallery-fullscreen-slideshow-bullet-nav');
-      if (bulletNav && bullets.length) {
-        new MutationObserver(function () {
-          var i = activeIndex();
-          if (i > -1) { idx = i; setCounter(i); }
-        }).observe(bulletNav, {
-          attributes: true,
-          subtree: true,
-          attributeFilter: ['hidden', 'class', 'aria-current']
-        });
-      }
-
-      // Squarespace's controller initializes on the LAST slide (its
-      // internal index starts at total-1). Once the controller has
-      // bound, silently advance one slide to land on the true first
-      // image, hiding the fade behind a brief opacity mask.
-      var slideItems = ss.querySelectorAll('.gallery-fullscreen-slideshow-item');
-      function visibleIndex() {
-        for (var i = 0; i < slideItems.length; i++) {
-          if (getComputedStyle(slideItems[i]).visibility === 'visible') return i;
-        }
-        return -1;
-      }
-
-      // Wait for the controller's init signature (it shows the LAST
-      // slide once initialized), then advance to the true first slide
-      // behind an opacity mask, verifying each click landed.
-      var waited = 0;
-      var waitInit = setInterval(function () {
-        waited += 200;
-        if (visibleIndex() === slideItems.length - 1) {
-          clearInterval(waitInit);
-          ss.style.opacity = '0';
-          var attempts = 0;
-          (function step() {
-            attempts++;
-            if (visibleIndex() === 0) {
-              ss.style.opacity = '';
-              idx = 0;
-              setCounter(0);
-              return;
-            }
-            if (attempts > 5) {
-              ss.style.opacity = '';
-              return;
-            }
-            nextNative.click();
-            setTimeout(step, 1500);
-          })();
-        } else if (waited > 10000) {
-          clearInterval(waitInit);
-        }
-      }, 200);
       return;
     }
 
