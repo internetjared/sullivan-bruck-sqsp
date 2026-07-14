@@ -391,6 +391,36 @@
           attributeFilter: ['hidden', 'class', 'aria-current']
         });
       }
+
+      // Squarespace's controller initializes on the LAST slide (its
+      // internal index starts at total-1). Once the controller has
+      // bound, silently advance one slide to land on the true first
+      // image, hiding the fade behind a brief opacity mask.
+      var slideItems = ss.querySelectorAll('.gallery-fullscreen-slideshow-item');
+      function visibleIndex() {
+        for (var i = 0; i < slideItems.length; i++) {
+          if (getComputedStyle(slideItems[i]).visibility === 'visible') return i;
+        }
+        return -1;
+      }
+
+      var tries = 0;
+      var poll = setInterval(function () {
+        tries++;
+        var bound = (ss.getAttribute('data-controllers-bound') || '')
+          .indexOf('GalleryFullscreenSlideshow') > -1;
+        if (!bound && tries < 40) return;
+        clearInterval(poll);
+        if (bound && visibleIndex() === slideItems.length - 1) {
+          ss.style.opacity = '0';
+          nextNative.click();
+          setTimeout(function () {
+            ss.style.opacity = '';
+            idx = 0;
+            setCounter(0);
+          }, 1300);
+        }
+      }, 150);
       return;
     }
 
