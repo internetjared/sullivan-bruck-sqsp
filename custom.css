@@ -491,14 +491,21 @@ section[data-section-id="6a4d1d0d85dd204cec53eb74"] .content-wrapper {
    ========================================================== */
 
 /* Hero section — full-bleed background image, 80vh
-   Reference: .project-hero (80vh, gradient to top 0.7→transparent 40%,
-   content absolute bottom-left 4rem) */
+   Reference: .project-hero, content absolute bottom-left 4rem.
+   Gradient is stronger than the reference for legibility over bright
+   backgrounds (e.g. the fire pit in the Luxe photo). */
 body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child {
   min-height: 80vh !important;
 }
 
 body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child .section-background-overlay {
-  background: linear-gradient(to top, rgba(20,20,20,0.7) 0%, transparent 40%) !important;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.5) 22%,
+    rgba(0, 0, 0, 0.15) 45%,
+    transparent 65%
+  ) !important;
   opacity: 1 !important;
 }
 
@@ -513,11 +520,14 @@ body:not(.sqs-is-page-editing).view-item.collection-6a4d1d0d85dd204cec53eb22 #se
   padding: 4rem !important;
 }
 
-/* Hero title */
+/* Hero title — match reference gaps: label→title 4px, title→loc 15px,
+   line-height 1.1. Squarespace's default h1 margin (32px top / 8px
+   bottom) is what threw the spacing off. */
 body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child h1 {
   font-size: clamp(2rem, 4vw, 3.5rem) !important;
   font-weight: 200 !important;
-  margin-bottom: 0.5rem !important;
+  line-height: 1.1 !important;
+  margin: 4px 0 15px !important;
 }
 
 /* Hero labels: strip stray leading <br>, tighten label→title gap */
@@ -526,7 +536,7 @@ body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:fir
 }
 
 body.view-item.collection-6a4d1d0d85dd204cec53eb22 #sections > .page-section:first-child [data-sqsp-text-block-content] h4:first-child {
-  margin: 0 0 0.75rem !important;
+  margin: 0 !important;
 }
 
 /* Location line (h4 after the title, or p) — ref .project-location-hero:
