@@ -1,0 +1,609 @@
+<title>SBA Portfolio Build Guide</title>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root{--bg:#141414;--card:#1c1c1c;--field:#0f0f0f;--text:#f0ede8;--muted:#9a9590;--accent:#c8b89a;--rule:rgba(255,255,255,.08);--gt:#8fbc8f;--gb:rgba(74,122,74,.2);--at:#d4b96a;--ab:rgba(122,106,58,.2);}
+body{font-family:-apple-system,'Inter','Helvetica Neue',sans-serif;background:var(--bg);color:var(--text);line-height:1.5;padding:3rem 2rem 6rem;max-width:900px;margin:0 auto;-webkit-font-smoothing:antialiased;}
+h1{font-size:2rem;font-weight:200;letter-spacing:-.02em;margin-bottom:.5rem;}
+.sub{color:var(--muted);font-size:.875rem;font-weight:300;margin-bottom:2rem;}
+.panel{background:var(--card);border:1px solid rgba(200,184,154,.15);padding:1.25rem 1.5rem;margin-bottom:1.25rem;font-size:.8125rem;line-height:1.8;color:var(--muted);border-radius:2px;}
+.panel h3{color:var(--accent);font-size:.6875rem;letter-spacing:.15em;text-transform:uppercase;font-weight:400;margin-bottom:.5rem;}
+.panel strong{color:var(--accent);font-weight:400;}
+.panel a{color:var(--text);text-decoration:underline;text-underline-offset:2px;}
+.panel code{background:var(--field);padding:1px 6px;font-family:'SF Mono',monospace;font-size:.75rem;color:var(--text);}
+.warn{border-color:rgba(212,185,106,.3);}
+.warn h3{color:var(--at);}
+.cat-hdr{display:flex;align-items:baseline;gap:.75rem;margin-top:2.5rem;margin-bottom:.25rem;padding-bottom:.5rem;border-bottom:1px solid var(--rule);}
+.cat-hdr h2{font-size:.6875rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);}
+.cat-hdr span{font-size:.6875rem;color:var(--muted);}
+.proj{border-bottom:1px solid var(--rule);padding:1.1rem 0;}
+.proj-top{display:flex;align-items:baseline;gap:.75rem;margin-bottom:.5rem;}
+.pn{font-size:.6875rem;color:var(--muted);min-width:1.5rem;font-variant-numeric:tabular-nums;}
+.pname{font-size:1.05rem;font-weight:300;flex:1;}
+.badge{font-size:.625rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:2px;}
+.badge-ok{background:var(--gb);color:var(--gt);}
+.badge-warn{background:var(--ab);color:var(--at);}
+.row{display:grid;grid-template-columns:82px 1fr;margin-bottom:3px;font-size:.8125rem;align-items:start;}
+.lbl{color:var(--muted);font-size:.625rem;letter-spacing:.06em;text-transform:uppercase;padding-top:6px;}
+.val{background:var(--field);padding:5px 10px;cursor:pointer;border:1px solid transparent;transition:border-color .15s,background .15s;border-radius:2px;}
+.val:hover{border-color:rgba(200,184,154,.25);}
+.val.ok{border-color:var(--gt);background:rgba(74,122,74,.12);}
+.val-desc{line-height:1.6;color:var(--muted);}
+.val-folder{font-family:'SF Mono',monospace;font-size:.6875rem;color:var(--muted);}
+.val-tbd{background:transparent;color:var(--at);font-style:italic;padding:5px 0;}
+.chk{display:flex;align-items:center;gap:.5rem;padding-left:82px;margin-top:.5rem;}
+.chk input{accent-color:var(--accent);width:14px;height:14px;cursor:pointer;}
+.chk label{font-size:.75rem;color:var(--muted);cursor:pointer;}
+.proj.done{opacity:.4;}
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--accent);color:var(--bg);font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:6px 16px;opacity:0;transition:opacity .15s,transform .15s;z-index:200;pointer-events:none;border-radius:2px;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.pbar{position:fixed;top:0;left:0;right:0;height:3px;background:var(--card);z-index:100;}
+.pfill{height:100%;background:var(--accent);width:0;transition:width .3s;}
+.plbl{position:fixed;top:6px;right:12px;font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);z-index:101;background:var(--bg);padding:2px 6px;}
+</style>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="plbl" id="pl">0 / 47</div>
+<div class="toast" id="toast">Copied</div>
+
+<h1>Portfolio Build Guide</h1>
+<div class="sub">Sullivan Bruck Architects — 46 remaining project pages. Click any field to copy it.</div>
+
+<div class="panel">
+  <h3>Links</h3>
+  <strong>Template page</strong> (what every project should look like):<br>
+  <a href="https://sba-2.squarespace.com/portfolio-1/luxe-125" target="_blank">https://sba-2.squarespace.com/portfolio-1/luxe-125</a><br><br>
+  <strong>Image folder</strong> (LEAD image + gallery images per project):<br>
+  <a href="__FOLDER_LINK_PLACEHOLDER__" target="_blank">PASTE SHARED FOLDER LINK — ask Jared</a>
+</div>
+
+<div class="panel">
+  <h3>Steps for each project</h3>
+  1. In <strong>Pages → Portfolio</strong>, hover <strong>Luxe 12.5</strong> → gear icon → <strong>Duplicate</strong>.<br>
+  2. Update the new page's <strong>Title</strong> and <strong>URL slug</strong>.<br>
+  3. <strong>Hero:</strong> replace the background image with the project's <code>LEAD</code> image; update the 3 hero text lines — category label, title, location.<br>
+  4. <strong>Info:</strong> update Location, Type, Status, Architect, and the description paragraph.<br>
+  5. <strong>Gallery:</strong> delete the sample images, upload the project's gallery images (everything except the LEAD image).<br>
+  6. <strong>Thumbnail:</strong> in project settings, set the thumbnail to the LEAD image.<br><br>
+  <strong>Type / Status / Architect are the same for all:</strong> Status = <code>Completed</code>, Architect = <code>Sullivan Bruck Architects</code>.
+</div>
+
+<div class="panel warn">
+  <h3>Please don't change</h3>
+  • The section anchor IDs on the page — <code>#hero</code>, <code>#info</code>, <code>#gallery</code> — the design depends on them.<br>
+  • The gallery layout type — leave it as the <strong>Slideshow</strong> layout it comes in as.<br>
+  • Any Code Injection / code blocks — no code changes needed.<br><br>
+  A few projects have no designated LEAD image (marked <span style="color:var(--at)">pick lead</span>) — choose the strongest exterior shot.
+</div>
+
+<div class="cat-hdr"><h2>Multi-Family</h2><span>33 projects</span></div>
+<div class="proj" id="p1">
+  <div class="proj-top"><span class="pn">1</span><span class="pname">Luxe 12.5</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Luxe 12.5">Luxe 12.5</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="luxe-125">luxe-125</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="The Highlands, NW Columbus">The Highlands, NW Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Located in The Highlands development in northwest Columbus, Ohio, Luxe is a 166-unit, five-story luxury resort-style apartment building with enclosed ground floor parking and bespoke amenities.">Located in The Highlands development in northwest Columbus, Ohio, Luxe is a 166-unit, five-story luxury resort-style apartment building with enclosed ground floor parking and bespoke amenities.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/01 Luxe 12.5">Multi-Family/01 Luxe 12.5  ·  lead: LEAD.jpg  ·  4 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c1"><label for="c1">Done</label></div>
+</div>
+<div class="proj" id="p2">
+  <div class="proj-top"><span class="pn">2</span><span class="pname">Station 324</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Station 324">Station 324</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="station-324">station-324</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Italian Village, Columbus">Italian Village, Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Station 324 is a 196-unit apartment community located in Italian Village. This project seeks to re-stitch the fabric of the neighborhood by responding to both the single-family neighborhood to the west and the industrial context to the east.  An internal street is established that separates the parcel into two urban blocks, each responding to the differing contexts but blending with a dynamic industrial aesthetic.  The main lobby, other building entrances and a pocket park activate the streetscape.   Finally, the heart of the community is a renovated century-old brick warehouse that has been repurposed to be a lively amenity space.">Station 324 is a 196-unit apartment community located in Italian Village. This project seeks to re-stitch the fabric of the neighborhood by responding to both the single-family neighborhood to the west and the industrial context to the east.  An internal street is established that separates the parcel into two urban blocks, each responding to the differing contexts but blending with a dynamic industrial aesthetic.  The main lobby, other building entrances and a pocket park activate the streetscape.   Finally, the heart of the community is a renovated century-old brick warehouse that has been repurposed to be a lively amenity space.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/02 Station 324">Multi-Family/02 Station 324  ·  lead: LEAD.jpg  ·  23 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c2"><label for="c2">Done</label></div>
+</div>
+<div class="proj" id="p3">
+  <div class="proj-top"><span class="pn">3</span><span class="pname">Flats at 4200</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Flats at 4200">Flats at 4200</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="flats-at-4200">flats-at-4200</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Tampa, Florida">Tampa, Florida</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="A new 314 unit, 539 bed urban student apartment development on the border of the University of South Florida in the city of Tampa.  The project is comprised of over 390,000 square feet within two five story podium buildings with four floors of wood framed constructing over one floor of a post-tension concrete structure.  Ground floor parking for residents and amenities of a clubhouse with fitness center and outdoor pool are included. This is what I said on the website…. The Flats at 4200 is a 539 bed urban student apartment development within walking distance of USF in Tampa, Florida.  The project is comprise of over 390,000 square feet within two five-story podium buildings with four floors of wood framed constructed over one floor of a post-tension concrete structure.  There is ground floor parking and many amenities that include a clubhouse with a fitness center, resort style pool, movie theater and much more.">A new 314 unit, 539 bed urban student apartment development on the border of the University of South Florida in the city of Tampa.  The project is comprised of over 390,000 square feet within two five story podium buildings with four floors of wood framed constructing over one floor of a post-tension concrete structure.  Ground floor parking for residents and amenities of a clubhouse with fitness center and outdoor pool are included. This is what I said on the website…. The Flats at 4200 is a 539 bed urban student apartment development within walking distance of USF in Tampa, Florida.  The project is comprise of over 390,000 square feet within two five-story podium buildings with four floors of wood framed constructed over one floor of a post-tension concrete structure.  There is ground floor parking and many amenities that include a clubhouse with a fitness center, resort style pool, movie theater and much more.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/03 Flats at 4200">Multi-Family/03 Flats at 4200  ·  lead: LEAD.jpg  ·  3 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c3"><label for="c3">Done</label></div>
+</div>
+<div class="proj" id="p4">
+  <div class="proj-top"><span class="pn">4</span><span class="pname">The Rise</span><span class="badge badge-warn">pick lead</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="The Rise">The Rise</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="the-rise">the-rise</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Milo Grogan, Columbus">Milo Grogan, Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Comprising 192 units in eight 3-story garden buildings and a clubhouse building, this project anchors a rapidly developing corridor in the Milo Grogan neighborhood at the convergence of growth between downtown and the Short North.  SBA worked with the owner to create a design that incorporates luxury amenities yet maximizes efficiency and utilizes a simple palette of materials to create a lively, vital community.">Comprising 192 units in eight 3-story garden buildings and a clubhouse building, this project anchors a rapidly developing corridor in the Milo Grogan neighborhood at the convergence of growth between downtown and the Short North.  SBA worked with the owner to create a design that incorporates luxury amenities yet maximizes efficiency and utilizes a simple palette of materials to create a lively, vital community.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/04 The Rise">Multi-Family/04 The Rise  ·  lead: (pick strongest exterior shot)  ·  4 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c4"><label for="c4">Done</label></div>
+</div>
+<div class="proj" id="p5">
+  <div class="proj-top"><span class="pn">5</span><span class="pname">Steelhouse</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Steelhouse">Steelhouse</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="steelhouse">steelhouse</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="5th By Northwest, Columbus">5th By Northwest, Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Comprising 113 units in a four-story urban-infill location, this project was one of the first in a rapidly re-developing pre-war industrial corridor that is in the 5xNW neighborhood of Columbus, nestled between the Ohio State University and Grandview Heights.  With a younger market, SBA worked with the owners to develop a contemporary image for the exterior and open-concept luxury units with a complete amenity package.">Comprising 113 units in a four-story urban-infill location, this project was one of the first in a rapidly re-developing pre-war industrial corridor that is in the 5xNW neighborhood of Columbus, nestled between the Ohio State University and Grandview Heights.  With a younger market, SBA worked with the owners to develop a contemporary image for the exterior and open-concept luxury units with a complete amenity package.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/05 Steelhouse">Multi-Family/05 Steelhouse  ·  lead: LEAD.jpg  ·  9 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c5"><label for="c5">Done</label></div>
+</div>
+<div class="proj" id="p6">
+  <div class="proj-top"><span class="pn">6</span><span class="pname">Liberty Grand</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Liberty Grand">Liberty Grand</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="liberty-grand">liberty-grand</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Powell, Ohio">Powell, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-tbd">— to be supplied by Jared —</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/06 Liberty Grand">Multi-Family/06 Liberty Grand  ·  lead: LEAD.JPG  ·  22 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c6"><label for="c6">Done</label></div>
+</div>
+<div class="proj" id="p7">
+  <div class="proj-top"><span class="pn">7</span><span class="pname">The Broadview</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="The Broadview">The Broadview</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="the-broadview">the-broadview</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Grandview Heights, Columbus">Grandview Heights, Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="The Broadview, Phase 1 The Broadview is a high-end boutique apartment development on an urban infill site one block off the busy commercial corridor of Grandview Avenue.  SBA worked with the developer to create capacity studies and conceptual design to gain neighborhood approvals for the project.  The project contains 64 luxury units over a semi-recessed parking podium.  A courtyard opens to Broadview Avenue, breaking up the mass of the building and creating a grand entrance as well as an exterior amenity.  Other amenities include a lounge, an outdoor patio, and a “B&amp;B” suite available to guests of residents.  The project overlooks and offers direct connectivity to bustling, walkable Grandview Avenue, while simultaneously benefiting from the quiet residential setting of Broadview Avenue.">The Broadview, Phase 1 The Broadview is a high-end boutique apartment development on an urban infill site one block off the busy commercial corridor of Grandview Avenue.  SBA worked with the developer to create capacity studies and conceptual design to gain neighborhood approvals for the project.  The project contains 64 luxury units over a semi-recessed parking podium.  A courtyard opens to Broadview Avenue, breaking up the mass of the building and creating a grand entrance as well as an exterior amenity.  Other amenities include a lounge, an outdoor patio, and a “B&amp;B” suite available to guests of residents.  The project overlooks and offers direct connectivity to bustling, walkable Grandview Avenue, while simultaneously benefiting from the quiet residential setting of Broadview Avenue.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/07 The Broadview">Multi-Family/07 The Broadview  ·  lead: LEAD.jpg  ·  4 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c7"><label for="c7">Done</label></div>
+</div>
+<div class="proj" id="p8">
+  <div class="proj-top"><span class="pn">8</span><span class="pname">River &amp; Rich</span><span class="badge badge-warn">pick lead</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="River &amp; Rich">River &amp; Rich</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="river-rich">river-rich</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Franklinton, Columbus">Franklinton, Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-tbd">— to be supplied by Jared —</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/08 River and Rich">Multi-Family/08 River and Rich  ·  lead: (pick strongest exterior shot)  ·  21 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c8"><label for="c8">Done</label></div>
+</div>
+<div class="proj" id="p9">
+  <div class="proj-top"><span class="pn">9</span><span class="pname">The Theodore</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="The Theodore">The Theodore</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="the-theodore">the-theodore</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Bridge Park, Dublin">Bridge Park, Dublin</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Located in the Bridge Park development in Dublin, Ohio, The Theodore is an 86-unit, four-story, wood-framed condominium building with direct access at each floor to an adjacent parking structure.  An enclosed center courtyard contains amenities including a swimming pool, fire pit, and grilling stations.">Located in the Bridge Park development in Dublin, Ohio, The Theodore is an 86-unit, four-story, wood-framed condominium building with direct access at each floor to an adjacent parking structure.  An enclosed center courtyard contains amenities including a swimming pool, fire pit, and grilling stations.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/09 The Theodore">Multi-Family/09 The Theodore  ·  lead: LEAD.jpg  ·  2 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c9"><label for="c9">Done</label></div>
+</div>
+<div class="proj" id="p10">
+  <div class="proj-top"><span class="pn">10</span><span class="pname">Tuller Flats</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Tuller Flats">Tuller Flats</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="tuller-flats">tuller-flats</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Dublin, Ohio">Dublin, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="With over 400 walk-up units in the Bridge Street District of Dublin, Ohio, this development extends over ten new city blocks in the urban center of Dublin and is a significant addition to the community.   SBA helped the developer navigate the form-based overlay code for the district, providing a design solution that met the rigorous requirements of the zoning overlay.  The result is a successful, vibrant, walkable community centered around a public green.">With over 400 walk-up units in the Bridge Street District of Dublin, Ohio, this development extends over ten new city blocks in the urban center of Dublin and is a significant addition to the community.   SBA helped the developer navigate the form-based overlay code for the district, providing a design solution that met the rigorous requirements of the zoning overlay.  The result is a successful, vibrant, walkable community centered around a public green.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/10 Tuller Flats">Multi-Family/10 Tuller Flats  ·  lead: LEAD.jpg  ·  13 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c10"><label for="c10">Done</label></div>
+</div>
+<div class="proj" id="p11">
+  <div class="proj-top"><span class="pn">11</span><span class="pname">The Barrett</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="The Barrett">The Barrett</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="the-barrett">the-barrett</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Merion Village, Columbus">Merion Village, Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="The Barrett Apartments and Single Family Homes The Barrett apartments and single-family homes are an urban in-fill and adaptive reuse community on the grounds of the former Columbus City Schools’ Barrett Middle School.  Sullivan Bruck Architects’ involvement in the project was to create 52 townhouse and garden style apartments within five new three story buildings and 22 new single-family homes that seamlessly integrate within the Merion Village neighborhood just south of downtown Columbus.  The apartment units range in areas of 830 to 1,290 square feet and each unit has an attached single car garage.  The single-family homes range in areas of 1,882 – 2,015 square feet and each home has an attached or detached two car garage.  The architecture of the homes was designed to blend in with the tapestry of the surrounding urban neighborhood in south Columbus.">The Barrett Apartments and Single Family Homes The Barrett apartments and single-family homes are an urban in-fill and adaptive reuse community on the grounds of the former Columbus City Schools’ Barrett Middle School.  Sullivan Bruck Architects’ involvement in the project was to create 52 townhouse and garden style apartments within five new three story buildings and 22 new single-family homes that seamlessly integrate within the Merion Village neighborhood just south of downtown Columbus.  The apartment units range in areas of 830 to 1,290 square feet and each unit has an attached single car garage.  The single-family homes range in areas of 1,882 – 2,015 square feet and each home has an attached or detached two car garage.  The architecture of the homes was designed to blend in with the tapestry of the surrounding urban neighborhood in south Columbus.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/11 The Barrett">Multi-Family/11 The Barrett  ·  lead: LEAD.jpg  ·  4 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c11"><label for="c11">Done</label></div>
+</div>
+<div class="proj" id="p12">
+  <div class="proj-top"><span class="pn">12</span><span class="pname">Flats on Vine</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Flats on Vine">Flats on Vine</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="flats-on-vine">flats-on-vine</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Arena District, Columbus">Arena District, Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="This 228 unit urban housing community was the first rental housing development in Columbus with flats located over ground level parking.  Units feature open floor plans with large windows that take advantage of the urban city views. This appealed to the young professionals of Columbus and set a new standard on rent per square foot in the Columbus multi-family market.">This 228 unit urban housing community was the first rental housing development in Columbus with flats located over ground level parking.  Units feature open floor plans with large windows that take advantage of the urban city views. This appealed to the young professionals of Columbus and set a new standard on rent per square foot in the Columbus multi-family market.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/12 Flats on Vine">Multi-Family/12 Flats on Vine  ·  lead: LEAD.jpg  ·  6 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c12"><label for="c12">Done</label></div>
+</div>
+<div class="proj" id="p13">
+  <div class="proj-top"><span class="pn">13</span><span class="pname">Flats II</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Flats II">Flats II</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="flats-ii">flats-ii</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Arena District, Columbus">Arena District, Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="A new 118,000 square feet, 120 unit urban apartment development in the Arena District of downtown Columbus, Ohio.  The project is comprised of a single five story wood framed “U” shaped building.  Dwelling units range in size from 530 square feet to 1,140 square feet.">A new 118,000 square feet, 120 unit urban apartment development in the Arena District of downtown Columbus, Ohio.  The project is comprised of a single five story wood framed “U” shaped building.  Dwelling units range in size from 530 square feet to 1,140 square feet.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/13 Flats II">Multi-Family/13 Flats II  ·  lead: LEAD.jpg  ·  4 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c13"><label for="c13">Done</label></div>
+</div>
+<div class="proj" id="p14">
+  <div class="proj-top"><span class="pn">14</span><span class="pname">Belmont</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Belmont">Belmont</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="belmont">belmont</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="San Margherita, Columbus">San Margherita, Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-tbd">— to be supplied by Jared —</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/14 Belmont">Multi-Family/14 Belmont  ·  lead: LEAD.jpg  ·  2 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c14"><label for="c14">Done</label></div>
+</div>
+<div class="proj" id="p15">
+  <div class="proj-top"><span class="pn">15</span><span class="pname">The Dorchester</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="The Dorchester">The Dorchester</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="the-dorchester">the-dorchester</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Grandview Yard, Grandview Heights">Grandview Yard, Grandview Heights</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Located in the Grandview Yard neighborhood of Grandview Heights, Ohio, the Dorchester is a 236-unit apartment community comprised of two four-story, wood-framed buildings with direct underground access to an adjacent parking structure.">Located in the Grandview Yard neighborhood of Grandview Heights, Ohio, the Dorchester is a 236-unit apartment community comprised of two four-story, wood-framed buildings with direct underground access to an adjacent parking structure.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/15 Dorchester">Multi-Family/15 Dorchester  ·  lead: LEAD.jpg  ·  6 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c15"><label for="c15">Done</label></div>
+</div>
+<div class="proj" id="p16">
+  <div class="proj-top"><span class="pn">16</span><span class="pname">The Broadview, Phase 2</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="The Broadview, Phase 2">The Broadview, Phase 2</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="the-broadview-phase-2">the-broadview-phase-2</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Grandview Heights, Columbus">Grandview Heights, Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="The Broadview, Phase II The Broadview Phase II is a high-end boutique apartment development on an urban infill site one block off the busy commercial corridor of Grandview Avenue.  SBA worked with the developer to create capacity studies and conceptual design to gain neighborhood approvals for the project.  Distinct from but adjacent to Phase I, this phase contains 60 luxury units in two components: a center four-story block over parking podium and a row of walk-up units facing the more residential charm of Broadview Avenue.  The podium provides parking for both components and an amenity courtyard sits on the podium between the two.  This phase has a more robust amenity package than Phase 1, but SBA created a site plan to connect to Phase 1 to create a larger community.">The Broadview, Phase II The Broadview Phase II is a high-end boutique apartment development on an urban infill site one block off the busy commercial corridor of Grandview Avenue.  SBA worked with the developer to create capacity studies and conceptual design to gain neighborhood approvals for the project.  Distinct from but adjacent to Phase I, this phase contains 60 luxury units in two components: a center four-story block over parking podium and a row of walk-up units facing the more residential charm of Broadview Avenue.  The podium provides parking for both components and an amenity courtyard sits on the podium between the two.  This phase has a more robust amenity package than Phase 1, but SBA created a site plan to connect to Phase 1 to create a larger community.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/16 Broadview Phase 2">Multi-Family/16 Broadview Phase 2  ·  lead: LEAD.jpg  ·  12 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c16"><label for="c16">Done</label></div>
+</div>
+<div class="proj" id="p17">
+  <div class="proj-top"><span class="pn">17</span><span class="pname">Luxe 88</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Luxe 88">Luxe 88</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="luxe-88">luxe-88</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="NW Columbus, Ohio">NW Columbus, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Located in a redeveloping area of north Columbus, Luxe 88 contains 221 units in two four-story buildings.  Units on the top floor contain popular mezzanine lofts to give the building the grander appearance of being five stories tall.  SBA’s design responds to the owner’s desire to project a lush, luxurious image on the exterior and within.  An opulent amenity package includes multi-story lobby entrance, large club and fitness space, and an extensive exterior amenity terrace.">Located in a redeveloping area of north Columbus, Luxe 88 contains 221 units in two four-story buildings.  Units on the top floor contain popular mezzanine lofts to give the building the grander appearance of being five stories tall.  SBA’s design responds to the owner’s desire to project a lush, luxurious image on the exterior and within.  An opulent amenity package includes multi-story lobby entrance, large club and fitness space, and an extensive exterior amenity terrace.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/17 Luxe 88">Multi-Family/17 Luxe 88  ·  lead: LEAD.jpg  ·  9 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c17"><label for="c17">Done</label></div>
+</div>
+<div class="proj" id="p18">
+  <div class="proj-top"><span class="pn">18</span><span class="pname">Station 73</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Station 73">Station 73</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="station-73">station-73</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Olde Detroit, Cleveland">Olde Detroit, Cleveland</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Station 73 is a market-rate 258unit apartment community located in the Olde Detroit neighborhood of west Cleveland. Occupying the former site of the Everready Battery factory, SBA’s design for this site takes advantage of walkable connectivity to adjacent Edgewater park and bustling Detroit Avenue, as well as terrific views of Lake Erie and the Cleveland skyline.  SBA created a design that reflects the industrial heritage of the site in forms and materiality of the two four story podium buildings.  All parking has been internalized, and buildings seek to recreate / reinforce street edges and activate the pedestrian landscape.  A free-standing 8,000 s.f. clubhouse contains leasing and amenities, and it fronts a pool terrace with amazing views of the lake.">Station 73 is a market-rate 258unit apartment community located in the Olde Detroit neighborhood of west Cleveland. Occupying the former site of the Everready Battery factory, SBA’s design for this site takes advantage of walkable connectivity to adjacent Edgewater park and bustling Detroit Avenue, as well as terrific views of Lake Erie and the Cleveland skyline.  SBA created a design that reflects the industrial heritage of the site in forms and materiality of the two four story podium buildings.  All parking has been internalized, and buildings seek to recreate / reinforce street edges and activate the pedestrian landscape.  A free-standing 8,000 s.f. clubhouse contains leasing and amenities, and it fronts a pool terrace with amazing views of the lake.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/18 Station 73">Multi-Family/18 Station 73  ·  lead: LEAD.png  ·  14 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c18"><label for="c18">Done</label></div>
+</div>
+<div class="proj" id="p19">
+  <div class="proj-top"><span class="pn">19</span><span class="pname">The Brooks</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="The Brooks">The Brooks</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="the-brooks">the-brooks</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Grandview Yard, Grandview Heights">Grandview Yard, Grandview Heights</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="The Brooks is a four story, 166 unit luxury apartment building over a below grade parking garage in the Grandview Yard development in the City of Grandview Heights, Ohio. The one and two bedroom units range in size from 740 to 1,220 square feet, with ground floor units having direct sidewalk access.">The Brooks is a four story, 166 unit luxury apartment building over a below grade parking garage in the Grandview Yard development in the City of Grandview Heights, Ohio. The one and two bedroom units range in size from 740 to 1,220 square feet, with ground floor units having direct sidewalk access.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/19 The Brooks">Multi-Family/19 The Brooks  ·  lead: LEAD.jpg  ·  6 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c19"><label for="c19">Done</label></div>
+</div>
+<div class="proj" id="p20">
+  <div class="proj-top"><span class="pn">20</span><span class="pname">Aston</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Aston">Aston</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="aston">aston</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Victorian Village, Columbus">Victorian Village, Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="This project won an award from The Urban Land Institute for Excellence in Development.  The Aston development was executed over three phases, each possessing their own unique stylistic identity, so the project does not feel like a large imposition to the historic neighborhood.  Sullivan Bruck developed a master plan for all three phases, addressing the developer’s vision along with the many restrictions and issues the site presented. The first phase, Aston Place, is a 3-story 44-unit apartment building over a semi-recessed parking garage.  Phase 2, Aston Row, is a single long row of ten townhomes facing the Aston Place courtyard across an existing alley which was upgraded to feel like a walkable street.  Phase 3, Aston Estates, was required by the historic commission to blend into the Victorian-era residential street and was designed as two and three family buildings with a more historic character.">This project won an award from The Urban Land Institute for Excellence in Development.  The Aston development was executed over three phases, each possessing their own unique stylistic identity, so the project does not feel like a large imposition to the historic neighborhood.  Sullivan Bruck developed a master plan for all three phases, addressing the developer’s vision along with the many restrictions and issues the site presented. The first phase, Aston Place, is a 3-story 44-unit apartment building over a semi-recessed parking garage.  Phase 2, Aston Row, is a single long row of ten townhomes facing the Aston Place courtyard across an existing alley which was upgraded to feel like a walkable street.  Phase 3, Aston Estates, was required by the historic commission to blend into the Victorian-era residential street and was designed as two and three family buildings with a more historic character.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/20 Aston">Multi-Family/20 Aston  ·  lead: LEAD.jpg  ·  14 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c20"><label for="c20">Done</label></div>
+</div>
+<div class="proj" id="p21">
+  <div class="proj-top"><span class="pn">21</span><span class="pname">Rich Street Walk</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Rich Street Walk">Rich Street Walk</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="rich-street-walk">rich-street-walk</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Downtown Columbus">Downtown Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Situated in a residential enclave in downtown Columbus, this development of 18 townhomes, nestles into the existing neighborhood while creating a semi-private exterior courtyard for the residents. The contemporary design maintains the scale of the Victorian streetscape. An elevated front yard allows all units to contain a partially buried attached garage, an elevated first floor living space, and a roof terrace with fantastic downtown views.">Situated in a residential enclave in downtown Columbus, this development of 18 townhomes, nestles into the existing neighborhood while creating a semi-private exterior courtyard for the residents. The contemporary design maintains the scale of the Victorian streetscape. An elevated front yard allows all units to contain a partially buried attached garage, an elevated first floor living space, and a roof terrace with fantastic downtown views.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/21 Rich Street Walk">Multi-Family/21 Rich Street Walk  ·  lead: LEAD.jpg  ·  3 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c21"><label for="c21">Done</label></div>
+</div>
+<div class="proj" id="p22">
+  <div class="proj-top"><span class="pn">22</span><span class="pname">Trotters Park</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Trotters Park">Trotters Park</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="trotters-park">trotters-park</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Harrison West, Columbus">Harrison West, Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Trotters Park is a multi-building development that is part of a revitalization taking the place of a tired 1970’s-era urban renewal project in the Harrison West neighborhood.  The project consists of six apartment buildings that encapsulate a courtyard where surface parking is located, thus removing the parking lot from the streetscape as much as possible.  A retail component was incorporated into the clubhouse at the request of the Harrison West Commission.  A contemporary façade design combines with an appropriate scale of building elements to achieve a successful streetscape.">Trotters Park is a multi-building development that is part of a revitalization taking the place of a tired 1970’s-era urban renewal project in the Harrison West neighborhood.  The project consists of six apartment buildings that encapsulate a courtyard where surface parking is located, thus removing the parking lot from the streetscape as much as possible.  A retail component was incorporated into the clubhouse at the request of the Harrison West Commission.  A contemporary façade design combines with an appropriate scale of building elements to achieve a successful streetscape.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/22 Trotters Park">Multi-Family/22 Trotters Park  ·  lead: LEAD.jpg  ·  3 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c22"><label for="c22">Done</label></div>
+</div>
+<div class="proj" id="p23">
+  <div class="proj-top"><span class="pn">23</span><span class="pname">The Province at Boulder</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="The Province at Boulder">The Province at Boulder</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="the-province-at-boulder">the-province-at-boulder</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Boulder, Colorado">Boulder, Colorado</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="The Province Boulder is a student living apartment community in Boulder, Colorado, situated in a four-story wood-framed apartment building over a below-grade parking level.  With stunning views of the Rocky Mountains to the west, many of the amenities for the development are contained within a repurposed church in the center courtyard.">The Province Boulder is a student living apartment community in Boulder, Colorado, situated in a four-story wood-framed apartment building over a below-grade parking level.  With stunning views of the Rocky Mountains to the west, many of the amenities for the development are contained within a repurposed church in the center courtyard.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/23 Province at Boulder">Multi-Family/23 Province at Boulder  ·  lead: LEAD.jpg  ·  4 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c23"><label for="c23">Done</label></div>
+</div>
+<div class="proj" id="p24">
+  <div class="proj-top"><span class="pn">24</span><span class="pname">The Julian</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="The Julian">The Julian</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="the-julian">the-julian</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="River South, Downtown Columbus">River South, Downtown Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="With a place on the National Register of Historic Places, The Julian is an adaptive reuse of the 1921 Julian &amp; Kokenge Women’s Shoe Factory.  Located steps from the Scioto Mile Riverfront, it now features 90 loft style apartments with original characteristics preserved along with many modern amenities including a parking garage, designer finishes and a rooftop terrace with  amazing views of the city.">With a place on the National Register of Historic Places, The Julian is an adaptive reuse of the 1921 Julian &amp; Kokenge Women’s Shoe Factory.  Located steps from the Scioto Mile Riverfront, it now features 90 loft style apartments with original characteristics preserved along with many modern amenities including a parking garage, designer finishes and a rooftop terrace with  amazing views of the city.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/24 The Julian">Multi-Family/24 The Julian  ·  lead: LEAD.jpg  ·  6 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c24"><label for="c24">Done</label></div>
+</div>
+<div class="proj" id="p25">
+  <div class="proj-top"><span class="pn">25</span><span class="pname">Lancaster Midtown</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Lancaster Midtown">Lancaster Midtown</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="lancaster-midtown">lancaster-midtown</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Lancaster, Ohio">Lancaster, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="This development has done well in what was an overlooked market. The style of the community is carried through the clubhouse, pool, and exercise facility which helps bring a &quot;neighborhood feel&quot; to the community. The open floor plans allow for a functional kitchen and living space.">This development has done well in what was an overlooked market. The style of the community is carried through the clubhouse, pool, and exercise facility which helps bring a &quot;neighborhood feel&quot; to the community. The open floor plans allow for a functional kitchen and living space.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/25 Lancaster Midtown">Multi-Family/25 Lancaster Midtown  ·  lead: LEAD.jpg  ·  2 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c25"><label for="c25">Done</label></div>
+</div>
+<div class="proj" id="p26">
+  <div class="proj-top"><span class="pn">26</span><span class="pname">Avery Pointe</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Avery Pointe">Avery Pointe</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="avery-pointe">avery-pointe</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Hilliard, Ohio">Hilliard, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Avery Pointe, located in Hilliard, is a family (and pet) friendly community.  It offers its residents many amenities including designer kitchens with high-end finishes, a swimming pool, lake views and a fitness center. It is conveniently located near shops, restaurants and grocery stores.">Avery Pointe, located in Hilliard, is a family (and pet) friendly community.  It offers its residents many amenities including designer kitchens with high-end finishes, a swimming pool, lake views and a fitness center. It is conveniently located near shops, restaurants and grocery stores.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/26 Avery Pointe">Multi-Family/26 Avery Pointe  ·  lead: LEAD.jpg  ·  2 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c26"><label for="c26">Done</label></div>
+</div>
+<div class="proj" id="p27">
+  <div class="proj-top"><span class="pn">27</span><span class="pname">The Kipton</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="The Kipton">The Kipton</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="the-kipton">the-kipton</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Grandview Heights, Columbus">Grandview Heights, Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Located in the Grandview Yard neighborhood of Grandview Heights, Ohio, the Dorchester is a 218-unit apartment community comprised of two four-story, wood-framed buildings comprised of 1, 2, and 3-bedroom units.">Located in the Grandview Yard neighborhood of Grandview Heights, Ohio, the Dorchester is a 218-unit apartment community comprised of two four-story, wood-framed buildings comprised of 1, 2, and 3-bedroom units.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/27 The Kipton">Multi-Family/27 The Kipton  ·  lead: LEAD.jpg  ·  4 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c27"><label for="c27">Done</label></div>
+</div>
+<div class="proj" id="p28">
+  <div class="proj-top"><span class="pn">28</span><span class="pname">Harper House</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Harper House">Harper House</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="harper-house">harper-house</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="The Highlands, NW Columbus">The Highlands, NW Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Located in The Highlands development in northwest Columbus, Ohio, Harper House is a 217-unit, four-story, wood-framed resort-style apartment building with enclosed center courtyard and bespoke amenities including an expansive swimming pool, cabanas, fire places, and grilling station.">Located in The Highlands development in northwest Columbus, Ohio, Harper House is a 217-unit, four-story, wood-framed resort-style apartment building with enclosed center courtyard and bespoke amenities including an expansive swimming pool, cabanas, fire places, and grilling station.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/28 Harper House">Multi-Family/28 Harper House  ·  lead: LEAD.jpg  ·  18 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c28"><label for="c28">Done</label></div>
+</div>
+<div class="proj" id="p29">
+  <div class="proj-top"><span class="pn">29</span><span class="pname">8th and High</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="8th and High">8th and High</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="8th-and-high">8th-and-high</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Columbus, Ohio">Columbus, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-tbd">— to be supplied by Jared —</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/29 8th and High">Multi-Family/29 8th and High  ·  lead: LEAD.jpg  ·  12 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c29"><label for="c29">Done</label></div>
+</div>
+<div class="proj" id="p30">
+  <div class="proj-top"><span class="pn">30</span><span class="pname">Luxe 23</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Luxe 23">Luxe 23</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="luxe-23">luxe-23</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Columbus, Ohio">Columbus, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-tbd">— to be supplied by Jared —</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/30 Luxe 23">Multi-Family/30 Luxe 23  ·  lead: LEAD.jpg  ·  6 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c30"><label for="c30">Done</label></div>
+</div>
+<div class="proj" id="p31">
+  <div class="proj-top"><span class="pn">31</span><span class="pname">Kendall Park Phase 2</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Kendall Park Phase 2">Kendall Park Phase 2</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="kendall-park-phase-2">kendall-park-phase-2</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Columbus, Ohio">Columbus, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-tbd">— to be supplied by Jared —</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/31 Kendall Park Phase 2">Multi-Family/31 Kendall Park Phase 2  ·  lead: LEAD.jpg  ·  7 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c31"><label for="c31">Done</label></div>
+</div>
+<div class="proj" id="p32">
+  <div class="proj-top"><span class="pn">32</span><span class="pname">Camden</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Camden">Camden</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="camden">camden</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Columbus, Ohio">Columbus, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-tbd">— to be supplied by Jared —</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/32 Camden">Multi-Family/32 Camden  ·  lead: LEAD.jpg  ·  4 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c32"><label for="c32">Done</label></div>
+</div>
+<div class="proj" id="p33">
+  <div class="proj-top"><span class="pn">33</span><span class="pname">Centerfield Apartments</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Centerfield Apartments">Centerfield Apartments</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="centerfield-apartments">centerfield-apartments</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Multi-Family">Multi-Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Downtown Dayton, Ohio">Downtown Dayton, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Multi-Family Residential">Multi-Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="The Centerfield Apartments is a five-story, wood-framed, mixed-use building containing 112 studio, 1, 2, and 3-bedroom units.  Located in downtown Dayton, Ohio, adjacent to the Day Air Ballpark, home of the Dayton Dragons.  The second floor clubhouse, with grand stand seating, has direct views of baseball action from right and center field.">The Centerfield Apartments is a five-story, wood-framed, mixed-use building containing 112 studio, 1, 2, and 3-bedroom units.  Located in downtown Dayton, Ohio, adjacent to the Day Air Ballpark, home of the Dayton Dragons.  The second floor clubhouse, with grand stand seating, has direct views of baseball action from right and center field.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Multi-Family/33 Centerfield">Multi-Family/33 Centerfield  ·  lead: LEAD.jpg  ·  3 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c33"><label for="c33">Done</label></div>
+</div>
+<div class="cat-hdr"><h2>Commercial</h2><span>3 projects</span></div>
+<div class="proj" id="p34">
+  <div class="proj-top"><span class="pn">34</span><span class="pname">Organ Cole</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Organ Cole">Organ Cole</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="organ-cole">organ-cole</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Commercial">Commercial</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Marble Cliff, Ohio">Marble Cliff, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Commercial">Commercial</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="This project is the headquarters for a boutique law firm based in Marble Cliff, Ohio.  The client purchased an existing small suburban office building built in the 1970’s for their new firm.  We provided design services for a total interior remodel to fit their program and an exterior refresh to provide a more current image for the firm.">This project is the headquarters for a boutique law firm based in Marble Cliff, Ohio.  The client purchased an existing small suburban office building built in the 1970’s for their new firm.  We provided design services for a total interior remodel to fit their program and an exterior refresh to provide a more current image for the firm.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Commercial/01 Organ Cole">Commercial/01 Organ Cole  ·  lead: LEAD.jpg  ·  7 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c34"><label for="c34">Done</label></div>
+</div>
+<div class="proj" id="p35">
+  <div class="proj-top"><span class="pn">35</span><span class="pname">St. Charles Prep Training Facility</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="St. Charles Prep Training Facility">St. Charles Prep Training Facility</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="st-charles-prep">st-charles-prep</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Commercial">Commercial</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Bexley, Ohio">Bexley, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Commercial">Commercial</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="St. Charles Preparatory School purchased an existing lumberyard and 70’s vintage building supply showroom with the purpose of creating a new athletic campus.  SBA developed site studies to help the school determine the best use of the property, which now includes a practice field, running track, and indoor training facility.  SBA created a design to repurpose the existing 7,000 s.f. showroom into a 12,000 s.f. training facility with weight training, cardio area, indoor turf area, concessions, storage, and caretaker space, as well as a gallery loggia facing the track and field.  The design brings the stately character of the main school architecture to this campus.">St. Charles Preparatory School purchased an existing lumberyard and 70’s vintage building supply showroom with the purpose of creating a new athletic campus.  SBA developed site studies to help the school determine the best use of the property, which now includes a practice field, running track, and indoor training facility.  SBA created a design to repurpose the existing 7,000 s.f. showroom into a 12,000 s.f. training facility with weight training, cardio area, indoor turf area, concessions, storage, and caretaker space, as well as a gallery loggia facing the track and field.  The design brings the stately character of the main school architecture to this campus.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Commercial/02 St. Charles Prep">Commercial/02 St. Charles Prep  ·  lead: LEAD.jpg  ·  4 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c35"><label for="c35">Done</label></div>
+</div>
+<div class="proj" id="p36">
+  <div class="proj-top"><span class="pn">36</span><span class="pname">Standley Law</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Standley Law">Standley Law</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="standley-law">standley-law</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Commercial">Commercial</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Dublin, Ohio">Dublin, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Commercial">Commercial</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="This project is the headquarters for a law firm based in Dublin, Ohio.  The site is a wooded property overlooking the Scioto River that formerly contained an original farmhouse for much of the surrounding land.  The aspiration of the owner was for his offices to reflect a history, to have the feel of an old manor house that was rooted to the site and added to over time.  The project contains over 14,000 square feet of office space, with richly detailed public areas and multiple terraces overlooking the river.">This project is the headquarters for a law firm based in Dublin, Ohio.  The site is a wooded property overlooking the Scioto River that formerly contained an original farmhouse for much of the surrounding land.  The aspiration of the owner was for his offices to reflect a history, to have the feel of an old manor house that was rooted to the site and added to over time.  The project contains over 14,000 square feet of office space, with richly detailed public areas and multiple terraces overlooking the river.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Commercial/03 Standley Law">Commercial/03 Standley Law  ·  lead: LEAD.jpg  ·  8 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c36"><label for="c36">Done</label></div>
+</div>
+<div class="cat-hdr"><h2>Single Family</h2><span>11 projects</span></div>
+<div class="proj" id="p37">
+  <div class="proj-top"><span class="pn">37</span><span class="pname">Private Residence — Brick House</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Private Residence — Brick House">Private Residence — Brick House</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="private-residence-brick-house">private-residence-brick-house</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Single Family">Single Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Upper Arlington, Ohio">Upper Arlington, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Single Family Residential">Single Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Being a newly created infill lot through a lot split, it quickly became apparent that this home would need to have a detached garage if it was to respond to today&#x27;s market demands while respecting the area&#x27;s architectural character. Extra detailing was added to the brick work above the entry and in the dormer heads to showcase how finely crafted details slowly reveal themselves as the visitor approaches the residence.">Being a newly created infill lot through a lot split, it quickly became apparent that this home would need to have a detached garage if it was to respond to today&#x27;s market demands while respecting the area&#x27;s architectural character. Extra detailing was added to the brick work above the entry and in the dormer heads to showcase how finely crafted details slowly reveal themselves as the visitor approaches the residence.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Single Family/01 Brick House">Single Family/01 Brick House  ·  lead: LEAD.jpg  ·  3 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c37"><label for="c37">Done</label></div>
+</div>
+<div class="proj" id="p38">
+  <div class="proj-top"><span class="pn">38</span><span class="pname">Private Residence — Bridgehampton</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Private Residence — Bridgehampton">Private Residence — Bridgehampton</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="private-residence-bridgehampton">private-residence-bridgehampton</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Single Family">Single Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Bridge Hampton, New York">Bridge Hampton, New York</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Single Family Residential">Single Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-tbd">— to be supplied by Jared —</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Single Family/02 Bridgehampton">Single Family/02 Bridgehampton  ·  lead: LEAD.tif  ·  12 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c38"><label for="c38">Done</label></div>
+</div>
+<div class="proj" id="p39">
+  <div class="proj-top"><span class="pn">39</span><span class="pname">Delaware Residence</span><span class="badge badge-warn">pick lead</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Delaware Residence">Delaware Residence</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="delaware-residence">delaware-residence</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Single Family">Single Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Delaware, Ohio">Delaware, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Single Family Residential">Single Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-tbd">— to be supplied by Jared —</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Single Family/03 Delaware Residence">Single Family/03 Delaware Residence  ·  lead: (pick strongest exterior shot)  ·  19 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c39"><label for="c39">Done</label></div>
+</div>
+<div class="proj" id="p40">
+  <div class="proj-top"><span class="pn">40</span><span class="pname">Heron Bay</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Heron Bay">Heron Bay</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="heron-bay">heron-bay</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Single Family">Single Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Columbus, Ohio">Columbus, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Single Family Residential">Single Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-tbd">— to be supplied by Jared —</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Single Family/04 Heron Bay">Single Family/04 Heron Bay  ·  lead: LEAD.jpg  ·  1 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c40"><label for="c40">Done</label></div>
+</div>
+<div class="proj" id="p41">
+  <div class="proj-top"><span class="pn">41</span><span class="pname">North of Broad</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="North of Broad">North of Broad</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="north-of-broad">north-of-broad</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Single Family">Single Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="King Lincoln District, Columbus">King Lincoln District, Columbus</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Single Family Residential">Single Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Sullivan Bruck has teamed with Homeport, a local non-profit that strives to create housing opportunities for low-to-moderate income individuals and families, on several successful projects on the near east side of Columbus.  Our designs for urban infill multi-family and single-family new-builds and remodels have helped revitalize a once neglected neighborhood.  SBA balanced  marketability with extremely tight budgets and the city’s upgraded building standards for projects receiving city funding.">Sullivan Bruck has teamed with Homeport, a local non-profit that strives to create housing opportunities for low-to-moderate income individuals and families, on several successful projects on the near east side of Columbus.  Our designs for urban infill multi-family and single-family new-builds and remodels have helped revitalize a once neglected neighborhood.  SBA balanced  marketability with extremely tight budgets and the city’s upgraded building standards for projects receiving city funding.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Single Family/05 North of Broad">Single Family/05 North of Broad  ·  lead: LEAD.JPG  ·  7 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c41"><label for="c41">Done</label></div>
+</div>
+<div class="proj" id="p42">
+  <div class="proj-top"><span class="pn">42</span><span class="pname">Private Residence — Melaragno</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Private Residence — Melaragno">Private Residence — Melaragno</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="private-residence-melaragno">private-residence-melaragno</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Single Family">Single Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Columbus, Ohio">Columbus, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Single Family Residential">Single Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-tbd">— to be supplied by Jared —</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Single Family/06 Melaragno">Single Family/06 Melaragno  ·  lead: LEAD.jpg  ·  18 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c42"><label for="c42">Done</label></div>
+</div>
+<div class="proj" id="p43">
+  <div class="proj-top"><span class="pn">43</span><span class="pname">New Albany Renovation</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="New Albany Renovation">New Albany Renovation</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="new-albany-renovation">new-albany-renovation</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Single Family">Single Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="New Albany, Ohio">New Albany, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Single Family Residential">Single Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-tbd">— to be supplied by Jared —</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Single Family/07 New Albany">Single Family/07 New Albany  ·  lead: LEAD.jpg  ·  7 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c43"><label for="c43">Done</label></div>
+</div>
+<div class="proj" id="p44">
+  <div class="proj-top"><span class="pn">44</span><span class="pname">Ravine Run Lot 4</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Ravine Run Lot 4">Ravine Run Lot 4</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="ravine-run-lot-4">ravine-run-lot-4</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Single Family">Single Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Columbus, Ohio">Columbus, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Single Family Residential">Single Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-tbd">— to be supplied by Jared —</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Single Family/08 Ravine Run Lot 4">Single Family/08 Ravine Run Lot 4  ·  lead: LEAD.jpg  ·  4 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c44"><label for="c44">Done</label></div>
+</div>
+<div class="proj" id="p45">
+  <div class="proj-top"><span class="pn">45</span><span class="pname">Ravine Run Lot 5</span><span class="badge badge-warn">pick lead</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Ravine Run Lot 5">Ravine Run Lot 5</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="ravine-run-lot-5">ravine-run-lot-5</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Single Family">Single Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Columbus, Ohio">Columbus, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Single Family Residential">Single Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-tbd">— to be supplied by Jared —</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Single Family/09 Ravine Run Lot 5">Single Family/09 Ravine Run Lot 5  ·  lead: (pick strongest exterior shot)  ·  8 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c45"><label for="c45">Done</label></div>
+</div>
+<div class="proj" id="p46">
+  <div class="proj-top"><span class="pn">46</span><span class="pname">Private Residence — Upper Chelsea</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Private Residence — Upper Chelsea">Private Residence — Upper Chelsea</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="private-residence-upper-chelsea">private-residence-upper-chelsea</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Single Family">Single Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Upper Arlington, Ohio">Upper Arlington, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Single Family Residential">Single Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="Working with a lot that abuts a senior living community, great care was exercised in designing open spaces that would exploit the best views while responding to the client’s wish list. The clean lines and steeply pitched roofs draw their inspiration from classic Tudor homes of many years past.">Working with a lot that abuts a senior living community, great care was exercised in designing open spaces that would exploit the best views while responding to the client’s wish list. The clean lines and steeply pitched roofs draw their inspiration from classic Tudor homes of many years past.</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Single Family/10 Upper Chelsea">Single Family/10 Upper Chelsea  ·  lead: LEAD.jpg  ·  2 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c46"><label for="c46">Done</label></div>
+</div>
+<div class="proj" id="p47">
+  <div class="proj-top"><span class="pn">47</span><span class="pname">Private Residence — White House</span><span class="badge badge-ok">lead ✓</span></div>
+  <div class="row"><span class="lbl">Title</span><span class="val" data-copy="Private Residence — White House">Private Residence — White House</span></div>
+  <div class="row"><span class="lbl">URL slug</span><span class="val" data-copy="private-residence-white-house">private-residence-white-house</span></div>
+  <div class="row"><span class="lbl">Category</span><span class="val" data-copy="Single Family">Single Family</span></div>
+  <div class="row"><span class="lbl">Location</span><span class="val" data-copy="Upper Arlington, Ohio">Upper Arlington, Ohio</span></div>
+  <div class="row"><span class="lbl">Type</span><span class="val" data-copy="Single Family Residential">Single Family Residential</span></div>
+  <div class="row"><span class="lbl">Description</span><span class="val val-desc" data-copy="With the creation of a new corner lot by the removal of an existing home and subsequent lot split into two parcels, it was critical for the home to not only fit into the fabric of the established neighborhood but also respond to today&#x27;s active family needs. The cities stringent zoning restrictions became the guiding parameter for the best utilization of the new site, exploiting site amenities while respecting public vs. private areas of the home">With the creation of a new corner lot by the removal of an existing home and subsequent lot split into two parcels, it was critical for the home to not only fit into the fabric of the established neighborhood but also respond to today&#x27;s active family needs. The cities stringent zoning restrictions became the guiding parameter for the best utilization of the new site, exploiting site amenities while respecting public vs. private areas of the home</span></div>
+  <div class="row"><span class="lbl">Images</span><span class="val val-folder" data-copy="Single Family/11 White House">Single Family/11 White House  ·  lead: LEAD.jpg  ·  2 gallery</span></div>
+  <div class="chk"><input type="checkbox" id="c47"><label for="c47">Done</label></div>
+</div>
+
+<script>
+var toast=document.getElementById('toast'),pf=document.getElementById('pf'),pl=document.getElementById('pl');
+var checks=document.querySelectorAll('input[type=checkbox]'),total=checks.length,tt;
+function flash(m){toast.textContent=m;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('show');},1200);}
+function copy(text,el){var ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;left:-9999px;top:-9999px;opacity:0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);el.classList.add('ok');setTimeout(function(){el.classList.remove('ok');},800);flash('Copied: '+(text.length>44?text.slice(0,44)+'…':text));}
+document.querySelectorAll('.val[data-copy]').forEach(function(el){el.addEventListener('click',function(){copy(el.getAttribute('data-copy'),el);});});
+function save(){var d=0,s={};checks.forEach(function(c){s[c.id]=c.checked;if(c.checked)d++;c.closest('.proj').classList.toggle('done',c.checked);});pf.style.width=Math.round(d/total*100)+'%';pl.textContent=d+' / '+total;try{localStorage.setItem('sba-guide',JSON.stringify(s));}catch(e){}}
+try{var sv=JSON.parse(localStorage.getItem('sba-guide')||'{}');checks.forEach(function(c){if(sv[c.id])c.checked=true;});}catch(e){}
+checks.forEach(function(c){c.addEventListener('change',save);});save();
+</script>
