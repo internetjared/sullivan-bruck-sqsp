@@ -297,7 +297,9 @@ section[data-section-id="69c561a06d6e4b21c6d06df9"] .section-border {
    - Collection grid: 6a4d1d0d85dd204cec53eb74
    ========================================================== */
 
-/* --- 5a. Page Header --- */
+/* --- 5a. Page Header ---
+   Reference .page-header: 45vh, h1 clamp(2.5rem,5vw,4.5rem) / weight
+   200 / line-height 1.1 / -0.02em / off-white #f0ede8. */
 
 section[data-section-id="6a4d1d0d85dd204cec53eb72"] {
   min-height: 45vh !important;
@@ -306,6 +308,14 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] {
 section[data-section-id="6a4d1d0d85dd204cec53eb72"] .section-background-overlay {
   background: linear-gradient(to top, rgba(20,20,20,0.85), rgba(20,20,20,0.2)) !important;
   opacity: 1 !important;
+}
+
+section[data-section-id="6a4d1d0d85dd204cec53eb72"] h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem) !important;
+  font-weight: 200 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--sba-text) !important;
 }
 
 /* --- 5b. Filter Bar (injected by JS) ---
