@@ -228,6 +228,23 @@
     var gridItems = grid.querySelectorAll('.grid-item');
     if (gridItems.length === 0) return;
 
+    // Tag portrait/square thumbnails so CSS shows them in full (contain)
+    // instead of heavily cropping them. Landscape stays edge-to-edge.
+    // Threshold 1.35 catches portraits + near-squares; 3:2 (1.5) and
+    // wider keep cover. Handles lazy-loaded images via the load event.
+    gridItems.forEach(function (el) {
+      var img = el.querySelector('img');
+      if (!img) return;
+      var check = function () {
+        if (img.naturalWidth && img.naturalHeight &&
+            img.naturalWidth / img.naturalHeight < 1.35) {
+          el.classList.add('sba-fit-contain');
+        }
+      };
+      if (img.complete) check();
+      img.addEventListener('load', check);
+    });
+
     var categorySet = {};
 
     gridItems.forEach(function (el) {

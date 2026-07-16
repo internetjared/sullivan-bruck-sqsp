@@ -446,6 +446,18 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] h1 {
   transition: transform 0.6s ease;
 }
 
+/* Portrait / square photos (tagged by custom.js) can't fill a
+   landscape tile with cover without losing most of the image, so
+   show them in full (contain) on the dark card background. Landscape
+   photos keep the clean edge-to-edge cover crop. */
+.portfolio-grid-overlay .grid-item.sba-fit-contain {
+  background: #101010;
+}
+
+.portfolio-grid-overlay .grid-item.sba-fit-contain .grid-image-inner-wrapper img {
+  object-fit: contain !important;
+}
+
 .portfolio-grid-overlay .grid-item:hover .grid-image-inner-wrapper img {
   transform: scale(1.03);
 }
