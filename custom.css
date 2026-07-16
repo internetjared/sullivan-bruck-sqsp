@@ -10,6 +10,19 @@
    4. Body context classes
    ============================================================ */
 
+/* Load Inter to match the reference design (@import must precede all
+   rules). Weights: 200 (display headings), 300 (body/titles), 400/500
+   (labels, buttons, nav). */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+
+/* Remap Squarespace's font-family variables to Inter — the two levers
+   the site uses for all headings and body text. Overriding these
+   switches the whole site to Inter without blanket-forcing elements. */
+:root {
+  --heading-font-font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+  --body-font-font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+}
+
 /* ============================================================
    TABLE OF CONTENTS
    1. Custom Properties
