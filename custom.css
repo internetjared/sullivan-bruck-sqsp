@@ -396,6 +396,10 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] h1 {
   max-width: none !important;
 }
 
+/* 3-column grid, 4px gap, capped 1280 centered (matches reference).
+   Image ASPECT RATIO is left to Squarespace — set it in
+   Design → Site Styles (portfolio grid image aspect ratio). We only
+   control columns, gap, hover, and the text overlay here. */
 .portfolio-grid-overlay.grid-wrapper {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
@@ -405,57 +409,17 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] h1 {
   padding: 0;
 }
 
-/* Grid items — 3:2 cards via the padding-bottom technique (bulletproof
-   against the grid's row sizing, which defeated aspect-ratio). The item
-   is height:0 + padding-bottom:66.667% (= 3:2); all children fill it
-   absolutely. align-self:start prevents the grid from stretching it.
-
-   Ratio is 3:2 (not 4:3) to match the project photos, which are mostly
-   3:2 — so cover shows them in full instead of cropping the sides. */
-.portfolio-grid-overlay.grid-wrapper {
-  grid-auto-rows: auto !important;
-}
-
+/* Keep the item as a positioned, clipped box so the overlay/text sit
+   correctly and the hover zoom stays inside — but do NOT force its
+   height or the image fit; Squarespace's native aspect ratio drives that. */
 .portfolio-grid-overlay .grid-item {
   position: relative !important;
-  aspect-ratio: auto !important;
-  height: 0 !important;
-  padding-bottom: 66.667% !important;
-  align-self: start !important;
   overflow: hidden !important;
-  display: block !important;
-  width: 100% !important;
-  float: none !important;
   background: var(--sba-bg-card);
 }
 
-.portfolio-grid-overlay .grid-item .grid-image,
-.portfolio-grid-overlay .grid-item .grid-image-inner-wrapper {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-
 .portfolio-grid-overlay .grid-item .grid-image-inner-wrapper img {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
   transition: transform 0.6s ease;
-}
-
-/* Portrait / square photos (tagged by custom.js) can't fill a
-   landscape tile with cover without losing most of the image, so
-   show them in full (contain) on the dark card background. Landscape
-   photos keep the clean edge-to-edge cover crop. */
-.portfolio-grid-overlay .grid-item.sba-fit-contain {
-  background: #101010;
-}
-
-.portfolio-grid-overlay .grid-item.sba-fit-contain .grid-image-inner-wrapper img {
-  object-fit: contain !important;
 }
 
 .portfolio-grid-overlay .grid-item:hover .grid-image-inner-wrapper img {

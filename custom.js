@@ -228,24 +228,6 @@
     var gridItems = grid.querySelectorAll('.grid-item');
     if (gridItems.length === 0) return;
 
-    // Tag portrait/square thumbnails so CSS shows them in full (contain)
-    // instead of heavily cropping them. Only genuine portraits/squares
-    // (ratio < 1.2, which lose 25-56% to cover) get contain; 4:3 (1.33)
-    // and wider crop little and keep the clean edge-to-edge cover.
-    // Handles lazy-loaded images via the load event.
-    gridItems.forEach(function (el) {
-      var img = el.querySelector('img');
-      if (!img) return;
-      var check = function () {
-        if (img.naturalWidth && img.naturalHeight &&
-            img.naturalWidth / img.naturalHeight < 1.2) {
-          el.classList.add('sba-fit-contain');
-        }
-      };
-      if (img.complete) check();
-      img.addEventListener('load', check);
-    });
-
     var categorySet = {};
 
     gridItems.forEach(function (el) {
