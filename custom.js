@@ -7,6 +7,64 @@
 (function () {
   'use strict';
 
+  /* --- Portfolio project metadata (category + location per URL slug) ---
+     Drives the filter bar and card location labels on the portfolio
+     landing page. Baked in here so it works with no extra setup.
+     To add a new project: add one line keyed by its URL slug.
+     A Code Block defining window.SBA_PROJECTS on the page overrides this. */
+  window.SBA_PROJECTS = window.SBA_PROJECTS || {
+    // Multi-Family
+    "luxe-125":                        { cat: "Multi-Family", loc: "The Highlands, NW Columbus" },
+    "station-324":                     { cat: "Multi-Family", loc: "Italian Village, Columbus" },
+    "flats-at-4200":                   { cat: "Multi-Family", loc: "Tampa, Florida" },
+    "the-rise":                        { cat: "Multi-Family", loc: "Milo Grogan, Columbus" },
+    "steelhouse":                      { cat: "Multi-Family", loc: "5th By Northwest, Columbus" },
+    "liberty-grand":                   { cat: "Multi-Family", loc: "Powell, Ohio" },
+    "the-broadview":                   { cat: "Multi-Family", loc: "Grandview Heights, Columbus" },
+    "river-rich":                      { cat: "Multi-Family", loc: "Franklinton, Columbus" },
+    "the-theodore":                    { cat: "Multi-Family", loc: "Bridge Park, Dublin" },
+    "tuller-flats":                    { cat: "Multi-Family", loc: "Dublin, Ohio" },
+    "the-barrett":                     { cat: "Multi-Family", loc: "Merion Village, Columbus" },
+    "flats-on-vine":                   { cat: "Multi-Family", loc: "Arena District, Columbus" },
+    "flats-ii":                        { cat: "Multi-Family", loc: "Arena District, Columbus" },
+    "belmont":                         { cat: "Multi-Family", loc: "San Margherita, Columbus" },
+    "the-dorchester":                  { cat: "Multi-Family", loc: "Grandview Yard, Grandview Heights" },
+    "the-broadview-phase-2":           { cat: "Multi-Family", loc: "Grandview Heights, Columbus" },
+    "luxe-88":                         { cat: "Multi-Family", loc: "NW Columbus, Ohio" },
+    "station-73":                      { cat: "Multi-Family", loc: "Olde Detroit, Cleveland" },
+    "the-brooks":                      { cat: "Multi-Family", loc: "Grandview Yard, Grandview Heights" },
+    "aston":                           { cat: "Multi-Family", loc: "Victorian Village, Columbus" },
+    "rich-street-walk":                { cat: "Multi-Family", loc: "Downtown Columbus" },
+    "trotters-park":                   { cat: "Multi-Family", loc: "Harrison West, Columbus" },
+    "the-province-at-boulder":         { cat: "Multi-Family", loc: "Boulder, Colorado" },
+    "the-julian":                      { cat: "Multi-Family", loc: "River South, Downtown Columbus" },
+    "lancaster-midtown":               { cat: "Multi-Family", loc: "Lancaster, Ohio" },
+    "avery-pointe":                    { cat: "Multi-Family", loc: "Hilliard, Ohio" },
+    "the-kipton":                      { cat: "Multi-Family", loc: "Grandview Heights, Columbus" },
+    "harper-house":                    { cat: "Multi-Family", loc: "The Highlands, NW Columbus" },
+    "8th-and-high":                    { cat: "Multi-Family", loc: "Columbus, Ohio" },
+    "luxe-23":                         { cat: "Multi-Family", loc: "Columbus, Ohio" },
+    "kendall-park-phase-2":            { cat: "Multi-Family", loc: "Columbus, Ohio" },
+    "camden":                          { cat: "Multi-Family", loc: "Columbus, Ohio" },
+    "centerfield-apartments":          { cat: "Multi-Family", loc: "Downtown Dayton, Ohio" },
+    // Commercial
+    "organ-cole":                      { cat: "Commercial", loc: "Marble Cliff, Ohio" },
+    "st-charles-prep":                 { cat: "Commercial", loc: "Bexley, Ohio" },
+    "standley-law":                    { cat: "Commercial", loc: "Dublin, Ohio" },
+    // Single Family
+    "private-residence-brick-house":   { cat: "Single Family", loc: "Upper Arlington, Ohio" },
+    "private-residence-bridgehampton": { cat: "Single Family", loc: "Bridge Hampton, New York" },
+    "delaware-residence":              { cat: "Single Family", loc: "Delaware, Ohio" },
+    "heron-bay":                       { cat: "Single Family", loc: "Columbus, Ohio" },
+    "north-of-broad":                  { cat: "Single Family", loc: "King Lincoln District, Columbus" },
+    "private-residence-melaragno":     { cat: "Single Family", loc: "Columbus, Ohio" },
+    "new-albany-renovation":           { cat: "Single Family", loc: "New Albany, Ohio" },
+    "ravine-run-lot-4":                { cat: "Single Family", loc: "Columbus, Ohio" },
+    "ravine-run-lot-5":                { cat: "Single Family", loc: "Columbus, Ohio" },
+    "private-residence-upper-chelsea": { cat: "Single Family", loc: "Upper Arlington, Ohio" },
+    "private-residence-white-house":   { cat: "Single Family", loc: "Upper Arlington, Ohio" }
+  };
+
   function isEditing() {
     return (
       document.body.classList.contains('sqs-is-page-editing') ||
@@ -198,6 +256,15 @@
     var categoryKeys = Object.keys(categorySet);
     if (categoryKeys.length === 0) return;
 
+    // Deliberate order (matches the reference): Multi-Family,
+    // Commercial, Single Family, then any others alphabetically.
+    var preferred = ['multi-family', 'commercial', 'single-family'];
+    categoryKeys.sort(function (a, b) {
+      var ia = preferred.indexOf(a), ib = preferred.indexOf(b);
+      if (ia === -1) ia = 99; if (ib === -1) ib = 99;
+      return ia - ib || a.localeCompare(b);
+    });
+
     var filterBar = document.createElement('div');
     filterBar.className = 'sba-filter-bar';
 
@@ -207,7 +274,7 @@
     allBtn.textContent = 'All Projects';
     filterBar.appendChild(allBtn);
 
-    categoryKeys.sort().forEach(function (slug) {
+    categoryKeys.forEach(function (slug) {
       var btn = document.createElement('button');
       btn.className = 'sba-filter-btn';
       btn.dataset.filter = slug;

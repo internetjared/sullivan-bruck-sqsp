@@ -308,7 +308,10 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] .section-background-overlay 
   opacity: 1 !important;
 }
 
-/* --- 5b. Filter Bar (injected by JS) --- */
+/* --- 5b. Filter Bar (injected by JS) ---
+   Reference .filter-bar: gap 32px, border-bottom hairline,
+   margin-bottom 64px, padding-bottom 16px. Sits inside the section's
+   4rem padding, capped at 1280 like the grid. */
 
 .sba-filter-bar {
   display: flex;
@@ -317,9 +320,7 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] .section-background-overlay 
   border-bottom: 1px solid var(--sba-rule);
   flex-wrap: wrap;
   max-width: 1280px;
-  margin: 0 auto 2.5rem;
-  padding-left: 4vw;
-  padding-right: 4vw;
+  margin: 0 auto 4rem;
 }
 
 .sba-filter-btn {
@@ -357,15 +358,18 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] .section-background-overlay 
   width: 100%;
 }
 
-/* --- 5c. Portfolio Grid --- */
+/* --- 5c. Portfolio Grid ---
+   Reference: .section padding 96px 64px, .section-narrow max-width
+   1280 centered, .project-grid 3-col / 4px gap. Uses the robust
+   portfolio-list section hook (not the per-site section ID). */
 
-section[data-section-id="6a4d1d0d85dd204cec53eb74"] {
+[data-sqsp-section="portfolio-list"] {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
 
-section[data-section-id="6a4d1d0d85dd204cec53eb74"] .content-wrapper {
-  padding: 3rem 0 !important;
+[data-sqsp-section="portfolio-list"] .content-wrapper {
+  padding: 6rem 4rem !important;
   max-width: none !important;
 }
 
@@ -375,7 +379,7 @@ section[data-section-id="6a4d1d0d85dd204cec53eb74"] .content-wrapper {
   gap: 4px !important;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 4vw;
+  padding: 0;
 }
 
 /* Grid items — 4:3 aspect ratio cards */
