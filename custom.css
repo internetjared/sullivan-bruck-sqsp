@@ -382,10 +382,18 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] .section-background-overlay 
   padding: 0;
 }
 
-/* Grid items — 4:3 aspect ratio cards */
+/* Grid items — 4:3 aspect ratio cards.
+   align-self:start + height:auto stop the grid from stretching the
+   item to the row track, so aspect-ratio drives the height. */
+.portfolio-grid-overlay.grid-wrapper {
+  grid-auto-rows: auto !important;
+}
+
 .portfolio-grid-overlay .grid-item {
   position: relative !important;
   aspect-ratio: 4/3 !important;
+  height: auto !important;
+  align-self: start !important;
   overflow: hidden !important;
   display: block !important;
   width: 100% !important;

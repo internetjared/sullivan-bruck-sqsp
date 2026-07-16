@@ -282,10 +282,10 @@
       filterBar.appendChild(btn);
     });
 
-    var contentWrapper = gridSection.querySelector('.content-wrapper');
-    if (contentWrapper) {
-      contentWrapper.insertBefore(filterBar, contentWrapper.firstChild);
-    }
+    // Insert the bar directly before the grid inside its own parent
+    // (.content). content-wrapper is a flex container, so inserting
+    // there would place the bar BESIDE the grid instead of above it.
+    grid.parentNode.insertBefore(filterBar, grid);
 
     filterBar.addEventListener('click', function (e) {
       var btn = e.target.closest('.sba-filter-btn');
