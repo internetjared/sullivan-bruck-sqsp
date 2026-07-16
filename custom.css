@@ -405,10 +405,13 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] h1 {
   padding: 0;
 }
 
-/* Grid items — 4:3 cards via the padding-bottom technique (bulletproof
+/* Grid items — 3:2 cards via the padding-bottom technique (bulletproof
    against the grid's row sizing, which defeated aspect-ratio). The item
-   is height:0 + padding-bottom:75% (= 4:3); all children fill it
-   absolutely. align-self:start prevents the grid from stretching it. */
+   is height:0 + padding-bottom:66.667% (= 3:2); all children fill it
+   absolutely. align-self:start prevents the grid from stretching it.
+
+   Ratio is 3:2 (not 4:3) to match the project photos, which are mostly
+   3:2 — so cover shows them in full instead of cropping the sides. */
 .portfolio-grid-overlay.grid-wrapper {
   grid-auto-rows: auto !important;
 }
@@ -417,7 +420,7 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] h1 {
   position: relative !important;
   aspect-ratio: auto !important;
   height: 0 !important;
-  padding-bottom: 75% !important;
+  padding-bottom: 66.667% !important;
   align-self: start !important;
   overflow: hidden !important;
   display: block !important;
@@ -447,17 +450,24 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] h1 {
   transform: scale(1.03);
 }
 
-/* Overlay — transparent by default, dark on hover */
+/* Overlay — transparent by default; on hover, darken with a
+   bottom-weighted gradient (heaviest where the title/location sit)
+   so the text reads clearly while the top of the image stays visible. */
 .portfolio-grid-overlay .grid-item .portfolio-overlay {
   position: absolute !important;
   inset: 0 !important;
-  background: rgba(0,0,0,0) !important;
+  background: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) !important;
   transition: background 0.4s ease !important;
   z-index: 1 !important;
 }
 
 .portfolio-grid-overlay .grid-item:hover .portfolio-overlay {
-  background: rgba(0,0,0,0.5) !important;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.9) 0%,
+    rgba(0,0,0,0.65) 45%,
+    rgba(0,0,0,0.5) 100%
+  ) !important;
 }
 
 /* Text — bottom-left, hidden until hover */
@@ -509,7 +519,7 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] h1 {
     transform: translateY(0);
   }
   .portfolio-grid-overlay .grid-item .portfolio-overlay {
-    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%) !important;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 55%, transparent 100%) !important;
   }
 }
 
