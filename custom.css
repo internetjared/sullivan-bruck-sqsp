@@ -879,11 +879,18 @@ body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow {
 
 /* --- Team grid (auto-layout list section) --- */
 
-/* 4 across, matching the reference .team-grid */
+/* 4 across, matching the reference .team-grid.
+   The list section is full-bleed by default, so it ignored the Fluid
+   Engine gutter and sat wider than the "Our People" heading above it.
+   Mirror Squarespace's own gutter + max-width so the grid's left edge
+   lines up with the heading and the philosophy content. */
 #collection-6a5fe8bcf8e023777c183e02 .user-items-list-item-container {
   gap: 2rem !important;
-  max-width: 1280px;
-  margin: 0 auto;
+  box-sizing: border-box !important;
+  max-width: var(--sqs-site-max-width, 1500px) !important;
+  margin: 0 auto !important;
+  padding-left: var(--sqs-site-gutter, 4vw) !important;
+  padding-right: var(--sqs-site-gutter, 4vw) !important;
 }
 
 /* Member photo — 3:4 portrait, lightly desaturated until hover */
