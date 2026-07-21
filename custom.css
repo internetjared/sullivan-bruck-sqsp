@@ -887,10 +887,17 @@ body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow {
 #collection-6a5fe8bcf8e023777c183e02 .user-items-list-item-container {
   gap: 2rem !important;
   box-sizing: border-box !important;
-  max-width: var(--sqs-site-max-width, 1500px) !important;
+  /* Match the Fluid Engine content box exactly, then centre. The list
+     already carries some parent inset, so adding gutter padding would
+     double it — sizing to the FE width and centring lands on the same
+     left edge as the heading. */
+  max-width: min(
+    var(--sqs-site-max-width, 1500px),
+    calc(100vw - var(--sqs-site-gutter, 4vw) * 2)
+  ) !important;
   margin: 0 auto !important;
-  padding-left: var(--sqs-site-gutter, 4vw) !important;
-  padding-right: var(--sqs-site-gutter, 4vw) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 /* Member photo — 3:4 portrait, lightly desaturated until hover */
