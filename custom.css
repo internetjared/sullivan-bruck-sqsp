@@ -1450,10 +1450,41 @@ footer#footer-sections.sections {
   color: var(--sba-accent);
 }
 
-/* Vertical breathing room to match the reference 4rem padding */
+/* Vertical breathing room — reference .site-footer padding: 4rem */
 #footer-sections .content-wrapper {
-  padding-top: 3rem !important;
-  padding-bottom: 3rem !important;
+  padding-top: 4rem !important;
+  padding-bottom: 4rem !important;
+}
+
+/* Top rule — reference uses the subtle hairline, not a solid grey */
+#footer-sections .page-section {
+  border-top: 1px solid var(--sba-rule) !important;
+}
+
+/* Right-hand links column sits flush right, like .footer-right */
+#footer-sections .fe-block:last-child [data-sqsp-text-block-content],
+#footer-sections .fe-block:last-child p {
+  text-align: right !important;
+}
+
+/* Footer links (Facebook / LinkedIn / …) — small, tracked, uppercase,
+   muted, gold on hover, no underline. Overrides the darkAccent colour
+   span and the default link underline Squarespace applies. */
+#footer-sections .fe-block:last-child p,
+#footer-sections .fe-block:last-child a,
+#footer-sections .fe-block:last-child a span,
+#footer-sections .fe-block:last-child .sqsrte-text-color--darkAccent {
+  font-size: 0.6875rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: var(--sba-text-muted) !important;
+  text-decoration: none !important;
+  line-height: 1.5 !important;
+}
+
+#footer-sections .fe-block:last-child a:hover,
+#footer-sections .fe-block:last-child a:hover span {
+  color: var(--sba-accent) !important;
 }
 
 /* Copyright text — small, tracked, muted (override the darkAccent
@@ -1467,8 +1498,9 @@ footer#footer-sections.sections {
   line-height: 1.5 !important;
 }
 
-/* Social links → text labels (custom.js adds .sba-social-label and
-   flags each wrapper .sba-textified). Hide the SVG icon, show text. */
+/* Fallback: if a Social Links BLOCK is ever used instead of text links,
+   custom.js converts its SVG icons to text labels (.sba-social-label
+   on a .sba-textified wrapper) so it still matches the reference. */
 #footer-sections .sqs-svg-icon--wrapper.sba-textified .sqs-svg-icon,
 #footer-sections .sqs-svg-icon--wrapper.sba-textified svg {
   display: none !important;
@@ -1487,8 +1519,6 @@ footer#footer-sections.sections {
   color: var(--sba-accent);
 }
 
-/* Keep the social block's icons row from imposing icon dimensions on
-   the text labels */
 #footer-sections .sba-textified .sqs-svg-icon--outer {
   width: auto !important;
   height: auto !important;
