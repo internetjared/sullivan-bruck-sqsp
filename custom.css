@@ -1175,7 +1175,141 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .section-border {
 
 
 /* ==========================================================
-   7. CONTACT FORM
+   7z. CONTACT PAGE (/contact)
+   Scoped to the page's collection id.
+   Section order: 0 hero · 1 info + form
+   Reference: contact.html (.contact-layout, .contact-form, .btn-submit)
+   ========================================================== */
+
+/* --- Hero --- */
+#collection-6a5fed4a9dabfa79a03136fb #sections > .page-section:first-child {
+  min-height: 45vh !important;
+}
+
+#collection-6a5fed4a9dabfa79a03136fb #sections > .page-section:first-child .section-background-overlay {
+  background: linear-gradient(to top, rgba(20,20,20,0.85), rgba(20,20,20,0.2)) !important;
+  opacity: 1 !important;
+}
+
+#collection-6a5fed4a9dabfa79a03136fb #sections > .page-section:first-child h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem) !important;
+  font-weight: 200 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--sba-text) !important;
+}
+
+/* Strip the stray leading <br> Squarespace keeps in eyebrow labels */
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-text-block-content] h4 br:first-child {
+  display: none;
+}
+
+/* --- Info column --- */
+#collection-6a5fed4a9dabfa79a03136fb #sections > .page-section:nth-child(2) h2 {
+  font-weight: 200 !important;
+  color: var(--sba-text) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
+}
+
+#collection-6a5fed4a9dabfa79a03136fb #sections > .page-section:nth-child(2) [data-sqsp-text-block-content] p {
+  color: var(--sba-text-muted) !important;
+  font-weight: 300 !important;
+  line-height: 1.6 !important;
+  margin: 0 0 0.5rem !important;
+}
+
+/* Phone / email / social links — white, gold on hover */
+#collection-6a5fed4a9dabfa79a03136fb #sections > .page-section:nth-child(2) [data-sqsp-text-block-content] a {
+  color: var(--sba-text) !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease;
+}
+
+#collection-6a5fed4a9dabfa79a03136fb #sections > .page-section:nth-child(2) [data-sqsp-text-block-content] a:hover {
+  color: var(--sba-accent) !important;
+}
+
+/* --- Form (reference .contact-form: underline fields only) --- */
+
+/* Field labels */
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] .title,
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] .field-element-title,
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] legend {
+  font-size: 0.6875rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  color: var(--sba-text-muted) !important;
+}
+
+/* Inputs — transparent with a single hairline underline */
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] input[type="text"],
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] input[type="email"],
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] input[type="tel"],
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] input[type="number"],
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] textarea,
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] select {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--sba-rule) !important;
+  border-radius: 0 !important;
+  padding: 1rem 0 !important;
+  font-size: 1rem !important;
+  font-weight: 300 !important;
+  color: var(--sba-text) !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: border-color 0.3s ease !important;
+}
+
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] input:focus,
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] textarea:focus,
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] select:focus {
+  border-bottom-color: var(--sba-accent) !important;
+}
+
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] textarea {
+  min-height: 120px !important;
+  resize: vertical !important;
+}
+
+/* Submit — outlined, not the filled gold default */
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] button[type="submit"],
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] [data-sqsp-button] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid var(--sba-text-muted) !important;
+  color: var(--sba-text) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  padding: 1rem 4rem !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+  transition: all 0.3s ease !important;
+}
+
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] button[type="submit"]:hover,
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] [data-sqsp-button]:hover {
+  border-color: var(--sba-accent) !important;
+  color: var(--sba-accent) !important;
+}
+
+/* Keep the button's inner label inheriting the outlined colour */
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] button[type="submit"] span,
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] button[type="submit"] .form-submit-button-state,
+#collection-6a5fed4a9dabfa79a03136fb [data-sqsp-block="form"] button[type="submit"] .form-submit-button-state span {
+  color: inherit !important;
+  letter-spacing: inherit !important;
+  text-transform: inherit !important;
+  font-size: inherit !important;
+}
+
+
+/* ==========================================================
+   7. CONTACT FORM (homepage section)
    Section ID: 69c5863d2526b8252328c50c
    ========================================================== */
 
