@@ -853,26 +853,42 @@ body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow-item img {
   padding-right: 0 !important;
 }
 
-/* Member photo — 3:4 portrait, lightly desaturated until hover */
-#collection-6a5fe8bcf8e023777c183e02 .list-item-media,
-#collection-6a5fe8bcf8e023777c183e02 .list-item-media-inner {
+/* Member photo — 3:4 frame. The outer .list-item-media defines the
+   box; the inner wrapper + image fill it absolutely. Photos are shown
+   in FULL (contain) on the card background, since the staff shots are
+   mixed orientations and shouldn't be cropped. */
+#collection-6a5fe8bcf8e023777c183e02 .list-item-media {
+  position: relative !important;
   aspect-ratio: 3 / 4 !important;
+  width: 100% !important;
+  height: auto !important;
+  padding: 0 !important;
   overflow: hidden !important;
   background: var(--sba-bg-card);
   margin-bottom: 1rem !important;
 }
 
-#collection-6a5fe8bcf8e023777c183e02 .list-item-media img,
-#collection-6a5fe8bcf8e023777c183e02 .list-item-media-inner img {
+#collection-6a5fe8bcf8e023777c183e02 .list-item-media-inner {
+  position: absolute !important;
+  inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important;
+  aspect-ratio: auto !important;
+  padding: 0 !important;
+}
+
+#collection-6a5fe8bcf8e023777c183e02 .list-item-media img,
+#collection-6a5fe8bcf8e023777c183e02 .list-item-media .list-image {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
   filter: grayscale(20%);
   transition: filter 0.5s ease, transform 0.5s ease;
 }
 
-#collection-6a5fe8bcf8e023777c183e02 .list-item:hover .list-item-media img,
-#collection-6a5fe8bcf8e023777c183e02 .list-item:hover .list-item-media-inner img {
+#collection-6a5fe8bcf8e023777c183e02 .list-item:hover .list-item-media img {
   filter: grayscale(0%);
 }
 
