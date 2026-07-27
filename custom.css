@@ -633,6 +633,14 @@ body:not(.sqs-is-page-editing) #info .fe-block:last-child {
   font-weight: 300 !important;
 }
 
+/* Hide the "Architect" metadata pair (client: no need to list ourselves
+   as the Architect). It's always the last label/value in the info
+   strip's first text block, so hide the last h4 + its paragraph. */
+#info .fe-block:first-child [data-sqsp-text-block-content] h4:last-of-type,
+#info .fe-block:first-child [data-sqsp-text-block-content] p:last-of-type {
+  display: none !important;
+}
+
 /* Prev / All / Next project navigation (injected by custom.js) */
 .sba-project-nav {
   display: flex;
@@ -670,133 +678,71 @@ body:not(.sqs-is-page-editing) #info .fe-block:last-child {
   padding-bottom: 0 !important;
 }
 
-/* Gallery → slideshow conversion (.sba-gallery-slideshow class is
-   added by custom.js). Reference: .project-slideshow — 16/9,
-   max-height 80vh, bg #0a0a0a, slides fade 0.8s, controls
-   bottom-right 2rem. The !important flags are required to beat the
-   GalleryMasonry controller's inline position/transform/width styles.
-   Edit-mode guarded so the editor shows the normal masonry grid.
+/* --- Project page gallery: native "Slideshow: Full" ---
+   Per client feedback: show the FULL image inside a black rectangle
+   (no cropping), with minimal arrow icons BELOW the image.
+
+   We let Squarespace's native slideshow run (it lazy-loads images as
+   it advances). CSS below: black frame, image shown in full (contain),
+   native side arrows + bullets hidden, and our own minimal arrow bar
+   sits below. custom.js proxies clicks to the native buttons so
+   advancement — and image loading — stays native.
 
    NOTE: never hide .section-border — it CONTAINS .section-background,
-   which renders each section's theme background and hero image.
-   (See git history: this exact mistake blanked the homepage once too.) */
+   which renders each section's theme background and hero image. */
 
-body:not(.sqs-is-page-editing) .sba-gallery-slideshow {
-  position: relative !important;
-  width: 100% !important;
-  aspect-ratio: 16 / 9;
-  max-height: 80vh;
-  overflow: hidden !important;
-  background: #0a0a0a;
-}
-
-body:not(.sqs-is-page-editing) .sba-gallery-slideshow .gallery-masonry-wrapper {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-body:not(.sqs-is-page-editing) .sba-gallery-slideshow .gallery-masonry-item {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  transform: none !important;
-  margin: 0 !important;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-  pointer-events: none;
-}
-
-body:not(.sqs-is-page-editing) .sba-gallery-slideshow .gallery-masonry-item.sba-active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-body:not(.sqs-is-page-editing) .sba-gallery-slideshow .gallery-masonry-item-wrapper {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-body:not(.sqs-is-page-editing) .sba-gallery-slideshow .gallery-masonry-item img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-}
-
-/* Controls inside the project slideshow — ref: bottom/right 2rem */
-.sba-gallery-slideshow .sba-slideshow-controls {
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 10;
-}
-
-/* --- Native Squarespace "Slideshow: Full" gallery on project pages ---
-   Pixel-match ref .project-slideshow: 16/9 capped at 80vh */
 body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow {
   height: min(56.25vw, 80vh) !important;
-  background: #0a0a0a;
+  background: #000 !important;
 }
 
-/* Hide the bullet nav and native arrow controls — replaced by our bar */
+/* Full image inside the black rectangle — contain, never crop */
+body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow-item img {
+  object-fit: contain !important;
+  background: #000 !important;
+}
+
+/* Hide the native side arrows + bullet nav — replaced by our bar below */
 #gallery .gallery-fullscreen-slideshow-bullet-nav,
-#gallery .sba-takeover .gallery-fullscreen-slideshow-control {
+#gallery .gallery-fullscreen-slideshow-control {
   display: none !important;
 }
 
-/* Takeover mode: OUR .sba-active class decides which slide shows.
-   These rules out-rank whatever inline/visibility state the native
-   controller applies, making the slideshow fully deterministic. */
-.sba-takeover .gallery-fullscreen-slideshow-wrapper,
-.sba-takeover .gallery-fullscreen-slideshow-list {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  transform: none !important;
-}
-
-.sba-takeover .gallery-fullscreen-slideshow-item {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  transform: none !important;
-  margin: 0 !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  transition: opacity 0.8s ease, visibility 0s linear 0.8s !important;
-  pointer-events: none !important;
-}
-
-.sba-takeover .gallery-fullscreen-slideshow-item.sba-active {
-  visibility: visible !important;
-  opacity: 1 !important;
-  transition: opacity 0.8s ease, visibility 0s !important;
-  pointer-events: auto !important;
-  z-index: 2;
-}
-
-.sba-takeover .gallery-fullscreen-slideshow-item img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* Controls bar — custom .sba-arrow buttons proxy the (hidden) native
-   prev/next buttons; shared styles come from the homepage slideshow */
-.gallery-fullscreen-slideshow .sba-slideshow-controls {
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 10;
+/* Minimal arrow bar below the image (injected by custom.js) */
+.sba-gallery-nav {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.25rem 0 0.25rem;
+  background: var(--sba-bg);
+}
+
+.sba-gallery-arrow {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: var(--sba-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+  line-height: 0;
+}
+
+.sba-gallery-arrow:hover {
+  color: var(--sba-text);
+}
+
+.sba-gallery-counter {
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  color: var(--sba-text-muted);
+  min-width: 56px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
 }
 
 

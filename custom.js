@@ -363,133 +363,89 @@
   }
 
   /* --- Project page gallery slideshow ---
-     The gallery section uses Squarespace's native Slideshow: Full
-     layout, but its controller initializes asynchronously on the
-     WRONG slide and binds handlers late — racing it proved
-     unreliable. So we take over rendering entirely: CSS scoped to
-     .sba-takeover forces item visibility from our .sba-active class,
-     overriding whatever the native controller does, and our own
-     arrows + counter drive it deterministically.
-     Falls back to converting a masonry gallery if one is used. */
+     Let Squarespace's native fullscreen slideshow run (it lazy-loads
+     images as it advances and handles start/wrap correctly). We hide
+     its default side arrows + bullet nav via CSS, and add a minimal
+     bar of arrow icons BELOW the image whose clicks proxy the native
+     prev/next buttons — so native advancement still loads every image
+     (fixes the "black frames after 3-4 images" bug caused by the old
+     takeover, which froze native advancement and left later lazy
+     images unloaded). Client request: arrows below, minimal icons. */
   function initProjectGallerySlideshow() {
     if (!document.body.classList.contains('view-item')) return;
     if (!document.body.classList.contains('collection-6a4d1d0d85dd204cec53eb22')) return;
 
-    // Prefer the #gallery anchor section; fall back to any fullscreen
-    // slideshow on the page.
     var galleryScope = document.getElementById('gallery') || document;
     var ss = galleryScope.querySelector('.gallery-fullscreen-slideshow');
-    if (ss) {
-      if (ss.dataset.sbaControls === 'true') return;
-      ss.dataset.sbaControls = 'true';
+    if (!ss) return;
+    if (ss.dataset.sbaNav === 'true') return;
+    ss.dataset.sbaNav = 'true';
 
-      var slides = ss.querySelectorAll('.gallery-fullscreen-slideshow-item');
-      if (slides.length === 0) return;
+    var prevNative = ss.querySelector('button[data-previous]');
+    var nextNative = ss.querySelector('button[data-next]');
+    var bullets = ss.querySelectorAll('.gallery-fullscreen-slideshow-bullet');
+    var total = bullets.length ||
+      ss.querySelectorAll('.gallery-fullscreen-slideshow-item').length;
+    if (!prevNative || !nextNative || total < 2) return;
 
-      ss.classList.add('sba-takeover');
-
-      var idx = 0;
-      slides[0].classList.add('sba-active');
-
-      if (slides.length < 2) return;
-
-      var bar = document.createElement('div');
-      bar.className = 'sba-slideshow-controls';
-
-      var prevBtn = document.createElement('button');
-      prevBtn.className = 'sba-arrow';
-      prevBtn.setAttribute('aria-label', 'Previous image');
-      prevBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M19 12H5M5 12L12 19M5 12L12 5"/></svg>';
-
-      var counter = document.createElement('span');
-      counter.className = 'sba-counter';
-      counter.textContent = '1 / ' + slides.length;
-
-      var nextBtn = document.createElement('button');
-      nextBtn.className = 'sba-arrow';
-      nextBtn.setAttribute('aria-label', 'Next image');
-      nextBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>';
-
-      bar.appendChild(prevBtn);
-      bar.appendChild(counter);
-      bar.appendChild(nextBtn);
-      ss.appendChild(bar);
-
-      function goTo(i) {
-        slides[idx].classList.remove('sba-active');
-        idx = (i + slides.length) % slides.length;
-        slides[idx].classList.add('sba-active');
-        counter.textContent = (idx + 1) + ' / ' + slides.length;
-      }
-
-      prevBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        goTo(idx - 1);
-      });
-
-      nextBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        goTo(idx + 1);
-      });
-      return;
-    }
-
-    // Fallback: masonry gallery → fading slideshow
-    var gallery = document.querySelector('.gallery-masonry');
-    if (!gallery) return;
-    if (gallery.dataset.sbaSlideshow === 'true') return;
-    gallery.dataset.sbaSlideshow = 'true';
-
-    var slides = gallery.querySelectorAll('.gallery-masonry-item');
-    if (slides.length === 0) return;
-
-    gallery.classList.add('sba-gallery-slideshow');
-
-    var current = 0;
-    slides[0].classList.add('sba-active');
-
-    if (slides.length < 2) return;
-
-    var controls = document.createElement('div');
-    controls.className = 'sba-slideshow-controls';
+    var bar = document.createElement('div');
+    bar.className = 'sba-gallery-nav';
 
     var prevBtn = document.createElement('button');
-    prevBtn.className = 'sba-arrow';
+    prevBtn.className = 'sba-gallery-arrow';
     prevBtn.setAttribute('aria-label', 'Previous image');
-    prevBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M19 12H5M5 12L12 19M5 12L12 5"/></svg>';
+    prevBtn.innerHTML = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M15 6L9 12L15 18"/></svg>';
 
-    var mCounter = document.createElement('span');
-    mCounter.className = 'sba-counter';
-    mCounter.textContent = '1 / ' + slides.length;
+    var counter = document.createElement('span');
+    counter.className = 'sba-gallery-counter';
+    counter.textContent = '1 / ' + total;
 
     var nextBtn = document.createElement('button');
-    nextBtn.className = 'sba-arrow';
+    nextBtn.className = 'sba-gallery-arrow';
     nextBtn.setAttribute('aria-label', 'Next image');
-    nextBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>';
+    nextBtn.innerHTML = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M9 6L15 12L9 18"/></svg>';
 
-    controls.appendChild(prevBtn);
-    controls.appendChild(mCounter);
-    controls.appendChild(nextBtn);
-    gallery.appendChild(controls);
+    bar.appendChild(prevBtn);
+    bar.appendChild(counter);
+    bar.appendChild(nextBtn);
 
-    function goTo(idx) {
-      slides[current].classList.remove('sba-active');
-      current = (idx + slides.length) % slides.length;
-      slides[current].classList.add('sba-active');
-      mCounter.textContent = (current + 1) + ' / ' + slides.length;
-    }
+    // Place the bar right after the slideshow so it sits below the image
+    var host = ss.parentNode;
+    host.insertBefore(bar, ss.nextSibling);
 
     prevBtn.addEventListener('click', function (e) {
       e.preventDefault();
-      goTo(current - 1);
+      prevNative.click();
     });
 
     nextBtn.addEventListener('click', function (e) {
       e.preventDefault();
-      goTo(current + 1);
+      nextNative.click();
     });
+
+    // Keep the counter in sync with whichever slide the native
+    // controller has active (its bullet toggles a hidden span).
+    function activeIndex() {
+      for (var i = 0; i < bullets.length; i++) {
+        var span = bullets[i].querySelector('.js-slideshow-active-slide');
+        if (span && !span.hasAttribute('hidden')) return i;
+      }
+      return -1;
+    }
+
+    var bulletNav = ss.querySelector('.gallery-fullscreen-slideshow-bullet-nav');
+    if (bulletNav && bullets.length) {
+      var sync = function () {
+        var i = activeIndex();
+        if (i > -1) counter.textContent = (i + 1) + ' / ' + total;
+      };
+      sync();
+      new MutationObserver(sync).observe(bulletNav, {
+        attributes: true,
+        subtree: true,
+        attributeFilter: ['hidden', 'class', 'aria-current']
+      });
+    }
   }
 
   /* --- Footer social links → text labels ---
