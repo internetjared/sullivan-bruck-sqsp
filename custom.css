@@ -854,9 +854,9 @@ body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow-item img {
 }
 
 /* Member photo — 3:4 frame. The outer .list-item-media defines the
-   box; the inner wrapper + image fill it absolutely. Photos are shown
-   in FULL (contain) on the card background, since the staff shots are
-   mixed orientations and shouldn't be cropped. */
+   box; the inner wrapper + image fill it absolutely. Photos crop to
+   the subject (cover) for a clean, uniform grid, centered on the face
+   (object-position slightly above centre). */
 #collection-6a5fe8bcf8e023777c183e02 .list-item-media {
   position: relative !important;
   aspect-ratio: 3 / 4 !important;
@@ -883,7 +883,8 @@ body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow-item img {
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  object-fit: contain !important;
+  object-fit: cover !important;
+  object-position: 50% 35% !important;
   filter: grayscale(20%);
   transition: filter 0.5s ease, transform 0.5s ease;
 }
