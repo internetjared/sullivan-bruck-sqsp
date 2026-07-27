@@ -702,9 +702,16 @@ body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow-item img {
   background: #000 !important;
 }
 
-/* Hide the native side arrows + bullet nav — replaced by our bar below */
-#gallery .gallery-fullscreen-slideshow-bullet-nav,
+/* Hide the native side arrows + bullet nav — replaced by our bar below.
+   Use opacity/pointer-events (NOT display:none) on the arrow controls so
+   their buttons stay in the render tree and still fire when custom.js
+   calls .click() on them. */
 #gallery .gallery-fullscreen-slideshow-control {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+#gallery .gallery-fullscreen-slideshow-bullet-nav {
   display: none !important;
 }
 

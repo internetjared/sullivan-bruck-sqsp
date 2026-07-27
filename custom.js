@@ -413,39 +413,25 @@
     var host = ss.parentNode;
     host.insertBefore(bar, ss.nextSibling);
 
+    // Track the index ourselves — each arrow click maps 1:1 to a
+    // native advance, and the native slideshow starts on slide 1 and
+    // doesn't autoplay, so a manual counter stays in sync (reading the
+    // native bullet state proved unreliable).
+    var idx = 0;
+
     prevBtn.addEventListener('click', function (e) {
       e.preventDefault();
       prevNative.click();
+      idx = (idx - 1 + total) % total;
+      counter.textContent = (idx + 1) + ' / ' + total;
     });
 
     nextBtn.addEventListener('click', function (e) {
       e.preventDefault();
       nextNative.click();
+      idx = (idx + 1) % total;
+      counter.textContent = (idx + 1) + ' / ' + total;
     });
-
-    // Keep the counter in sync with whichever slide the native
-    // controller has active (its bullet toggles a hidden span).
-    function activeIndex() {
-      for (var i = 0; i < bullets.length; i++) {
-        var span = bullets[i].querySelector('.js-slideshow-active-slide');
-        if (span && !span.hasAttribute('hidden')) return i;
-      }
-      return -1;
-    }
-
-    var bulletNav = ss.querySelector('.gallery-fullscreen-slideshow-bullet-nav');
-    if (bulletNav && bullets.length) {
-      var sync = function () {
-        var i = activeIndex();
-        if (i > -1) counter.textContent = (i + 1) + ' / ' + total;
-      };
-      sync();
-      new MutationObserver(sync).observe(bulletNav, {
-        attributes: true,
-        subtree: true,
-        attributeFilter: ['hidden', 'class', 'aria-current']
-      });
-    }
   }
 
   /* --- Footer social links → text labels ---
