@@ -641,6 +641,13 @@ body:not(.sqs-is-page-editing) #info .fe-block:last-child {
   display: none !important;
 }
 
+/* Hide Squarespace's native portfolio item pagination — our own
+   Prev / All / Next bar (injected by custom.js) replaces it, so the
+   native one (large bar with project names) is duplicative. */
+body.view-item.collection-6a4d1d0d85dd204cec53eb22 .item-pagination {
+  display: none !important;
+}
+
 /* Prev / All / Next project navigation (injected by custom.js) */
 .sba-project-nav {
   display: flex;
