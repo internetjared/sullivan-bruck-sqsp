@@ -813,16 +813,24 @@ body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow-item img {
 /* Principles — alternating "title" (p.sqsrte-small) + body paragraph.
    Give both a gold left rail so each pair reads as one principle,
    matching the reference .principle border-left. */
+/* Client (Jon): heading must read clearly larger than the description.
+   Heading 1.25rem / 400 with a thin gold underline; body 0.9375rem. */
 #collection-6a5fe8bcf8e023777c183e02 #sections > .page-section:nth-child(2) p.sqsrte-small {
-  font-size: 1rem !important;
-  font-weight: 300 !important;
+  font-size: 1.25rem !important;
+  font-weight: 400 !important;
+  line-height: 1.3 !important;
   color: var(--sba-text) !important;
   letter-spacing: 0 !important;
   text-transform: none !important;
+  text-decoration: underline !important;
+  text-decoration-color: var(--sba-accent) !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 6px !important;
   padding-left: 2rem !important;
   border-left: 1px solid var(--sba-accent) !important;
   margin: 0 !important;
   padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
 }
 
 #collection-6a5fe8bcf8e023777c183e02 #sections > .page-section:nth-child(2) p.sqsrte-small + p {
@@ -833,7 +841,7 @@ body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow-item img {
   padding-left: 2rem !important;
   border-left: 1px solid var(--sba-accent) !important;
   margin: 0 0 2rem !important;
-  padding-top: 0.4rem !important;
+  padding-top: 0.6rem !important;
   padding-bottom: 0.25rem !important;
 }
 
@@ -951,24 +959,29 @@ section[data-section-id="69c58420aea2363fae6ea228"] h2 {
   letter-spacing: -0.02em !important;
 }
 
-/* Body text — muted color */
+/* Principle descriptions — muted, and smaller than the heading */
 section[data-section-id="69c58420aea2363fae6ea228"] p {
   color: var(--sba-text-muted) !important;
-  font-size: 1.0625rem !important;
-  line-height: 1.75 !important;
+  font-size: 0.9375rem !important;
+  line-height: 1.7 !important;
   font-weight: 300 !important;
 }
 
-/* Principle titles H3 — light weight with gold left border */
+/* Principle titles H3 — clearly larger than the description (client
+   request), with a thin gold underline and the gold left rail */
 section[data-section-id="69c58420aea2363fae6ea228"] h3 {
-  font-size: 1.0625rem !important;
-  font-weight: 300 !important;
+  font-size: 1.25rem !important;
+  font-weight: 400 !important;
   color: var(--sba-text) !important;
   letter-spacing: 0 !important;
-  line-height: 1.5 !important;
+  line-height: 1.3 !important;
+  text-decoration: underline !important;
+  text-decoration-color: var(--sba-accent) !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 6px !important;
   padding-left: 1.5rem !important;
   border-left: 2px solid var(--sba-accent) !important;
-  margin-bottom: 0 !important;
+  margin-bottom: 0.5rem !important;
 }
 
 /* About page team grid */
@@ -1011,18 +1024,20 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .slide.list-item {
   position: relative !important;
 }
 
-/* Slide images cover the area */
+/* Slide images show in FULL on black (client: "can the entire image
+   show up here?"). contain instead of cover so nothing is cropped. */
 section[data-section-id="69c5859f3b7752712f05e4b0"] .slide-media-container {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
+  background: #000 !important;
 }
 
 section[data-section-id="69c5859f3b7752712f05e4b0"] .list-slideshow-image {
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important;
+  object-fit: contain !important;
 }
 
 /* Gradient overlay — bottom-left vignette for text readability */
