@@ -768,16 +768,16 @@ body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow-item img {
    ========================================================== */
 
 /* --- Hero --- */
-#collection-6a5fe8bcf8e023777c183e02 #sections > .page-section:first-child {
+#collection-6a5fe8bcf8e023777c183e02 main .page-section:nth-of-type(1) {
   min-height: 45vh !important;
 }
 
-#collection-6a5fe8bcf8e023777c183e02 #sections > .page-section:first-child .section-background-overlay {
+#collection-6a5fe8bcf8e023777c183e02 main .page-section:nth-of-type(1) .section-background-overlay {
   background: linear-gradient(to top, rgba(20,20,20,0.85), rgba(20,20,20,0.2)) !important;
   opacity: 1 !important;
 }
 
-#collection-6a5fe8bcf8e023777c183e02 #sections > .page-section:first-child h1 {
+#collection-6a5fe8bcf8e023777c183e02 main .page-section:nth-of-type(1) h1 {
   font-size: clamp(2.5rem, 5vw, 4.5rem) !important;
   font-weight: 200 !important;
   line-height: 1.1 !important;
@@ -794,16 +794,16 @@ body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow-item img {
 
 /* Background image treatment — reference desaturates and darkens it.
    Applies automatically if/when a section background image is added. */
-#collection-6a5fe8bcf8e023777c183e02 #sections > .page-section:nth-child(2) .section-background img {
+#collection-6a5fe8bcf8e023777c183e02 main .page-section:nth-of-type(2) .section-background img {
   filter: grayscale(100%) brightness(0.25) !important;
 }
 
-#collection-6a5fe8bcf8e023777c183e02 #sections > .page-section:nth-child(2) .section-background-overlay {
+#collection-6a5fe8bcf8e023777c183e02 main .page-section:nth-of-type(2) .section-background-overlay {
   background: rgba(20, 20, 20, 0.75) !important;
   opacity: 1 !important;
 }
 
-#collection-6a5fe8bcf8e023777c183e02 #sections > .page-section:nth-child(2) h2 {
+#collection-6a5fe8bcf8e023777c183e02 main .page-section:nth-of-type(2) h2 {
   font-weight: 200 !important;
   color: var(--sba-text) !important;
   line-height: 1.15 !important;
@@ -815,7 +815,7 @@ body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow-item img {
    matching the reference .principle border-left. */
 /* Client (Jon): heading must read clearly larger than the description.
    Heading 1.25rem / 400 with a thin gold underline; body 0.9375rem. */
-#collection-6a5fe8bcf8e023777c183e02 #sections > .page-section:nth-child(2) p.sqsrte-small {
+#collection-6a5fe8bcf8e023777c183e02 main .page-section:nth-of-type(2) p.sqsrte-small {
   font-size: 1.25rem !important;
   font-weight: 400 !important;
   line-height: 1.3 !important;
@@ -833,7 +833,7 @@ body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow-item img {
   padding-bottom: 0.25rem !important;
 }
 
-#collection-6a5fe8bcf8e023777c183e02 #sections > .page-section:nth-child(2) p.sqsrte-small + p {
+#collection-6a5fe8bcf8e023777c183e02 main .page-section:nth-of-type(2) p.sqsrte-small + p {
   font-size: 0.9375rem !important;
   line-height: 1.7 !important;
   color: var(--sba-text-muted) !important;
@@ -1174,16 +1174,16 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .section-border {
    ========================================================== */
 
 /* --- Hero --- */
-#collection-6a5fed4a9dabfa79a03136fb #sections > .page-section:first-child {
+#collection-6a5fed4a9dabfa79a03136fb main .page-section:nth-of-type(1) {
   min-height: 45vh !important;
 }
 
-#collection-6a5fed4a9dabfa79a03136fb #sections > .page-section:first-child .section-background-overlay {
+#collection-6a5fed4a9dabfa79a03136fb main .page-section:nth-of-type(1) .section-background-overlay {
   background: linear-gradient(to top, rgba(20,20,20,0.85), rgba(20,20,20,0.2)) !important;
   opacity: 1 !important;
 }
 
-#collection-6a5fed4a9dabfa79a03136fb #sections > .page-section:first-child h1 {
+#collection-6a5fed4a9dabfa79a03136fb main .page-section:nth-of-type(1) h1 {
   font-size: clamp(2.5rem, 5vw, 4.5rem) !important;
   font-weight: 200 !important;
   line-height: 1.1 !important;
@@ -1197,14 +1197,14 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .section-border {
 }
 
 /* --- Info column --- */
-#collection-6a5fed4a9dabfa79a03136fb #sections > .page-section:nth-child(2) h2 {
+#collection-6a5fed4a9dabfa79a03136fb main .page-section:nth-of-type(2) h2 {
   font-weight: 200 !important;
   color: var(--sba-text) !important;
   line-height: 1.15 !important;
   letter-spacing: -0.02em !important;
 }
 
-#collection-6a5fed4a9dabfa79a03136fb #sections > .page-section:nth-child(2) [data-sqsp-text-block-content] p {
+#collection-6a5fed4a9dabfa79a03136fb main .page-section:nth-of-type(2) [data-sqsp-text-block-content] p {
   color: var(--sba-text-muted) !important;
   font-weight: 300 !important;
   line-height: 1.6 !important;
@@ -1212,13 +1212,13 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .section-border {
 }
 
 /* Phone / email / social links — white, gold on hover */
-#collection-6a5fed4a9dabfa79a03136fb #sections > .page-section:nth-child(2) [data-sqsp-text-block-content] a {
+#collection-6a5fed4a9dabfa79a03136fb main .page-section:nth-of-type(2) [data-sqsp-text-block-content] a {
   color: var(--sba-text) !important;
   text-decoration: none !important;
   transition: color 0.3s ease;
 }
 
-#collection-6a5fed4a9dabfa79a03136fb #sections > .page-section:nth-child(2) [data-sqsp-text-block-content] a:hover {
+#collection-6a5fed4a9dabfa79a03136fb main .page-section:nth-of-type(2) [data-sqsp-text-block-content] a:hover {
   color: var(--sba-accent) !important;
 }
 
@@ -1697,12 +1697,12 @@ body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .sl
   /* About page — philosophy stacks, principles keep the gold rail
      with tighter inset; team grid handled by Squarespace's own
      responsive columns. */
-  #collection-6a5fe8bcf8e023777c183e02 #sections > .page-section:nth-child(2) p.sqsrte-small,
-  #collection-6a5fe8bcf8e023777c183e02 #sections > .page-section:nth-child(2) p.sqsrte-small + p {
+  #collection-6a5fe8bcf8e023777c183e02 main .page-section:nth-of-type(2) p.sqsrte-small,
+  #collection-6a5fe8bcf8e023777c183e02 main .page-section:nth-of-type(2) p.sqsrte-small + p {
     padding-left: 1.25rem !important;
   }
 
-  #collection-6a5fe8bcf8e023777c183e02 #sections > .page-section:nth-child(2) p.sqsrte-small + p {
+  #collection-6a5fe8bcf8e023777c183e02 main .page-section:nth-of-type(2) p.sqsrte-small + p {
     margin-bottom: 1.5rem !important;
   }
 

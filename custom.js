@@ -316,7 +316,11 @@
     if (!document.body.classList.contains('collection-6a4d1d0d85dd204cec53eb22')) return;
     if (document.querySelector('.sba-project-nav')) return;
 
-    var sections = document.getElementById('sections');
+    // Squarespace wraps page sections in <article id="sections"> on
+    // collection item pages, but <section class="region"> on standard
+    // pages (and may migrate). Accept either.
+    var sections = document.getElementById('sections') ||
+      document.querySelector('main section.region');
     if (!sections) return;
 
     var path = window.location.pathname.replace(/\/$/, '');
