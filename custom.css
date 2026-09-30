@@ -267,7 +267,9 @@ section[data-section-id="69c561a06d6e4b21c6d06df9"]::after {
   content: '⌄';
   position: absolute;
   bottom: 2.5rem;
-  right: 4rem;
+  /* centered; left-based so the bob animation's transform isn't fought */
+  left: calc(50% - 20px);
+  right: auto;
   z-index: 10;
   width: 40px;
   text-align: center;
@@ -287,7 +289,8 @@ section[data-section-id="69c561a06d6e4b21c6d06df9"]::before {
   content: 'SCROLL';
   position: absolute;
   bottom: calc(2.5rem + 2rem);
-  right: 4rem;
+  left: calc(50% - 20px);
+  right: auto;
   z-index: 10;
   width: 40px;
   text-align: center;
