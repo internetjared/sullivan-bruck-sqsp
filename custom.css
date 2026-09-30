@@ -395,13 +395,16 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] h1 {
    Image ASPECT RATIO is left to Squarespace — set it in
    Design → Site Styles (portfolio grid image aspect ratio). We only
    control columns, gap, hover, and the text overlay here. */
+/* padding must be !important: Squarespace gives this wrapper its own
+   10vw/4vw padding, which was insetting the tiles 41px past the filter
+   bar and stacking ~100px of extra space above the grid. */
 .portfolio-grid-overlay.grid-wrapper {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
   gap: 4px !important;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 !important;
 }
 
 /* Keep the item as a positioned, clipped box so the overlay/text sit
