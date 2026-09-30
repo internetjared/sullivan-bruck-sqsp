@@ -219,7 +219,15 @@ section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide-content {
   max-width: 600px;
 }
 
-/* Title — white, large, thin weight */
+/* Client (Jon, Sept 2026): remove the large "Sullivan Bruck Architects"
+   title AND the "Four decades of designing…" subtitle from the hero.
+   The logo in the header and the statement below carry the name. Hide
+   the whole slide text block on the live site only (editor unaffected). */
+body:not(.sqs-is-page-editing) section[data-section-id="69c561a06d6e4b21c6d06df9"] .slide-content {
+  display: none !important;
+}
+
+/* Title — white, large, thin weight (retained for edit mode) */
 section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__title {
   color: var(--sba-text) !important;
   font-size: clamp(2.5rem, 5vw, 4.5rem) !important;
@@ -995,7 +1003,8 @@ body:not(.sqs-is-page-editing) section[data-section-id="69c58420aea2363fae6ea228
 /* The statement — promoted to the large display size the heading
    used to have, full width, off-white */
 section[data-section-id="69c58420aea2363fae6ea228"] p {
-  font-size: clamp(1.75rem, 3vw, 2.75rem) !important;
+  /* reduced by ~1/3 from clamp(1.75rem, 3vw, 2.75rem) per client */
+  font-size: clamp(1.125rem, 2vw, 1.8125rem) !important;
   font-weight: 200 !important;
   line-height: 1.2 !important;
   letter-spacing: -0.02em !important;
@@ -1088,7 +1097,7 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .slide-content {
   z-index: 2;
   padding: 0 !important;
   background: none !important;
-  max-width: 500px;
+  max-width: 720px; /* was 500px; let longer titles sit on one line */
 }
 
 /* Project title */
@@ -1099,6 +1108,14 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .list-item-content__title {
   line-height: 1.15 !important;
   letter-spacing: -0.02em !important;
   margin-bottom: 4px !important;
+}
+
+/* Keep titles like "The Broadview, Phase 2" on a single line on desktop
+   (client request). Mobile is left to wrap naturally. */
+@media (min-width: 768px) {
+  section[data-section-id="69c5859f3b7752712f05e4b0"] .list-item-content__title {
+    white-space: nowrap !important;
+  }
 }
 
 /* Project location */
