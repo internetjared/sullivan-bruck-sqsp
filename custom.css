@@ -338,7 +338,7 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] h1 {
   border-bottom: 1px solid var(--sba-rule);
   flex-wrap: wrap;
   max-width: 1280px;
-  margin: 0 auto 4rem;
+  margin: 0 auto 2.5rem;
 }
 
 .sba-filter-btn {
@@ -386,8 +386,10 @@ section[data-section-id="6a4d1d0d85dd204cec53eb72"] h1 {
   padding-bottom: 0 !important;
 }
 
+/* Top padding tightened (was 6rem) per client: less dead space
+   between the header and the filter bar / thumbnails. */
 [data-sqsp-section="portfolio-list"] .content-wrapper {
-  padding: 6rem 4rem !important;
+  padding: 3rem 4rem 6rem !important;
   max-width: none !important;
 }
 
