@@ -970,10 +970,21 @@ body:not(.sqs-is-page-editing) section[data-section-id="69c58420aea2363fae6ea228
   display: block !important;
 }
 
+/* Restore the site gutter the Fluid Engine grid used to provide, so
+   the statement doesn't sit flush against the viewport edge or clip
+   on the right. Cap the measure at 1280 like the rest of the site. */
 body:not(.sqs-is-page-editing) section[data-section-id="69c58420aea2363fae6ea228"] .fe-block:first-child {
+  box-sizing: border-box !important;
   width: 100% !important;
   max-width: 1280px !important;
   margin: 0 auto !important;
+  padding: 0 var(--sqs-site-gutter, 4vw) !important;
+}
+
+body:not(.sqs-is-page-editing) section[data-section-id="69c58420aea2363fae6ea228"] .fe-block:first-child .sqs-block,
+body:not(.sqs-is-page-editing) section[data-section-id="69c58420aea2363fae6ea228"] .fe-block:first-child [data-sqsp-text-block-content] {
+  max-width: 100% !important;
+  overflow-wrap: break-word;
 }
 
 /* The statement — promoted to the large display size the heading
