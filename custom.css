@@ -246,17 +246,12 @@ section[data-section-id="69c561a06d6e4b21c6d06df9"] .mobile-arrows {
   display: none !important;
 }
 
-/* "COLUMBUS, OHIO" label — injected before the title via ::before */
+/* "COLUMBUS, OHIO" eyebrow label removed per client (Jon, Sept 2026):
+   the landing page should be clean and minimal. The ::before is
+   neutralized rather than deleted so the mobile override stays inert. */
 section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__title::before {
-  content: 'COLUMBUS, OHIO';
-  display: block;
-  font-size: 0.6875rem;
-  font-weight: 400;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--sba-accent);
-  margin-bottom: 1rem;
-  line-height: 1.4;
+  content: none;
+  display: none;
 }
 
 /* Scroll indicator — label + chevron, bottom center-right */
@@ -947,41 +942,49 @@ body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow-item img {
 
 
 /* ==========================================================
-   6. ABOUT SECTION (homepage)
+   6. ABOUT SECTION (homepage / landing page)
    Section ID: 69c58420aea2363fae6ea228
+
+   Client direction (Jon, Sept 2026): the landing page should be clean
+   and minimal and not repeat the About page. Keep ONLY the single
+   statement paragraph, shown in the large display size across the
+   full width. The "About the Firm" eyebrow, the "We value..." heading,
+   and the five principle bullets are hidden here. They stay on the
+   About page, which has its own rules. The underlying blocks can be
+   deleted in the Squarespace editor at any time; these rules are
+   harmless once they're gone.
    ========================================================== */
 
-/* H2 heading — thin weight, white */
-section[data-section-id="69c58420aea2363fae6ea228"] h2 {
-  font-weight: 200 !important;
-  color: var(--sba-text) !important;
-  line-height: 1.15 !important;
-  letter-spacing: -0.02em !important;
+/* Hide the eyebrow, the old heading, and the bullet column */
+section[data-section-id="69c58420aea2363fae6ea228"] h4,
+section[data-section-id="69c58420aea2363fae6ea228"] h2,
+section[data-section-id="69c58420aea2363fae6ea228"] h3,
+section[data-section-id="69c58420aea2363fae6ea228"] .fe-block:last-child {
+  display: none !important;
 }
 
-/* Principle descriptions — muted, and smaller than the heading */
+/* Collapse the two-column Fluid Engine layout so the surviving
+   statement spans the full width. Edit-mode guarded so the editor
+   still shows the normal grid. */
+body:not(.sqs-is-page-editing) section[data-section-id="69c58420aea2363fae6ea228"] .fluid-engine {
+  display: block !important;
+}
+
+body:not(.sqs-is-page-editing) section[data-section-id="69c58420aea2363fae6ea228"] .fe-block:first-child {
+  width: 100% !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+}
+
+/* The statement — promoted to the large display size the heading
+   used to have, full width, off-white */
 section[data-section-id="69c58420aea2363fae6ea228"] p {
-  color: var(--sba-text-muted) !important;
-  font-size: 0.9375rem !important;
-  line-height: 1.7 !important;
-  font-weight: 300 !important;
-}
-
-/* Principle titles H3 — clearly larger than the description (client
-   request), with a thin gold underline and the gold left rail */
-section[data-section-id="69c58420aea2363fae6ea228"] h3 {
-  font-size: 1.25rem !important;
-  font-weight: 400 !important;
+  font-size: clamp(1.75rem, 3vw, 2.75rem) !important;
+  font-weight: 200 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.02em !important;
   color: var(--sba-text) !important;
-  letter-spacing: 0 !important;
-  line-height: 1.3 !important;
-  text-decoration: underline !important;
-  text-decoration-color: var(--sba-accent) !important;
-  text-decoration-thickness: 1px !important;
-  text-underline-offset: 6px !important;
-  padding-left: 1.5rem !important;
-  border-left: 2px solid var(--sba-accent) !important;
-  margin-bottom: 0.5rem !important;
+  max-width: none !important;
 }
 
 /* About page team grid */
@@ -1040,23 +1043,20 @@ section[data-section-id="69c5859f3b7752712f05e4b0"] .list-slideshow-image {
   object-fit: contain !important;
 }
 
-/* Gradient overlay — bottom-left vignette for text readability */
+/* Gradient overlay — kept to a light bottom-left vignette only.
+   Images are now shown in full (contain) on black, so the caption
+   sits over the black margin on desktop and the image itself no longer
+   needs a heavy bottom fade. Client (Jon): the whole bottom of the
+   image matters here. */
 section[data-section-id="69c5859f3b7752712f05e4b0"] .slide-media-container::after {
   content: '';
   position: absolute;
   inset: 0;
   background:
     radial-gradient(
-      ellipse 80% 60% at 0% 100%,
-      rgba(0, 0, 0, 0.7) 0%,
-      rgba(0, 0, 0, 0.4) 40%,
+      ellipse 60% 45% at 0% 100%,
+      rgba(0, 0, 0, 0.45) 0%,
       transparent 70%
-    ),
-    linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0.3) 25%,
-      transparent 50%
     );
   pointer-events: none;
   z-index: 1;
@@ -1649,12 +1649,6 @@ body.sqs-is-page-editing section[data-section-id="69c561a06d6e4b21c6d06df9"] .sl
     font-size: clamp(1.75rem, 7vw, 2.75rem) !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
-  }
-
-  /* Columbus Ohio label — smaller on mobile */
-  section[data-section-id="69c561a06d6e4b21c6d06df9"] .list-item-content__title::before {
-    font-size: 0.5625rem !important;
-    margin-bottom: 0.5rem !important;
   }
 
   /* Description text — prevent overflow */
