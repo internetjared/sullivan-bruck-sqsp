@@ -940,8 +940,9 @@ body:not(.sqs-is-page-editing) #gallery .gallery-fullscreen-slideshow-item img {
   margin: 0 0 0.5rem !important;
 }
 
-/* Credentials (second line) — gold */
-#collection-6a5fe8bcf8e023777c183e02 .list-item-content__description p:last-child {
+/* Credentials: every line after the role, gold. Covers one or many
+   lines, whether entered as separate paragraphs or with line breaks. */
+#collection-6a5fe8bcf8e023777c183e02 .list-item-content__description p:not(:first-child) {
   font-size: 0.6875rem !important;
   letter-spacing: 0.05em !important;
   color: var(--sba-accent) !important;

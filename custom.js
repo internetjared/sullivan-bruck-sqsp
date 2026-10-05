@@ -470,6 +470,83 @@
     });
   }
 
+  /* ----------------------------------------------------------
+     About page team captions (client markup, Oct 2026).
+     Credentials move up next to the name and the education line is
+     spelled out, one entry per line. Keyed on the ORIGINAL name text,
+     so once a caption is updated in the Squarespace editor the name
+     no longer matches and this steps aside for that person.
+     role: optional job-title correction. creds: one string per line.
+     ---------------------------------------------------------- */
+  var SBA_TEAM = {
+    'Matthew J Lytle': {
+      name: 'Matthew J Lytle, AIA',
+      creds: ['B. Arch, University of Detroit Mercy \u201996']
+    },
+    'Jon Stephens': {
+      name: 'Jon Stephens, AIA',
+      creds: ['B.S. Arch, The Ohio State University \u201990',
+              'M. Arch, The Ohio State University \u201993']
+    },
+    'Valerie Kyer': {
+      name: 'Valerie Kyer, LEED AP',
+      creds: ['B.S. Arch, The Ohio State University \u201993']
+    },
+    'Thomas Popoff': {
+      role: 'Director of Single Family Studio',
+      creds: ['B.S. Arch, The Ohio State University \u201988',
+              'M. Arch, Princeton University \u201991']
+    },
+    'Brian McAlexander': {
+      name: 'Brian McAlexander-Norvell, AIA',
+      creds: ['B. Arch, University of Cincinnati \u201998',
+              'Historic Preservation / LEED AP']
+    },
+    'Brode Lutz': {
+      creds: ['B.S. Environmental Design',
+              'Kent State University \u201905']
+    },
+    'Matthew T Latham': {
+      creds: ['B.S. Arch / City and Regional Planning',
+              'The Ohio State University \u201910']
+    }
+  };
+
+  function initTeamCaptions() {
+    if (!document.getElementById('collection-6a5fe8bcf8e023777c183e02')) return;
+
+    document.querySelectorAll('.list-item').forEach(function (li) {
+      var title = li.querySelector('.list-item-content__title');
+      if (!title || li.dataset.sbaTeam === 'true') return;
+      var cfg = SBA_TEAM[title.textContent.replace(/\s+/g, ' ').trim()];
+      if (!cfg) return;
+      li.dataset.sbaTeam = 'true';
+
+      if (cfg.name) title.textContent = cfg.name;
+
+      var desc = li.querySelector('.list-item-content__description');
+      if (!desc) return;
+      var paras = desc.querySelectorAll('p');
+      if (!paras.length) return;
+
+      if (cfg.role) {
+        var roleEl = paras[0].querySelector('em') || paras[0];
+        roleEl.textContent = cfg.role;
+      }
+
+      if (cfg.creds) {
+        // Drop the old credentials paragraph(s), keep the role paragraph
+        for (var i = paras.length - 1; i >= 1; i--) paras[i].remove();
+        cfg.creds.forEach(function (line) {
+          var p = document.createElement('p');
+          p.className = 'sba-team-cred';
+          p.textContent = line;
+          desc.appendChild(p);
+        });
+      }
+    });
+  }
+
   function init() {
     if (isEditing()) return;
     initSlideshowControls();
@@ -478,6 +555,7 @@
     initProjectNav();
     initProjectGallerySlideshow();
     initFooterSocialLabels();
+    initTeamCaptions();
   }
 
   document.addEventListener('DOMContentLoaded', init);
