@@ -530,8 +530,8 @@
       if (!paras.length) return;
 
       if (cfg.role) {
-        var roleEl = paras[0].querySelector('em') || paras[0];
-        roleEl.textContent = cfg.role;
+        // Replace the whole line: the italic span may cover only part of it
+        paras[0].textContent = cfg.role;
       }
 
       if (cfg.creds) {
